@@ -28,16 +28,22 @@
         <option value="ምጣድ ጥገና">ምጣድ ጥገና</option>
         <option value="አስጠኚ">አስጠኚ</option>
         <option value="ጸሃፊ">ጸሃፊ</option>
-        <option value="ካሜራ ማን">ካሜራ ማን</option>
+        <option value="ካሜራ">ካሜራ</option>
         <option value="ዲኮር ስራ">ዲኮር ስራ</option>
         <option value="መስተንግዶ">መስተንግዶ</option>
         <option value="ልብስ ስፌት">ልብስ ስፌት</option>
         <option value="ነርስ">ነርስ</option>
-        <option value="ብየዳ">ብየዳ</option>
+        <option value="ብየዳ ስራ">ብየዳ ስራ</option>
         <option value="ትርጉም ስራ">ትርጉም ስራ</option>
         <option value="ጥበቃ">ጥበቃ</option>
       </select>
       <div v-if="errors.selectedService" class="text-red-500">{{ errorMessage.selectedService }}</div>
+    </div>
+
+    <div class="mb-5">
+      <label for="crmNumber" class="block text-sm font-medium text-gray-600 mb-1">CRM Ticket Number/CRM ቲኬት ቁጥር:</label>
+      <input v-model="crmTrackingNumber" type="number" class="w-[50%] border-2 rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black" placeholder="Enter CRM ticket number" />
+      <div v-if="errors.crmTrackingNumber" class="text-red-500 ">{{ errorMessage.crmTrackingNumber }}</div>
     </div>
 
     <div class="mb-5">
@@ -63,14 +69,17 @@ export default {
     return {
       selectedService: '',
       location: '',
+      crmTrackingNumber:'',
       phone: '',
       errors: {
         selectedService: false,
+        crmTrackingNumber: false,
         location: false,
         phone: false,
       },
       errorMessage: {
         selectedService: "Please select a service.",
+        crmTrackingNumber:"Please enter a CRM tracking number",
         location: "Please enter a location.",
         phone: "Please enter a valid phone number starting with '09..' and having a total of 10 digits.",
       },
@@ -83,6 +92,7 @@ export default {
         const messageTemplate = this.generateMessageTemplate();
         const message = messageTemplate
           .replace('{service}', this.selectedService)
+          .replace('{crmTrackingNumber}', this.crmTrackingNumber)
           .replace('{location}', this.location)
           .replace('{phone}', this.phone);
 
@@ -98,6 +108,7 @@ export default {
     validateForm() {
       this.errors.selectedService = this.selectedService === "";
       this.errors.location = this.location.trim() === "";
+      this.errors.crmTrackingNumber = this.crmTrackingNumber=== "";
       this.errors.phone = !this.isValidPhone();
     },
     hasErrors() {
@@ -108,22 +119,21 @@ export default {
     generateMessageTemplate() {
       // Define message templates for different services
       const templates = {
-        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ዲሽ_ቴክኒሽያን: `📣አስቸኳይ📣 ዲሽ ቴክኒሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ካሜራ_ማን: `📣አስቸኳይ📣 ካሜራ ማን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
-        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`,
+        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ዲሽ_ቴክኒሽያን: `📣አስቸኳይ📣 ዲሽ ቴክኒሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
       };
 
-      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ`;
+      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
     },
     isValidPhone() {
       // Check if the phone number has a total count of 10 digits and starts with '0'
