@@ -10,7 +10,6 @@
       </div>
       <div class="flex items-center gap-8">
         <router-link to="/" class="text-[#ffffffc4] hover:text-white  hover:scale-110 transition duration-500">Message Generator</router-link>
-        <router-link to="/about" class="text-[#ffffffc4] hover:text-white hover:scale-110 transition duration-500">About</router-link>
       </div>
     </nav>
   </header>

@@ -77,9 +77,13 @@ export default {
           .replace('{location}', this.location)
           .replace('{phone}', this.phone);
 
-        this.$emit("message-generated", message);
-      } else {
-        // alert("Please fill in all fields correctly before generating a message.");
+          // validation for message(characters should be <= 69)
+        if(this.isValidMessageLength(message)){
+          this.$emit("message-generated", message);
+        }else{
+          alert("Generated message exceeds the character limit. Please adjust your inputs.");
+        }
+
       }
     },
     validateForm() {
@@ -117,6 +121,9 @@ export default {
       // Remove non-numeric characters from the phone number input
       this.phone = this.phone.replace(/\D/g, '');
     },
+    isValidMessageLength(message){
+      return message.length <= 69;
+    }
   },
 };
 </script>
