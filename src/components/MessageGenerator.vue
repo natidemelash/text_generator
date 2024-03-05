@@ -26,14 +26,19 @@
         <option value="አልሙኒየም ስራ">አልሙኒየም ስራ</option>
         <option value="ልብስ ማጠቢያ ጥገና">ልብስ ማጠቢያ ጥገና</option>
         <option value="ምጣድ ጥገና">ምጣድ ጥገና</option>
+        <option value="ኦቭን ጥገና">ኦቭን ጥገና</option>
+        <option value="ስቶቭ ጥገና">ስቶቭ ጥገና</option>
+        <option value="ፕሪንተር ጥገና">ፕሪንተር ጥገና</option>
         <option value="አስጠኚ">አስጠኚ</option>
         <option value="ጸሃፊ">ጸሃፊ</option>
         <option value="ካሜራ">ካሜራ</option>
         <option value="ዲኮር ስራ">ዲኮር ስራ</option>
         <option value="መስተንግዶ">መስተንግዶ</option>
         <option value="ልብስ ስፌት">ልብስ ስፌት</option>
+        <option value="ፀጉር ስራ">ፀጉር ስራ</option>
         <option value="ነርስ">ነርስ</option>
         <option value="ብየዳ ስራ">ብየዳ ስራ</option>
+        <option value="ሴራሚክ ስራ">ሴራሚክ ስራ</option>
         <option value="ትርጉም ስራ">ትርጉም ስራ</option>
         <option value="ጥበቃ">ጥበቃ</option>
       </select>
