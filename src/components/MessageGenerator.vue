@@ -23,7 +23,7 @@
         <option value="ማናጀር">ማናጀር</option>
         <option value="ቲቪ ጥገና">ቲቪ ጥገና</option>
         <option value="ፍሪጅ ጥገና">ፍሪጅ ጥገና</option>
-        <option value="አልሙኒየም ስራ">አልሙኒየም ስራ</option>
+        <option value="አልሙኒየም">አልሙኒየም</option>
         <option value="ልብስ ማጠቢያ ጥገና">ልብስ ማጠቢያ ጥገና</option>
         <option value="ምጣድ ጥገና">ምጣድ ጥገና</option>
         <option value="ኦቭን ጥገና">ኦቭን ጥገና</option>
@@ -38,7 +38,8 @@
         <option value="ፀጉር ስራ">ፀጉር ስራ</option>
         <option value="ነርስ">ነርስ</option>
         <option value="ብየዳ ስራ">ብየዳ ስራ</option>
-        <option value="ሴራሚክ ስራ">ሴራሚክ ስራ</option>
+        <option value="አውቶ_መካኒክ">አውቶ መካኒክ</option>
+        <option value="ሴራሚክ">ሴራሚክ</option>
         <option value="ትርጉም ስራ">ትርጉም ስራ</option>
         <option value="ጥበቃ">ጥበቃ</option>
       </select>
@@ -124,21 +125,22 @@ export default {
     generateMessageTemplate() {
       // Define message templates for different services
       const templates = {
-        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ዲሽ_ቴክኒሽያን: `📣አስቸኳይ📣 ዲሽ ቴክኒሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ዲሽ_ቴክኒሽያን: `📣አስቸኳይ📣 ዲሽ ቴክኒሽያን ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አውቶ_መካኒክ: `📣አስቸኳይ📣 አውቶ መካኒክ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
       };
 
-      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
+      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
     },
     isValidPhone() {
       // Check if the phone number has a total count of 10 digits and starts with '0'
