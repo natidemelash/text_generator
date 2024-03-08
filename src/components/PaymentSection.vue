@@ -8,7 +8,6 @@
 <script>
 import PaymentMessageForm from '@/view/PaymentMessageForm.vue';
 
-
 export default {
   components: {
     PaymentMessageForm,

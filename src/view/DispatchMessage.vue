@@ -1,10 +1,10 @@
 <template>
-  <div class="card p-6 mx-auto max-w-2xl bg-white mt-8 shadow-md rounded-md">
-    <h3 class="text-2xl font-semibold mb-4 text-[#C21F80]">Generate Message</h3>
+  <div class="card p-6 mx-auto max-w-2xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
+    <h3 class="text-xl font-semibold mb-4 text-[#C21F80]">Dispatch Message</h3>
 
     <div class="mb-5">
       <label for="service" class="block text-sm font-medium text-gray-600 mb-1">Select Service/የስራ ዘርፍ:</label>
-      <select v-model="selectedService"  class="w-[50%] border-2 rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black">
+      <select v-model="selectedService"  class="w-[50%] border-2 bg-[#ECF0F1] rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black">
         <option value="" disabled>Select a Service</option>
         <option value="ምግብ አብሳይ">ምግብ አብሳይ</option>
         <option value="ጽዳት">ጽዳት</option>
@@ -48,19 +48,19 @@
 
     <div class="mb-5">
       <label for="crmNumber" class="block text-sm font-medium text-gray-600 mb-1">CRM Ticket Number/CRM ቲኬት ቁጥር:</label>
-      <input v-model="crmTrackingNumber" type="number" class="w-[50%] border-2 rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black" placeholder="Enter CRM ticket number" />
+      <input v-model="crmTrackingNumber" type="number" class="w-[50%] border-2 bg-[#ECF0F1] rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black" placeholder="Enter CRM ticket number" />
       <div v-if="errors.crmTrackingNumber" class="text-red-500 ">{{ errorMessage.crmTrackingNumber }}</div>
     </div>
 
     <div class="mb-5">
       <label for="location" class="block text-sm font-medium text-gray-600 mb-1">Location /የስራ አካባቢ:</label>
-      <input v-model="location" type="text" class="w-[50%] border-2 rounded-md border-black  focus:border-b-[#C21F80] p-2 text-black" placeholder="Enter location" />
+      <input v-model="location" type="text" class="w-[50%] border-2 rounded-md border-black bg-[#ECF0F1]  focus:border-b-[#C21F80] p-2 text-black" placeholder="Enter location" />
       <div v-if="errors.location" class="text-red-500 ">{{ errorMessage.location }}</div>
     </div>
 
     <div class="mb-10">
       <label for="phone" class="block text-sm font-medium text-gray-600 mb-1">Enter Phone/የዲስፓቸር ሰልክ ቁጥር:</label>
-      <input v-model="phone" @input="onPhoneInput" type="text" class="w-[50%] border-2 rounded-md border-black focus:border focus:border-[#C21F80] p-2 text-black " placeholder="Enter phone number" />
+      <input v-model="phone" @input="onPhoneInput" type="text" class="w-[50%] border-2 rounded-md bg-[#ECF0F1] border-black focus:border focus:border-[#C21F80] p-2 text-black " placeholder="Enter phone number" />
       <div v-if="errors.phone" class="text-red-500 w-3/4">{{ errorMessage.phone }}</div>
     </div>
 

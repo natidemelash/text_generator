@@ -1,10 +1,11 @@
 <template>
   <div>
     <Header />
-    <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage"/>
+    <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage" @engagement-message="updateEngagementMessage"/>
     <div class="my-5">
       <MessageDisplay v-if="generatedMessage && !isPaymentRoute" :generatedMessage="generatedMessage" />
       <MessageDisplay v-if="isPaymentRoute && paymentMessage " :generatedMessage="paymentMessage" :isPaymentMessage="true" />
+      <MessageDisplay v-if="!isPaymentRoute " :generatedMessage="engagementMessage"/>
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@ import MessageDisplay from './components/MessageDisplay.vue';
       generatedMessage: '',
       isPaymentRoute:false,
       paymentMessage: '',
+      engagementMessage: ''
     };
   },
   methods: {
@@ -31,6 +33,9 @@ import MessageDisplay from './components/MessageDisplay.vue';
     },
     updatePaymentMessage(message) {
       this.paymentMessage = message;
+    },
+    updateEngagementMessage(message){
+      this.engagementMessage = message;
     }
   },
   watch: {
@@ -41,3 +46,10 @@ import MessageDisplay from './components/MessageDisplay.vue';
   },
 }
 </script>
+
+<style>
+  button:focus {
+    outline: none;
+    border: 3px solid #111;
+  }
+</style>
