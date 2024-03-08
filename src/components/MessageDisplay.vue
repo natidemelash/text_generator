@@ -14,6 +14,7 @@
 export default {
   props: {
     generatedMessage: String,
+    isPaymentMessage: Boolean,
   },
   methods: {
     copyToClipboard() {

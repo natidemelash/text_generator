@@ -65,11 +65,12 @@
     </div>
 
 
-    <button @click="generateMessage" class="block bg-blue-500 text-white px-4 py-2 rounded-md">Generate Message</button>
+    <button @click="generateMessage" class="block bg-[#640D4D] text-white px-4 py-2 rounded-md">Generate Message</button>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -101,6 +102,12 @@ export default {
           .replace('{crmTrackingNumber}', this.crmTrackingNumber)
           .replace('{location}', this.location)
           .replace('{phone}', this.phone);
+
+          // Clear input values after successful message generation
+          this.selectedService = "";
+          this.location = "";
+          this.phone = "";
+          this.crmTrackingNumber = "";
 
           // validation for message(characters should be <= 69)
         if(this.isValidMessageLength(message)){
