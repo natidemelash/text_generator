@@ -3,9 +3,9 @@
     <Header />
     <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage" @engagement-message="updateEngagementMessage"/>
     <div class="my-5">
-      <MessageDisplay v-if="generatedMessage && !isPaymentRoute" :generatedMessage="generatedMessage" />
+      <MessageDisplay v-if="generatedMessage && !isPaymentRoute && !isEngagementRoute" :generatedMessage="generatedMessage" />
       <MessageDisplay v-if="isPaymentRoute && paymentMessage " :generatedMessage="paymentMessage" :isPaymentMessage="true" />
-      <MessageDisplay v-if="!isPaymentRoute " :generatedMessage="engagementMessage"/>
+      <MessageDisplay v-if="isEngagementRoute && engagementMessage" :generatedMessage="engagementMessage" :isEngagementRoute="true"/>
     </div>
   </div>
 </template>
@@ -23,6 +23,7 @@ import MessageDisplay from './components/MessageDisplay.vue';
     return {
       generatedMessage: '',
       isPaymentRoute:false,
+      isEngagementRoute:false,
       paymentMessage: '',
       engagementMessage: ''
     };
@@ -40,8 +41,8 @@ import MessageDisplay from './components/MessageDisplay.vue';
   },
   watch: {
     $route(to) {
-      // Update isPaymentRoute based on the route
       this.isPaymentRoute = to.path === '/payments';
+      this.isEngagementRoute = to.path === '/engagements';
     },
   },
 }
