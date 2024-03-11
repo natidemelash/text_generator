@@ -3,7 +3,7 @@
     <nav class="flex items-center justify-between ">
       <div>
         <h1>
-          <router-link to="/dispatch">
+          <router-link to="/">
             <img src="../assets/logo.png" alt="logo" width="50"/>
           </router-link>
         </h1>
