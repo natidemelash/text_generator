@@ -3,9 +3,9 @@
     <div class="text-center">
       <img src="../assets/logo.png" alt="" width="200">
     </div>
-    <h3 class="py-2 text-xl ">Text Message Generator:</h3>
+    <h3 class="py-2 text-xl text-[#01FF01]">Text Message Generator:</h3>
 
-    <div class="my-4">
+    <div class="my-4 text-[]">
       <p>
         <span class="font-semibold text-[#C21F80] py-1 px-3 bg-slate-300 rounded-md leading-7">Dispatch</span> : for sending bulk SMS for SP  / ለባለሙያዎች bulk መልዕክት መላክ ሲያስፈልግ
       </p>
@@ -19,7 +19,7 @@
 
     <div class="my-4">
       <p>
-        <span class="font-semibold text-[#C21F80] py-1 px-3 bg-slate-300 rounded-md leading-7">Engagement</span>  : for sending SMS for both Employers & SPs after the dispatching process / ለባለሙያዎችም ሆነ ለቀጣሪዎች በክትትል ሰዓት መላክ ሲያስፈልግ
+        <span class="font-semibold text-[#C21F80] py-1 px-3 bg-slate-300 rounded-md leading-7">Engagement</span>  : for sending SMS for both Employers & SPs after the dispatching process / ለባለሙያዎችም ሆነ ለቀጣሪዎች በክትትል ሰዓት መልዕክት መላክ ሲያስፈልግ
       </p>
     </div>
   </div>
