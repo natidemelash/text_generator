@@ -15,10 +15,10 @@
     <div v-if="showPhoneNumberInput" class="mt-4">
       <label for="phoneNumber" class="text-sm font-semibold text-gray-700">Phone Number/የዲስፓቸር ስልክ:</label>
       <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 border-gray-800 rounded-md">
+      <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
       <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
           <img src="../assets//send.png" alt="" width="25">
       </button>
-      <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
     </div>
   </div>
 </template>
