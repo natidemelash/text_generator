@@ -10,36 +10,73 @@
       <button class="bg-[#435f8c] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('sp-noanswer')">SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ </button>
       <button class="bg-[#435f8c] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('dispatched-sp-noanswer')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
     </div>
+
+    <!-- Input field for phone number -->
+    <div v-if="showPhoneNumberInput" class="mt-4">
+      <label for="phoneNumber" class="text-sm font-semibold text-gray-700">Phone Number/የዲስፓቸር ስልክ:</label>
+      <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 border-gray-800 rounded-md">
+      <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
+          <img src="../assets//send.png" alt="" width="25">
+      </button>
+      <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
+
+    data(){
+      return{
+        showPhoneNumberInput: false,
+        phoneNumber: '',
+        phoneNumberError: ''
+      }
+    },
+
     methods: {
-      handleButtonClick(action){
+      handleButtonClick(action) {
+        this.showPhoneNumberInput = true;
+        this.selectedAction = action;
+      },
+
+      generateMessage() {
         let message = '';
 
-        switch (action) {
-        case 'emp-paid-noanswer':
-          message = 'ሰላም! የባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በአስቸኳይ ይደውሉልን። መልካም ቀን!';
-          break;
-        case 'still-searching':
-          message = 'የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። መልካም ቀን!';
-          break;
-        case 'sp-dispatched-noanswer':
-          message = 'ሰላም! የባለሙያ ስልክ ልከንልዎ ለማረጋገጥ ስንደውል ማግኘት አልቻልንም። ከባለሙያው ጋር በ24 ሰዓት ውስጥ ተነጋግረው ካላሳወቁን ሌላ ባለሙያ ለመላክ ሲስተሙ እንደማይፈቅድልን እናሳውቃለን።';
-          break;
-        case 'sp-noanswer':
-          message = 'የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። መልካም ቀን!';
-          break;
-        case 'dispatched-sp-noanswer':
-          message = 'የተላኩበትን ስራ በተመለከተ ደውለን ነበር። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። መልካም ቀን!';
-          break;
-        default:
-          break;
-      }
-      this.$emit('engagement-message', message);
-    }
+        if (!this.phoneNumber) {
+          this.phoneNumberError = 'Phone number cannot be empty.';
+          return;
+        }
+
+        if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
+          this.phoneNumberError = 'Invalid phone number format. It should start with 09 and be 10 digits long.';
+          return;
+        }
+        this.phoneNumberError = '';
+        this.showPhoneNumberInput = false;
+
+        switch (this.selectedAction) {
+          case 'emp-paid-noanswer':
+            message = `ጤና ይስጥልን! የባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በአስቸኳይ ይደውሉልን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            break;
+          case 'still-searching':
+            message = `የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            break;
+          case 'sp-dispatched-noanswer':
+            message = `ጤና ይስጥልን! የባለሙያ ስልክ ልከን ለማረጋገጥ ስንደውል ማግኘት አልቻልንም። ከባለሙያው ጋር በ24 ሰዓት ውስጥ ተነጋግረው ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል በትህትና እናሳውቃለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
+            break;
+          case 'sp-noanswer':
+            message = `የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            break;
+          case 'dispatched-sp-noanswer':
+            message = `ለስራ ልከንዎት በምንደውልልዎ ሰዓት ማግኘት አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከመላካችን በፊት በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            break;
+          default:
+            break;
+        }
+        this.$emit('engagement-message', message);
+        this.phoneNumber = '';
+      },
   }    
 }
 </script>
