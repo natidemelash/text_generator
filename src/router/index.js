@@ -4,6 +4,7 @@ import DispatchMessage from '@/view/DispatchMessage.vue';
 import PaymentMessageForm from '@/view/PaymentMessageForm.vue';
 import Engagement from '@/view/Engagement.vue';
 import Home from '@/view/Home.vue';
+import Custom from '@/view/Custom.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,11 @@ const router = createRouter({
       name: 'Engagement',
       component: Engagement,
     },
+    {
+      path: '/custom',
+      name: 'Custom',
+      component: Custom
+    }
   ],
 });
 
