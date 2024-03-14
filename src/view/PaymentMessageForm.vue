@@ -1,7 +1,8 @@
 <template>
-  <div class="card p-6 mx-auto max-w-2xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
+  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
      <h2 class="text-xl font-semibold mb-4 text-[#C21F80]">Payment related messages</h2>
-     <div class="flex items-center text-black gap-8">
+     <div class="grid grid-cols-1 md:grid-cols-3 text-black gap-8">
+      <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('bank-confirmation')">Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ </button>
        <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('Well-received')">Received Payment / ክፍያ ደርሶናል</button>
        <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
        <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Closed Ticket')">Closing ticket / የመዝጊያ መልዕክት </button>
@@ -53,14 +54,17 @@
       this.showPhoneNumberInput = false;
 
       switch (this.selectedAction) {
+        case 'bank-confirmation':
+          message = `ሰላም! የባንክ መረጃ እንደደረስዎት ለማረጋገጥ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መልካም ቀን!`;
+          break;
         case 'Well-received':
-          message = `ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የባለሙያ ስልክ ከ15 - 20 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+          message = `ሰላም! ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የባለሙያ ስልክ ከ15 - 20 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
           break;
         case 'Reminder':
-          message = `ክፍያ ባለመፈጸምዎ የባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+          message = `ሰላም! ክፍያ ባለመፈጸምዎ የባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
           break;
         case 'Closed Ticket':
-          message = `ላቀረቡት የባለሙያ ጥያቄ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። አገልግሎታችንን በድጋሚ ሲፈልጉ ልናገለግልዎ ዝግጁ ነን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። `;
+          message = `ሰላም! ለባለሙያ ጥያቄዎ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። አገልግሎታችንን ሲፈልጉ በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን።`;
           break;
         default:
           break;
@@ -70,4 +74,4 @@
     },
   },
  };
- </script>
+ </script> 

@@ -1,5 +1,5 @@
 <template>
-  <div class="card p-6 mx-auto max-w-3xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
+  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
     <h3 class="text-xl font-semibold mb-4 text-[#C21F80]">Engagement Messages</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
@@ -63,13 +63,13 @@
             message = `የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
             break;
           case 'sp-dispatched-noanswer':
-            message = `ጤና ይስጥልን! የባለሙያ ስልክ ልከን ለማረጋገጥ ስንደውል ማግኘት አልቻልንም። ከባለሙያው ጋር በ24 ሰዓት ውስጥ ተነጋግረው ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል በትህትና እናሳውቃለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
+            message = `ሰላም! የላክንልዎ  የባለሙያ ስልክ ደረሰዎ?  በ24 ሰዓት ተነጋግረው ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል በትህትና እናሳውቃለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ።`;
             break;
           case 'sp-noanswer':
             message = `የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
             break;
           case 'dispatched-sp-noanswer':
-            message = `ለስራ ልከንዎት በምንደውልልዎ ሰዓት ማግኘት አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከመላካችን በፊት በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            message = `ሰላም! ለስራ ልከንዎት ስንደውል ልናገኝዎ አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከመላካችን በፊት በ${this.phoneNumber} ይደውሉ።`;
             break;
           default:
             break;
