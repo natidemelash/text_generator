@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-md mx-4 md:mx-auto mt-8">
+  <div class="max-w-md mx-4 md:mx-auto mt-8" v-if="generatedMessage">
     <div class="bg-white p-6 rounded-md shadow-md flex flex-col items-start justify-between">
       <h2 class="text-lg font-semibold mb-6 text-black">Generated Message:</h2>
       <p class="text-gray-800 text-base md:text-lg">{{ generatedMessage }}</p>
@@ -26,6 +26,7 @@ export default {
       document.body.removeChild(el);
       // Optionally, you can provide some feedback to the user
       alert("Message copied to clipboard successfully!");
+      this.$emit('close');
     },
   },
 };

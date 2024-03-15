@@ -3,9 +3,9 @@
     <Header />
     <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage" @engagement-message="updateEngagementMessage"/>
     <div class="my-5">
-      <MessageDisplay v-if="generatedMessage && !isPaymentRoute && !isEngagementRoute" :generatedMessage="generatedMessage" />
-      <MessageDisplay v-if="isPaymentRoute && paymentMessage " :generatedMessage="paymentMessage" :isPaymentMessage="true" />
-      <MessageDisplay v-if="isEngagementRoute && engagementMessage" :generatedMessage="engagementMessage" :isEngagementRoute="true"/>
+      <MessageDisplay v-if="generatedMessage && !isPaymentRoute && !isEngagementRoute" :generatedMessage="generatedMessage" @close="clearGeneratedMessage" />
+      <MessageDisplay v-if="isPaymentRoute && paymentMessage " :generatedMessage="paymentMessage" :isPaymentMessage="true" @close="clearPaymentMessage" />
+      <MessageDisplay v-if="isEngagementRoute && engagementMessage" :generatedMessage="engagementMessage" :isEngagementRoute="true" @close="clearEngagementMessage"/>
     </div>
   </div>
 </template>
@@ -37,6 +37,15 @@ import MessageDisplay from './components/MessageDisplay.vue';
     },
     updateEngagementMessage(message){
       this.engagementMessage = message;
+    },
+    clearGeneratedMessage() {
+      this.generatedMessage = null;
+    },
+    clearPaymentMessage() {
+      this.paymentMessage = null;
+    },
+    clearEngagementMessage() {
+      this.engagementMessage = null;
     }
   },
   watch: {
