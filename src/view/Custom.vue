@@ -133,7 +133,6 @@ export default {
             const phoneRegex = /^(\+2519\d{8}|09\d{8})$/;
             return phoneRegex.test(phone);
         },
-
         blsrMessage() {
             if(this.validateForm()){
                 this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን`;
