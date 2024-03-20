@@ -1,17 +1,17 @@
 <template>
-  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#ECF0F1] mt-8 shadow-md rounded-md">
-     <h2 class="text-xl font-semibold mb-4 text-[#C21F80]">Payment related messages</h2>
+  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+     <h2 class="text-xl font-semibold mb-4 text-[#fff]">Payment related messages</h2>
      <div class="grid grid-cols-1 md:grid-cols-3 text-black gap-8">
-      <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('bank-confirmation')">Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ </button>
-       <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('Well-received')">Received Payment / ክፍያ ደርሶናል</button>
-       <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
-       <button class="bg-[#640D4D] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Closed Ticket')">Closing ticket / የመዝጊያ መልዕክት </button>
+      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('bank-confirmation')">Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ </button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('Well-received')">Received Payment / ክፍያ ደርሶናል</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Closed Ticket')">Closing ticket / የመዝጊያ መልዕክት </button>
      </div>
 
        <!-- Input field for phone number -->
       <div v-if="showPhoneNumberInput" class="mt-4">
-        <label for="phoneNumber" class="text-sm font-semibold text-gray-700">Phone Number/የዲስፓቸር ስልክ:</label>
-        <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 border-gray-800 rounded-md">
+        <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
+        <input type="text" id="phoneNumber" v-model="phoneNumber" placeholder="Dispatcher phone" @input="validatePhoneNumber"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm rounded-md focus:outline-none">
         <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
         <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
           <img src="../assets//send.png" alt="" width="25">
