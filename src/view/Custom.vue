@@ -1,5 +1,18 @@
 <template>
-    <div class="card text-white p-6 mx-auto max-w-2xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <div class="flex justify-center items-center gap-8 mt-10">
+        <h3>For Whom you are senting SMS / መልዕክቱ የሚላክለት</h3>
+        <div class="flex flex-col ">
+            <label class="inline-flex items-center">
+                <input type="radio" class="form-radio h-5 w-5 text-indigo-600" v-model="messageFor" value="customer" />
+                <span class="ml-2">Customer</span>
+            </label>
+            <label class="inline-flex items-center mt-4">
+                <input type="radio" class="form-radio h-5 w-5 text-indigo-600" v-model="messageFor" value="serviceProvider" />
+                <span class="ml-2">Service Provider</span>
+            </label>
+        </div>
+    </div>
+    <section v-if="messageFor === 'customer'" class="card text-white p-6 mx-auto max-w-2xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
         <h3 class="text-xl font-semibold mb-4 ">Custom SMS for BLSR</h3>
         <div class="flex flex-col w-[80%]">
            <label for="service">Job Dispatched</label> 
@@ -21,7 +34,20 @@
         </div>
 
         <button class="bg-[#e21e81] text-sm text-white px-4 py-2 rounded-full" @click="blsrMessage">Generate Msg</button>
-    </div>
+    </section>
+    <section v-if="messageFor === 'serviceProvider'" class="card text-white p-6 mx-auto max-w-2xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+        <div class="my-2 flex flex-col w-[70%]">
+            <label for="Customer_name">Customer name/ የቀጣሪ ስም</label>
+            <input type="text" name="Customer_name" v-model="name" placeholder="customer name" class="py-2 px-3 bg-[#ECF0F1] text-black my-1 rounded focus:outline-none">
+            <div v-if="errors.name" class="text-red-500 ">{{ errorMessage.name }}</div>
+        </div>
+        <div class="mt-2 mb-6 flex flex-col w-[70%]">
+            <label for="Customer_phone">Customer phone/የቀጣሪ ስልክ ቁጥር</label>
+            <input type="text" name="Customer_phone" v-model="phone" placeholder="customer phone number" class="py-2 px-3 bg-[#ECF0F1] text-black my-1 rounded focus:outline-none">
+            <div v-if="errors.serviceProviderPhone" class="text-red-500 w-3/4">{{ errorMessage.phone }}</div>
+        </div>
+        <button class="bg-[#e21e81] text-sm text-white px-4 py-2 rounded-full" @click="blsrMessage">Generate Msg</button>
+    </section>
     <div v-if="message" class="card mx-auto max-w-sm bg-[#4f4d4d] mt-8 shadow-md rounded-md p-6">
         <p> {{ message }}</p>
         <button @click="copyToClipboard" class="mt-6 mr-auto p-2 bg-gray-400 hover:bg-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-300 transition duration-300">
@@ -34,7 +60,12 @@
 export default {
     data(){
         return {
+            messageFor: null,
             selectedService: null,
+            serviceProviderName:'',
+            serviceProviderPhone: '',
+            customerName: '',
+            customerPhone: '',
             services: [
                 'Accountant', 
                 'Aluminium Works',
@@ -104,17 +135,19 @@ export default {
                 'Weaver',
                 'Welding',
             ],
-            serviceProviderName: '',
-            serviceProviderPhone: '',
+            name: '',
+            phone: '',
             message: '',
             errors:{
                 selectedService: false,
                 serviceProviderName: false,
+                customerName: false,
                 serviceProviderPhone: false,
+                customerPhone: false,
             },
             errorMessage: {
                 selectedService: "Please select a service.",
-                name: "Please enter the SP name.",
+                name: "Please enter a name.",
                 phone: "Please enter a valid phone number",
             },
         }
@@ -122,12 +155,16 @@ export default {
 
     methods:{
         validateForm() {
-            let isValid = true;
-            this.errors.selectedService = !this.selectedService;
-            this.errors.serviceProviderName = !this.serviceProviderName;
-            this.errors.serviceProviderPhone = !this.isValidPhoneNumber(this.serviceProviderPhone);
-            isValid = !this.errors.selectedService && !this.errors.serviceProviderName && !this.errors.serviceProviderPhone;
-            return isValid;
+            if (this.messageFor === 'customer') {
+                this.errors.selectedService = !this.selectedService;
+                this.errors.serviceProviderName = !this.serviceProviderName;
+                this.errors.serviceProviderPhone = !this.isValidPhoneNumber(this.serviceProviderPhone);
+                return !this.errors.selectedService && !this.errors.serviceProviderName && !this.errors.serviceProviderPhone;
+            } else if (this.messageFor === 'serviceProvider') {
+                this.errors.name = !this.name;
+                this.errors.phone = !this.isValidPhoneNumber(this.phone);
+                return !this.errors.name && !this.errors.phone;
+            }
         },
         isValidPhoneNumber(phone) {
             const phoneRegex = /^(\+2519\d{8}|09\d{8})$/;
@@ -135,9 +172,16 @@ export default {
         },
         blsrMessage() {
             if(this.validateForm()){
-                this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን`;
+                if(this.messageFor === 'customer'){
+                    this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን`;
+                }else if (this.messageFor === 'serviceProvider'){
+                    this.message = `የቀጣሪ ስም፡ ${this.name} - የቀጣሪ ስልክ ቁጥር ${this.phone}`;
+                }
+                this,this.selectedService = '';
                 this.serviceProviderName = '';
                 this.serviceProviderPhone = '';
+                this.customerName = '';
+                this.customerPhone = '';
                 return message;
             }
         },
