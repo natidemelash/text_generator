@@ -1,7 +1,7 @@
 
 <template>
-    <div class="flex justify-center items-center gap-8 mt-10">
-        <h3>For Whom you are senting SMS / መልዕክቱ የሚላክለት</h3>
+    <div class="flex flex-col md:flex-row justify-center items-center gap-8 mt-10">
+        <h3>To whom are you sending the SMS? / መልዕክቱ የሚላክለት</h3>
         <div class="flex flex-col ">
             <label class="inline-flex items-center">
                 <input type="radio" class="form-radio h-5 w-5 text-indigo-600" v-model="messageFor" value="customer" />
@@ -176,7 +176,7 @@ export default {
                 if(this.messageFor === 'customer'){
                     this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን`;
                 }else if (this.messageFor === 'serviceProvider'){
-                    this.message = `የቀጣሪ ስም፡ ${this.name} - የቀጣሪ ስልክ ቁጥር ${this.phone}`;
+                    this.message = `ከGoodayOn ቀጣሪ (${this.name}) - በ(${this.phone}) ስልክ ይደውሉ። መልካም ቀን!`;
                 }
                 this,this.selectedService = '';
                 this.serviceProviderName = '';

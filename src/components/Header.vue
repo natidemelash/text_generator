@@ -16,7 +16,7 @@
       </div>
 
       <!-- Navigation links -->
-      <div :class="{'hidden': !mobileMenuOpen, 'md:flex': !mobileMenuOpen, 'flex-col': mobileMenuOpen}" class="md:flex-row md:gap-4 flex-col items-center gap-4">
+      <div :class="{'hidden': !mobileMenuOpen, 'md:flex gap-3': !mobileMenuOpen, 'flex flex-col': mobileMenuOpen}" class="md:flex-row md:gap-4 flex-col items-center gap-4">
         <router-link to="/dispatch" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
           <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Dispatch</button>
         </router-link>
@@ -27,7 +27,7 @@
           <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Engagements</button>
         </router-link>
         <router-link to="/custom" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">BLSR</button>
+          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Custom</button>
         </router-link>
       </div>
     </nav>
