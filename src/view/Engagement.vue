@@ -1,6 +1,19 @@
 <template>
-  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-    <h3 class="text-xl font-semibold mb-4 text-[#fff]">Engagement Messages</h3>
+  <div class="flex flex-col md:flex-row gap-4 mx-4 justify-center my-4 max-w-[1000px]">
+    <div
+      v-for="(type, index) in projectTypes"
+      :key="index"
+      :class="['card p-4 md:w-[20%] bg-[#4f4d4d] text-[#F1C40F] font-semibold rounded-md cursor-pointer mr-4' , {'border-2 border-[#F1C40F]': selectedProjectType === type }]"
+      @click="handleProjectType(type)"
+    >
+      {{ type }}
+    </div>
+
+  </div>
+
+  <!-- CCO Messages -->
+  <div  v-if="selectedProjectType === 'CCO'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <h3 class="text-lg mb-4 text-[#fff]">CCO Engagement Messages</h3>
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('emp-paid-noanswer')">Paid connection - No reply from EMP /ቀጣሪው ከክፍያ በኋላ ስልክ አያነሳም</button>
@@ -21,16 +34,27 @@
       </button>
     </div>
   </div>
+
+  <!-- MACT Messages -->
+  <div v-if="selectedProjectType === 'MACT'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <h3 class="text-lg mb-4 text-[#fff]">MACT Engagement Messages</h3>
+  </div>
+
+  <!-- BLSR Messages -->
+  <div v-if="selectedProjectType === 'BLSR'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <h3 class="text-lg mb-4 text-[#fff]">BLSR Engagement Messages</h3>
+  </div>
 </template>
 
 <script>
   export default {
-
     data(){
       return{
         showPhoneNumberInput: false,
         phoneNumber: '',
-        phoneNumberError: ''
+        phoneNumberError: '',
+        projectTypes: ['CCO', 'MACT', 'BLSR'],
+        selectedProjectType: null,
       }
     },
 
@@ -38,6 +62,10 @@
       handleButtonClick(action) {
         this.showPhoneNumberInput = true;
         this.selectedAction = action;
+      },
+
+      handleProjectType(projectType){
+        this.selectedProjectType = projectType;
       },
 
       generateMessage() {
