@@ -174,7 +174,7 @@ export default {
         blsrMessage() {
             if(this.validateForm()){
                 if(this.messageFor === 'customer'){
-                    this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን`;
+                    this.message = `የ${this.selectedService} ባለሙያ ከGoodayOn ወደ (${this.serviceProviderName}) በ(${this.serviceProviderPhone}) ይደውሉ። መልካም ቀን!`;
                 }else if (this.messageFor === 'serviceProvider'){
                     this.message = `ከGoodayOn ቀጣሪ (${this.name}) - በ(${this.phone}) ስልክ ይደውሉ። መልካም ቀን!`;
                 }
