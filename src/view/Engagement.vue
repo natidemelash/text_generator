@@ -59,6 +59,14 @@
   <div v-if="selectedProjectType === 'BLSR'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
     <h3 class="text-lg mb-4 text-[#fff]">BLSR Engagement Messages</h3>
   </div>
+
+  <!-- NUE Message -->
+  <div v-if="selectedProjectType === 'NUE'" class="card p-6 mx-3 md:mx-auto max-w-3xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <h3 class="text-lg mb-4 text-[#fff]">New User Engagement Message</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
+      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('nue-1')">Only App downloaded</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -69,7 +77,7 @@
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
-        projectTypes: ['CCO', 'MACT', 'BLSR'],
+        projectTypes: ['CCO', 'MACT', 'BLSR', 'NUE'],
         selectedProjectType: null,
       }
     },
@@ -136,6 +144,9 @@
             break;
           case 'mact-emp-close':
             message = `ሰላም! የአገልግሎት ጥራታችንን ለማሻሻል በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን አገልግሎቱን እንዳልፈለጉ በመገንዘብ ካርዱን ዘግተነዋል። ለቀጣይ የባለሙያ ጥያቄ በ9675 አልያም +251949231010 ይደውሉልን። መልካም ቀን!`;
+            break;
+          case 'nue-1':
+            message = `የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ +251949231010 ይደውሉ። መልካም ቀን!`
             break;
           default:
             break;
