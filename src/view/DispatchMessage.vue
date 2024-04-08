@@ -42,6 +42,7 @@
         <option value="ሴራሚክ">ሴራሚክ</option>
         <option value="ትርጉም ስራ">ትርጉም ስራ</option>
         <option value="ጥበቃ">ጥበቃ</option>
+        <option value="ስቶር ኪፐር">ስቶር ኪፐር</option>
       </select>
       <div v-if="errors.selectedService" class="text-red-500">{{ errorMessage.selectedService }}</div>
     </div>

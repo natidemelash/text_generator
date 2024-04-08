@@ -12,72 +12,37 @@
   </div>
 
   <!-- CCO Messages -->
-  <div  v-if="selectedProjectType === 'CCO'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-    <h3 class="text-lg mb-4 text-[#fff]">CCO Engagement Messages</h3>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('emp-paid-noanswer')">Paid connection - No reply from EMP /ቀጣሪው ከክፍያ በኋላ ስልክ አያነሳም</button>
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('still-searching')">Still Searching for SP / በ15 ደቂቃ ባለሙያ ማግኘት ካልተቻለ </button>
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('sp-dispatched-noanswer')">Dispatched SP - Employer No answer / ባለሙያ ልከንለት ቀጣሪው ስልክ ሳያነሳ ሲቅር</button>
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('closing-without-SP')">No SP available / ባለሙያ ስናጣ ለቀጣሪው የሚላክ</button>
-
-      <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('sp-noanswer')">SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ </button>
-      <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('dispatched-sp-noanswer')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
-    </div>
-
-    <!-- Input field for phone number -->
-    <div v-if="showPhoneNumberInput" class="mt-4">
-      <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-      <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
-      <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
-      <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
-          <img src="../assets//send.png" alt="" width="25">
-      </button>
-    </div>
-  </div>
+  <CCO v-if="selectedProjectType ==='CCO'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" @generate-message="handleGenerateMessage"/>
 
   <!-- MACT Messages -->
-  <div v-if="selectedProjectType === 'MACT'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-    <h3 class="text-lg mb-4 text-[#fff]">MACT Engagement Messages</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-emp-1st')">First call to employer - No answer/ቀጣሪው ስልክ አያነሳም (1ኛ ሙከራ)</button>
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-emp-close')">Repeated calls to employer - No answer/ቀጣሪው ስልክ አያነሳም (መዝጊያ)</button>
-    </div>
+  <MACT v-if="selectedProjectType === 'MACT'" @button-click="handleButtonClick"/>
 
-     <!-- Input field for phone number -->
-     <div v-if="showPhoneNumberInput" class="mt-4">
-      <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-      <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
-      <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
-      <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
-          <img src="../assets//send.png" alt="" width="25">
-      </button>
-    </div>
-  </div>
+  <BLSR v-if="selectedProjectType === 'BLSR'" />
 
-  <!-- BLSR Messages -->
-  <div v-if="selectedProjectType === 'BLSR'" class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-    <h3 class="text-lg mb-4 text-[#fff]">BLSR Engagement Messages</h3>
-  </div>
-
-  <!-- NUE Message -->
-  <div v-if="selectedProjectType === 'NUE'" class="card p-6 mx-3 md:mx-auto max-w-3xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-    <h3 class="text-lg mb-4 text-[#fff]">New User Engagement Message</h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-      <button class="bg-[#A569BD] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('nue-1')">New user(app downloaded) - not responsive</button>
-    </div>
-  </div>
+  <NUEP v-if="selectedProjectType === 'NUE'" @button-click="handleButtonClick" />
+  
 </template>
 
 <script>
+import BLSR from '../components/BLSR.vue'
+import MACT from '../components/MACT.vue'
+import CCO from '../components/CCO.vue'
+import NUEP from '../components/NUEP.vue'
+
   export default {
+    components:{
+      CCO,
+      BLSR,
+      MACT,
+      NUEP,
+    },
     data(){
       return{
         showPhoneNumberInput: false,
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
-        projectTypes: ['CCO', 'MACT', 'BLSR', 'NUE'],
+        projectTypes: ['CCO', 'MACT', 'BLSR', 'NUE', 'ACE'],
         selectedProjectType: null,
       }
     },
@@ -102,6 +67,19 @@
       handleProjectType(projectType){
         this.selectedProjectType = projectType;
       },
+
+      handleGenerateMessage(messageData) {
+        // Extract action and phone number from the emitted event data
+        const { action, phoneNumber } = messageData;
+        
+        // Set the selected action and phone number
+        this.selectedAction = action;
+        this.phoneNumber = phoneNumber;
+
+        // Generate the message
+        this.generateMessage();
+      },
+
 
       generateMessage() {
         let message = '';
@@ -140,7 +118,7 @@
             message = `ብቁ ባለሙያዎች መተግበሪያችንን እንዲቀላቀሉ ተግተን ስለምንሰራ ለሚቀጥለው ጥያቄዎ ፈጣን ምላሽ እንደምንሰጥ በመተማመን የከፈሉትን ክፍያ በሌላ ጊዜ እንደሚገለገሉበት ለማሳወቅ እንወዳለን።`;
             break;
           case 'mact-emp-1st':
-            message = `ሰላም! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ሁኔታ ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
+            message = `ሰላም! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ሁኔታ ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ0949231010 ይደውሉልን።`;
             break;
           case 'mact-emp-close':
             message = `ሰላም! የአገልግሎት ጥራታችንን ለማሻሻል በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን አገልግሎቱን እንዳልፈለጉ በመገንዘብ ካርዱን ዘግተነዋል። ለቀጣይ የባለሙያ ጥያቄ በ9675 አልያም +251949231010 ይደውሉልን። መልካም ቀን!`;

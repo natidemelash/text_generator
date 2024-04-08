@@ -124,6 +124,7 @@ export default {
                 'Shoe Cleaner',
                 'Shoe Repair',
                 'Special Needs ',
+                'Storekeeper',
                 'Tailor',
                 'Tattoo Artist',
                 'Teacher',
