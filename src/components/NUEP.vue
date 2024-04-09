@@ -10,9 +10,9 @@
 <script>
 export default {
    methods:{
-    handleButtonClick(action){
+     handleButtonClick(action){
         this.$emit('button-click', action)
-    }
+     }
    }
 }
 </script>

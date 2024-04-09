@@ -8,19 +8,20 @@
 
 
      <!-- Input field for phone number -->
-        <!-- <div v-if="showPhoneNumberInput" class="mt-4">
+        <div v-if="showPhoneNumberInput" class="mt-4">
             <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-            <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
+            <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone" class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
             <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
             <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
                 <img src="../assets//send.png" alt="" width="25">
             </button>
-        </div> -->
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    props: ['showPhoneNumberInput'],
     methods:{
         handleButtonClick(action) {
             this.$emit('button-click', action)
