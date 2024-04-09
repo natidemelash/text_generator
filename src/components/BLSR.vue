@@ -4,7 +4,6 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
         <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('blsr-01')">Unreachable during FollowUp</button>
-        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('still-searching')">Still Searching for SP / በ15 ደቂቃ ባለሙያ ማግኘት ካልተቻለ </button>
     </div>
 
     <!-- Input field for phone number -->
