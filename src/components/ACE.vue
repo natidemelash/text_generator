@@ -8,6 +8,20 @@
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-03')">Newly Registered Customer</button>
         </div>
 
+        <!-- Employer Name -->
+        <div v-if="showEmployerNameInput">
+          <label class="customerName">Customer Name </label>
+          <input v-model="employerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
+        </div>
+
+        <!-- Serivice field for  -->
+        <di v-if="showServiceOfInterestInput">
+          <label>Service of Interest </label> 
+          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+            <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
+          </select>
+        </di>
+
          <!-- Input field for phone number -->
         <div v-if="showPhoneNumberInput" class="mt-4">
           <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
@@ -22,11 +36,32 @@
 
 <script>
 export default{
-  props: ['showPhoneNumberInput'],
+  props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showEmployerNameInput'],
   data(){
     return{
       phoneNumber: '',
-      phoneNumberError: ''
+      phoneNumberError: '',
+      serviceOfInterest: [
+          'ምግብ አብሳይ',
+          'የጽዳት',
+          'የምግብ ዝግጅት',
+          'ሞግዚት',
+          'አስጠኚ',
+          'ዲሽ',
+          'ኤሌክትሪክ',
+          'ቧንቧ',
+          'ጥገና',
+          'ቀለም ቅብ',
+          'ግንባታ',
+          'ጂፕሰም',
+          'አልሙኒየም',
+          'አናጺ',
+          'ወለል ንጣፍ',
+          'ሂሳብ ስራ',
+          'ሽያጭ'     
+      ],
+      selectedService: null,
+      employerName: '',
     }
   },
   methods:{
@@ -38,7 +73,9 @@ export default{
     emitMessageEvent() {
       this.$emit('generate-message', {
         action: this.selectedAction,
-        phoneNumber: this.phoneNumber
+        phoneNumber: this.phoneNumber,
+        selectedService:this.selectedService,
+        employerName: this.employerName
       });
     }
   }  

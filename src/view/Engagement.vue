@@ -22,7 +22,7 @@
 
   <NUEP v-if="selectedProjectType === 'NUE'" @button-click="handleButtonClick" />
 
-  <ACE v-if="selectedProjectType === 'ACE'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" @generate-message="handleGenerateMessage"/>
+  <ACE v-if="selectedProjectType === 'ACE'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-employer-name-input="showEmployerNameInput"  @generate-message="handleGenerateMessage"/>
   
 </template>
 
@@ -44,11 +44,15 @@ import ACE from '@/components/ACE.vue'
     data(){
       return{
         showPhoneNumberInput: false,
+        showServiceOfInterestInput: false,
+        showEmployerNameInput: false,
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
         projectTypes: ['CCO', 'MACT', 'BLSR', 'NUE', 'ACE'],
         selectedProjectType: null,
+        selectedService:'',
+        employerName: '', 
       }
     },
 
@@ -61,8 +65,12 @@ import ACE from '@/components/ACE.vue'
         this.selectedAction = action;
 
         // Check if the selected action requires a phone number
-        if (action === 'emp-paid-noanswer' || action === 'still-searching' || action === 'sp-dispatched-noanswer' || action === 'dispatched-sp-noanswer' || action === 'sp-noanswer' || action === 'blsr-01' || action === 'ace-01' || action === 'ace-02') {
+        if (action === 'emp-paid-noanswer' || action === 'still-searching' || action === 'sp-dispatched-noanswer' || action === 'dispatched-sp-noanswer' || action === 'sp-noanswer' || action === 'blsr-01') {
           this.showPhoneNumberInput = true;
+        } else if(action === 'ace-01' || action === 'ace-02' ){  
+          this.showServiceOfInterestInput = true;
+          this.showEmployerNameInput = true;
+          this.showPhoneNumberInput =true;
         } else {
           // For other actions, directly generate the message without requiring a phone number
           this.generateMessage();
@@ -75,11 +83,13 @@ import ACE from '@/components/ACE.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber } = messageData;
+        const { action, phoneNumber, selectedService, employerName } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
         this.phoneNumber = phoneNumber;
+        this.selectedService = selectedService;
+        this.employerName = employerName;
 
         // Generate the message
         this.generateMessage();
@@ -132,10 +142,10 @@ import ACE from '@/components/ACE.vue'
             message = `ሰላም! የአገልግሎት ጥራታችንን ለማሻሻል ለክትትል በደወልን ሰዓት ልናገኝዎ አልቻልንም። ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ቢያሳውቁን ፈጣን አገልግሎት እንድንሰጥዎ ይረዳናል።`
             break;
           case 'ace-01':
-            message=`ሰላም!በአቅራቢያዎ ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
+            message=`ሰላም ${this.employerName}! የ${this.selectedService} ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
             break;   
           case 'ace-02':
-            message = `ሰላም! በባለሙያ ፍለጋዎ እገዛ ለማድረግ ደውለን ነበር። ለተሻለ ቀልጣፋ አገልግሎት በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
+            message = `ሰላም ${this.employerName}! የ${this.selectedService} ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። እገዛ ለማግኘት በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
             break;
           case 'ace-03':
             message = `የGoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ+251949231010 ይደውሉ። መልካም ቀን!`

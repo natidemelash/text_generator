@@ -133,22 +133,22 @@ export default {
     generateMessageTemplate() {
       // Define message templates for different services
       const templates = {
-        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ማናጀር: `📣አስቸኳይ📣 ማናጀር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አስጠኚ: `📣አስቸኳይ📣 አስጠኚ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ግንበኛ: `📣አስቸኳይ📣 ግንበኛ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አናፂ: `📣አስቸኳይ📣 አናፂ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጸሃፊ: `📣አስቸኳይ📣 ጸሃፊ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሹፌር: `📣አስቸኳይ📣 ሹፌር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ኤሌክትሪሽያን: `📣አስቸኳይ📣 ኤሌክትሪሽያን ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሂሳብ_ባለሙያ: `📣አስቸኳይ📣 ሂሳብ ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ሞግዚት: `📣አስቸኳይ📣 ሞግዚት ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
         ዲሽ_ቴክኒሽያን: `📣አስቸኳይ📣 ዲሽ ቴክኒሽያን ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
-        አውቶ_መካኒክ: `📣አስቸኳይ📣 አውቶ መካኒክ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ነርስ: `📣አስቸኳይ📣 ነርስ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        ጥበቃ: `📣አስቸኳይ📣 ጥበቃ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
+        አውቶ_መካኒክ: `📣አስቸኳይ📣 አውቶመካኒክ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
       };
 
-      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
+      return templates[this.selectedService] ||`📣አስቸኳይ📣 የ${this.selectedService} ባለሙያ ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
     },
     isValidPhone() {
       // Check if the phone number has a total count of 10 digits and starts with '0'
@@ -160,7 +160,7 @@ export default {
       this.phone = this.phone.replace(/\D/g, '');
     },
     isValidMessageLength(message){
-      return message.length <= 69;
+      return message.length <= 119;
     }
   },
 };
