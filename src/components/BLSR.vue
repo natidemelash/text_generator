@@ -6,6 +6,12 @@
         <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('blsr-01')">Unreachable during FollowUp</button>
     </div>
 
+     <!-- Employer Name -->
+    <div v-if="showEmployerNameInput">
+        <label class="customerName">Customer Name </label>
+        <input v-model="employerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
+    </div>
+
     <!-- Input field for phone number -->
     <div v-if="showPhoneNumberInput" class="mt-4">
         <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
