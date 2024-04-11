@@ -12,11 +12,11 @@
             <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('dispatched-sp-noanswer')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
         </div>
 
-           <!-- Employer Name -->
-        <div v-if="showEmployerNameInput">
+           <!-- Customer Name -->
+        <div v-if="showCustomerNameInput">
           <label class="customerName">Customer Name </label>
-          <input v-model="employerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-          <p v-if="employerNameError" class="text-amber-500 text-sm mt-1">{{ employerNameError }}</p>
+          <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+          <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
         <!-- Input field for phone number -->
@@ -33,36 +33,33 @@
 
 <script>
 export default {
-    props:['showPhoneNumberInput', 'showEmployerNameInput'],
+    props:['showPhoneNumberInput', 'showCustomerNameInput'],
     data() {
         return {
-            employerName: '',
-            employerNameError: '',  
+            customerName: '',
+            customerNameError: '',  
             phoneNumber: '',
             phoneNumberError: '',
-            showEmployerNameInput: false
         };
   },
     methods: {
         handleButtonClick(action){
-            this.showEmployerNameInput = true;
             this.selectedAction = action;
             this.$emit('button-click', action)
         },
 
         emitMessageEvent() {
-            if(!this.employerName){
-                this.employerNameError = 'Name can\'t be empty'
+            if(!this.customerName){
+                this.customerNameError = 'Name can\'t be empty'
                 return;
             }
             // Emit an event with the action and phone number to be handled by the parent component
             this.$emit('generate-message', {
                 action: this.selectedAction,
                 phoneNumber: this.phoneNumber,
-                employerName: this.employerName
+                customerName: this.customerName
             });
-            this.showEmployerNameInput =false
-            this.employerName = ''
+            this.customerName = ''
             this.phoneNumber = ''
 
         }
