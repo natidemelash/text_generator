@@ -35,6 +35,7 @@ import CCO from '@/components/CCO.vue'
 import EGPT from '@/components/EGPT.vue'
 import ACE from '@/components/ACE.vue'
 import MPUE from '@/components/MPUE.vue'
+import ThankYou from './ThankYou.vue'
 
   export default {
     components:{
@@ -44,6 +45,7 @@ import MPUE from '@/components/MPUE.vue'
       EGPT,
       ACE,
       MPUE,
+      ThankYou,
     },
     data(){
       return{
@@ -137,7 +139,10 @@ import MPUE from '@/components/MPUE.vue'
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ስንደውል ልናገኝዎ አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከመላካችን በፊት በ${this.phoneNumber} ይደውሉ።`;
             break;
           case 'closing-without-SP':
-            message = `ሰላም ${this.customerName}! ብቁ ባለሙያዎች መተግበሪያችንን እንዲቀላቀሉ ተግተን ስለምንሰራ ለሚቀጥለው ጥያቄዎ ፈጣን ምላሽ እንደምንሰጥ በመተማመን የከፈሉትን ክፍያ በሌላ ጊዜ እንደሚገለገሉበት ለማሳወቅ እንወዳለን።`;
+            message = `ሰላም ${this.customerName}! ባለሙያ ማግኘት ስላልተቻለ የከፈሉትን ክፍያ ለቀጣይ ጥያቄዎ መጠቀም የሚችሉ መሆኑን በትህትና እንገልጻለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`;
+            break;
+          case 'job-transfered':
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
@@ -171,6 +176,10 @@ import MPUE from '@/components/MPUE.vue'
             break;
           case 'ace-04':
             message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መልካም ቀን!`
+            break;
+          case 'success':
+            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና በአገልግሎታችን ደስተኛ ስለሆኑ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ በማጋራት ይተባበሩን ። መልካም ቀን!`
+            break;
           default:
             break;
         }

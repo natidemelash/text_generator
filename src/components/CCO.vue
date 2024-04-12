@@ -11,6 +11,7 @@
             <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('feedback-from-SP')">Asking SPs Feedback/ ከ ባለሙያ አስተያየት ለመጠየቅ</button>
             <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('sp-noanswer')">SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ </button>
             <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('dispatched-sp-noanswer')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('job-transfered')">SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል </button>
         </div>
 
            <!-- Customer Name -->

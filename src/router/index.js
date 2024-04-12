@@ -5,6 +5,7 @@ import PaymentMessageForm from '@/view/PaymentMessageForm.vue';
 import Engagement from '@/view/Engagement.vue';
 import Home from '@/view/Home.vue';
 import Custom from '@/view/Custom.vue';
+import ThankYou from '@/view/ThankYou.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/custom',
       name: 'Custom',
       component: Custom
+    },
+    {
+      path: '/thanks',
+      name: 'ThankYou',
+      component: ThankYou
     }
   ],
 });
