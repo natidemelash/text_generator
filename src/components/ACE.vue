@@ -74,6 +74,10 @@ export default{
     },
 
     emitMessageEvent() {
+      if(!this.customerName){
+        this.customerNameError = 'Name can\'t be empty'
+        return;
+      }
       this.$emit('generate-message', {
         action: this.selectedAction,
         phoneNumber: this.phoneNumber,

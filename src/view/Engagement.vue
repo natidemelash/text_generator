@@ -74,21 +74,7 @@ import MPUE from '@/components/MPUE.vue'
           this.showServiceOfInterestInput = true;
         }else{
           this.generateMessage();
-        }
-        // Check if the selected action requires a phone number
-        // if (action === 'emp-paid-noanswer' || action === 'still-searching' || action === 'sp-dispatched-noanswer' || action === 'dispatched-sp-noanswer' || action === 'sp-noanswer' || action === 'mact-01' || action === 'blsr-01' || action === 'ace-04') {
-        //   this.showPhoneNumberInput = true;
-        //   this.showCustomerNameInput = true;
-        //   this.showServiceOfInterestInput = false;
-        // } else if(action === 'ace-01' || action === 'ace-02' || action === 'emp-paid-noanswer' ||action === 'ace-03'){  
-        //   this.showServiceOfInterestInput = true;
-        //   this.showCustomerNameInput = true;
-        //   this.showPhoneNumberInput =true;
-        // } else {
-        //   // For other actions, directly generate the message without requiring a phone number
-          //  this.generateMessage();
-        // }
-       
+        }     
       },
 
       handleProjectType(projectType){
@@ -123,17 +109,6 @@ import MPUE from '@/components/MPUE.vue'
               return;
             }
 
-        // if (this.selectedAction === 'emp-paid-noanswer' || this.selectedAction === 'still-searching' || this.selectedAction === 'sp-dispatched-noanswer' || this.selectedAction === 'dispatched-sp-noanswer' || this.selectedAction === 'sp-noanswer' || this.selectedAction === 'mact-01' ||this.selectedAction === 'mact-02' || this.selectedAction === 'blsr-01' || this.selectedAction === 'ace-01' || this.selectedAction === 'ace-02' || this.selectedAction === 'ace-03' || this.selectedAction === 'ace-04') {
-        //     // Validate phone number
-        //     if (!this.phoneNumber) {
-        //       this.phoneNumberError = 'Phone number cannot be empty.';
-        //       return;
-        //     }
-        //     if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
-        //       this.phoneNumberError = 'Invalid phone number format. It should start with 09 and be 10 digits long.';
-        //       return;
-        //     }
-        // }
         this.phoneNumberError = '';
         this.showPhoneNumberInput = false;
         this.showCustomerNameInput = false;
@@ -148,6 +123,12 @@ import MPUE from '@/components/MPUE.vue'
             break;
           case 'sp-dispatched-noanswer':
             message = `ሰላም ${this.customerName}! የባለሙያ ስልክ ልከን ለማረጋገጥ ነበር። በ24 ሰዓት ውስጥ የደረሱበትን በ${this.phoneNumber} ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል ለመግለጽ እንወዳለን። መልካም ቀን!`;
+            break;
+          case 'feedback-from-employer':
+            message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መልካምቀን!`
+            break;
+          case 'feedback-from-SP':
+            message = `ሰላም ${this.customerName}! በላክንዎት ስራ ላይ ያለዎትን አስተያየት ለመውሰድ ደውለን ነበር። በሌላ ጊዜ የስራ ጥሪዎች እንዲደርሱዎት ያለዎትን አስተያየት በ${this.phoneNumber} ስልክ ደውለው ያሳውቁን። መልካም ቀን!`
             break;
           case 'sp-noanswer':
             message = `ሰላም ${this.customerName}! የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;

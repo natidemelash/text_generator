@@ -10,7 +10,7 @@
      <!-- Customer Name -->
      <div v-if="showCustomerNameInput">
           <label class="customerName">Customer Name </label>
-          <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+          <input v-model="customerName" type="text" placeholder="Customer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
           <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
       </div>
 
@@ -44,6 +44,10 @@ export default {
     },
 
     emitMessageEvent() {
+      if(!this.customerName){
+        this.customerNameError = 'Name can\'t be empty'
+        return;
+      }
       // Emit an event with the action and phone number to be handled by the parent component
       this.$emit('generate-message', {
         action: this.selectedAction,
