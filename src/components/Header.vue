@@ -29,9 +29,6 @@
         <router-link to="/custom" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
           <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Custom</button>
         </router-link>
-        <router-link to="/thanks" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">ThankYou Messages</button>
-        </router-link>
       </div>
     </nav>
   </header>

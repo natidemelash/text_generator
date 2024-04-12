@@ -35,7 +35,6 @@ import CCO from '@/components/CCO.vue'
 import EGPT from '@/components/EGPT.vue'
 import ACE from '@/components/ACE.vue'
 import MPUE from '@/components/MPUE.vue'
-import ThankYou from './ThankYou.vue'
 
   export default {
     components:{
@@ -45,7 +44,6 @@ import ThankYou from './ThankYou.vue'
       EGPT,
       ACE,
       MPUE,
-      ThankYou,
     },
     data(){
       return{
@@ -74,7 +72,8 @@ import ThankYou from './ThankYou.vue'
 
         if(action === 'ace-01' || action === 'ace-02' ){
           this.showServiceOfInterestInput = true;
-        }else{
+        }       
+        else{
           this.generateMessage();
         }     
       },
@@ -110,6 +109,7 @@ import ThankYou from './ThankYou.vue'
               this.phoneNumberError = 'Invalid phone number format. It should start with 09 and be 10 digits long.';
               return;
             }
+
 
         this.phoneNumberError = '';
         this.showPhoneNumberInput = false;
@@ -178,7 +178,8 @@ import ThankYou from './ThankYou.vue'
             message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መልካም ቀን!`
             break;
           case 'success':
-            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና በአገልግሎታችን ደስተኛ ስለሆኑ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ በማጋራት ይተባበሩን ። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። 
+            መልካም ቀን!`
             break;
           default:
             break;
