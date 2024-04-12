@@ -20,6 +20,8 @@
 
   <BLSR v-if="selectedProjectType === 'BLSR'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
+  <EGPT v-if="selectedProjectType === 'EGPT'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
+
   <MPUE v-if="selectedProjectType === 'MPUE'"/>
 
   <ACE v-if="selectedProjectType === 'ACE'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
@@ -30,6 +32,7 @@
 import BLSR from '@/components/BLSR.vue'
 import MACT from '@/components/MACT.vue'
 import CCO from '@/components/CCO.vue'
+import EGPT from '@/components/EGPT.vue'
 import ACE from '@/components/ACE.vue'
 import MPUE from '@/components/MPUE.vue'
 
@@ -38,6 +41,7 @@ import MPUE from '@/components/MPUE.vue'
       CCO,
       BLSR,
       MACT,
+      EGPT,
       ACE,
       MPUE,
     },
@@ -49,7 +53,7 @@ import MPUE from '@/components/MPUE.vue'
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
-        projectTypes: ['CCO', 'MACT', 'BLSR', 'MPUE', 'ACE'],
+        projectTypes: ['CCO', 'MACT', 'BLSR', 'EGPT', 'MPUE', 'ACE'],
         selectedProjectType: null,
         selectedService:'',
         customerName: '', 
@@ -64,19 +68,27 @@ import MPUE from '@/components/MPUE.vue'
 
         this.selectedAction = action;
         this.showPhoneNumberInput = true
-        // Check if the selected action requires a phone number
-        if (action === 'emp-paid-noanswer' || action === 'still-searching' || action === 'sp-dispatched-noanswer' || action === 'dispatched-sp-noanswer' || action === 'sp-noanswer' || action === 'mact-01' || action === 'blsr-01' || action === 'ace-04') {
-          this.showPhoneNumberInput = true;
-          this.showCustomerNameInput = true;
-          this.showServiceOfInterestInput = false;
-        } else if(action === 'ace-01' || action === 'ace-02' || action === 'emp-paid-noanswer' ||action === 'ace-03'){  
+        this.showCustomerNameInput = true;
+
+        if(action === 'ace-01' || action === 'ace-02' ){
           this.showServiceOfInterestInput = true;
-          this.showCustomerNameInput = true;
-          this.showPhoneNumberInput =true;
-        } else {
-          // For other actions, directly generate the message without requiring a phone number
+        }else{
           this.generateMessage();
         }
+        // Check if the selected action requires a phone number
+        // if (action === 'emp-paid-noanswer' || action === 'still-searching' || action === 'sp-dispatched-noanswer' || action === 'dispatched-sp-noanswer' || action === 'sp-noanswer' || action === 'mact-01' || action === 'blsr-01' || action === 'ace-04') {
+        //   this.showPhoneNumberInput = true;
+        //   this.showCustomerNameInput = true;
+        //   this.showServiceOfInterestInput = false;
+        // } else if(action === 'ace-01' || action === 'ace-02' || action === 'emp-paid-noanswer' ||action === 'ace-03'){  
+        //   this.showServiceOfInterestInput = true;
+        //   this.showCustomerNameInput = true;
+        //   this.showPhoneNumberInput =true;
+        // } else {
+        //   // For other actions, directly generate the message without requiring a phone number
+          //  this.generateMessage();
+        // }
+       
       },
 
       handleProjectType(projectType){
@@ -125,6 +137,7 @@ import MPUE from '@/components/MPUE.vue'
         this.phoneNumberError = '';
         this.showPhoneNumberInput = false;
         this.showCustomerNameInput = false;
+        this.showServiceOfInterestInput =false;
 
         switch (this.selectedAction) {
           case 'emp-paid-noanswer':
@@ -146,14 +159,26 @@ import MPUE from '@/components/MPUE.vue'
             message = `ሰላም ${this.customerName}! ብቁ ባለሙያዎች መተግበሪያችንን እንዲቀላቀሉ ተግተን ስለምንሰራ ለሚቀጥለው ጥያቄዎ ፈጣን ምላሽ እንደምንሰጥ በመተማመን የከፈሉትን ክፍያ በሌላ ጊዜ እንደሚገለገሉበት ለማሳወቅ እንወዳለን።`;
             break;
           case 'mact-01':
-            message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ሁኔታ ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
+            message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
             break;
           case 'mact-02':
             message = `ሰላም ${this.customerName}! በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን አገልግሎቱን እንዳልፈለጉ በመገንዘብ ካርዱን ዘግተነዋል። ለቀጣይ የባለሙያ ጥያቄ በ9675 አልያም በ${this.phoneNumber} ይደውሉልን።`;
             break;
+          case 'mact-03':
+            message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎ ለክትትል ስንደውል ማግኘት ስላልቻልን ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ያሳውቁን። መልካም ቀን!`
+            break;
+          case 'mact-04':
+            message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎት ለክትትል ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            break;
+          case 'egpt-01':
+            message = `ሰላም ${this.customerName}! መተግበሪያችን ላይ ባለሙያ ለማግኘት ማስታወቂያ ለጥፈው ነበር። እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። በሌላ ጊዜ ቀልጣፋ አገልግሎት እንድንሰጥዎ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
+            break; 
           case 'blsr-01':
             message = `ሰላም ${this.customerName}! የአገልግሎት ጥራታችንን ለማሻሻል ለክትትል በደወልን ሰዓት ልናገኝዎ አልቻልንም። ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ቢያሳውቁን ፈጣን አገልግሎት እንድንሰጥዎ ይረዳናል።`
             break;
+          case 'blsr-02':
+            message = `ሰላም ${this.customerName}! በ24 ሰዓታት ውስጥ ባለሙያዎቹን ባለማናገርዎ እንዲሁም በተደጋጋሚ ስንደውል ስላላገኘንዎ አገልግሎቱን ማስቀጠል አለመቻላችንን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            break;  
           case 'ace-01':
             message=`ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`
             break;   

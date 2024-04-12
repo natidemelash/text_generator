@@ -4,13 +4,15 @@
 
     <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
         <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('blsr-01')">Unreachable during FollowUp</button>
+        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('blsr-02')">Employer does not contact SPs in 24 hours</button>
     </div>
 
-     <!-- Employer Name -->
-    <div v-if="showEmployerNameInput">
-        <label class="customerName">Customer Name </label>
-        <input v-model="employerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
-    </div>
+     <!-- Customer Name -->
+     <div v-if="showCustomerNameInput">
+          <label class="customerName">Customer Name </label>
+          <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+          <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
+      </div>
 
     <!-- Input field for phone number -->
     <div v-if="showPhoneNumberInput" class="mt-4">
@@ -26,9 +28,11 @@
 
 <script>
 export default {
-  props:['showPhoneNumberInput'],
+  props:['showPhoneNumberInput', 'showCustomerNameInput'],
   data(){
     return{
+      customerName: '',
+      customerNameError: '',
       phoneNumber: '',
       phoneNumberError: ''
     }
@@ -43,8 +47,11 @@ export default {
       // Emit an event with the action and phone number to be handled by the parent component
       this.$emit('generate-message', {
         action: this.selectedAction,
-        phoneNumber: this.phoneNumber
+        phoneNumber: this.phoneNumber,
+        customerName: this.customerName,
       });
+        this.customerName = ''
+        this.phoneNumber = ''
     }
   },
 }

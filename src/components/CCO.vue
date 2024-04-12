@@ -61,7 +61,6 @@ export default {
             });
             this.customerName = ''
             this.phoneNumber = ''
-
         }
     }
 }

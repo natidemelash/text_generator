@@ -9,11 +9,11 @@
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-04')">Closing Employer</button>
         </div>
 
-        <!-- Employer Name -->
-        <div v-if="showEmployerNameInput">
+        <!-- Customer Name -->
+        <div v-if="showCustomerNameInput">
           <label class="customerName">Customer Name </label>
-          <input v-model="employerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
-          <p v-if="employerNameError" class="text-amber-500 text-sm mt-1">{{ employerNameError }}</p>
+          <input v-model="customerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
+          <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
         <!-- Serivice field for  -->
@@ -38,7 +38,7 @@
 
 <script>
 export default{
-  props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showEmployerNameInput'],
+  props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput'],
   data(){
     return{
       phoneNumber: '',
@@ -63,8 +63,8 @@ export default{
           'ሽያጭ'     
       ],
       selectedService: null,
-      employerName: '',
-      employerNameError: ''
+      customerName: '',
+      customerNameError: ''
     }
   },
   methods:{
@@ -78,10 +78,10 @@ export default{
         action: this.selectedAction,
         phoneNumber: this.phoneNumber,
         selectedService:this.selectedService,
-        employerName: this.employerName
+        customerName: this.customerName
       });
 
-      this.employerName = '';
+      this.customerName = '';
       this.serviceOfInterest = null
     }
   }  
