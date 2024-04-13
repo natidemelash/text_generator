@@ -25,8 +25,11 @@
   <MPUE v-if="selectedProjectType === 'MPUE'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
   <ACE v-if="selectedProjectType === 'ACE'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
+
+  <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-</template>
+
+ </template>
 
 <script>
 import BLSR from '@/components/BLSR.vue'
@@ -35,6 +38,7 @@ import CCO from '@/components/CCO.vue'
 import EGPT from '@/components/EGPT.vue'
 import ACE from '@/components/ACE.vue'
 import MPUE from '@/components/MPUE.vue'
+import SPA from '@/components/SPA.vue';
 
   export default {
     components:{
@@ -44,6 +48,7 @@ import MPUE from '@/components/MPUE.vue'
       EGPT,
       ACE,
       MPUE,
+      SPA,
     },
     data(){
       return{
@@ -53,7 +58,7 @@ import MPUE from '@/components/MPUE.vue'
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
-        projectTypes: ['CCO', 'MACT', 'BLSR', 'EGPT', 'MPUE', 'ACE'],
+        projectTypes: ['CCO', 'MACT', 'BLSR', 'EGPT', 'MPUE', 'ACE', 'SPA'],
         selectedProjectType: null,
         selectedService:'',
         customerName: '', 
@@ -72,7 +77,7 @@ import MPUE from '@/components/MPUE.vue'
 
         if(action === 'ace-01' || action === 'ace-02' ){
           this.showServiceOfInterestInput = true;
-        }       
+        }     
         else{
           this.generateMessage();
         }     
@@ -99,7 +104,8 @@ import MPUE from '@/components/MPUE.vue'
 
       generateMessage() {
         let message = '';
-
+        const playStoreLink = 'https://rb.gy/imua7s'
+        const appStoreLink = 'https://rb.gy/aq2i5u'
             //Validate phone number
             if (!this.phoneNumber) {
               this.phoneNumberError = 'Phone number cannot be empty.';
@@ -178,11 +184,13 @@ import MPUE from '@/components/MPUE.vue'
             message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መልካም ቀን!`
             break;
           case 'mpue-01':
-            message = `ሰላም ${this.customerName}! የGoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መልካም ቀን!`
+            message = `ሰላም የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መልካም ቀን!`
             break;
           case 'success':
-            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። 
-            መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። መልካም ቀን!`;
+            break;
+          case 'spa-01':
+            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያን ተጠቅመው በባለሙያነት ስለተመዘገቡ እናመሰግናለን። የስራ ማስታወቂያዎት የማረጋገጫ አርማ እና እይታ እንዲኖረው በ${this.phoneNumber} ደውለው ያስውቁን። መልካም ቀን!`
             break;
           default:
             break;

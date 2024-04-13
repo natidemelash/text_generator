@@ -32,7 +32,7 @@ const router = createRouter({
     {
       path: '/custom',
       name: 'Custom',
-      component: Custom
+      component: Custom,
     },
   ],
 });
