@@ -20,13 +20,13 @@ import MessageDisplay from './components/MessageDisplay.vue';
       MessageDisplay
     },
     data() {
-    return {
-      generatedMessage: '',
-      isPaymentRoute:false,
-      isEngagementRoute:false,
-      paymentMessage: '',
-      engagementMessage: ''
-    };
+      return {
+        generatedMessage: '',
+        isPaymentRoute:false,
+        isEngagementRoute:false,
+        paymentMessage: '',
+        engagementMessage: ''
+      };
   },
   methods: {
     updateGeneratedMessage(message) {

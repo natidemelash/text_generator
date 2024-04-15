@@ -106,16 +106,17 @@ import SPA from '@/components/SPA.vue';
         let message = '';
         const playStoreLink = 'https://rb.gy/imua7s'
         const appStoreLink = 'https://rb.gy/aq2i5u'
-            //Validate phone number
-            if (!this.phoneNumber) {
-              this.phoneNumberError = 'Phone number cannot be empty.';
-              return;
-            }
-            if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
-              this.phoneNumberError = 'Invalid phone number format. It should start with 09 and be 10 digits long.';
-              return;
-            }
+        
+        //Validate phone number
+        if (!this.phoneNumber) {
+          this.phoneNumberError = 'Phone number cannot be empty.';
+          return;
+        }
 
+        if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
+          this.phoneNumberError = 'Invalid phone number format. It should start with 09 and be 10 digits long.';
+          return;
+        }
 
         this.phoneNumberError = '';
         this.showPhoneNumberInput = false;
@@ -184,13 +185,13 @@ import SPA from '@/components/SPA.vue';
             message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መልካም ቀን!`
             break;
           case 'mpue-01':
-            message = `ሰላም የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መልካም ቀን!`
+            message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መልካም ቀን!`
             break;
           case 'success':
             message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። መልካም ቀን!`;
             break;
           case 'spa-01':
-            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያን ተጠቅመው በባለሙያነት ስለተመዘገቡ እናመሰግናለን። የስራ ማስታወቂያዎት የማረጋገጫ አርማ እና እይታ እንዲኖረው በ${this.phoneNumber} ደውለው ያስውቁን። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
           default:
             break;
