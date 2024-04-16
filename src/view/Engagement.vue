@@ -1,5 +1,5 @@
 <template>
-  <h2 class="uppercase text-center text-lg md:text-2xl my-6">Select Project to Generate Message</h2>
+  <h2 class=" text-center text-lg md:text-xl my-6">Select Project to Generate Message</h2>
   <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 mx-4 md:mx-8 gap-4 items-center my-4 ">
     <div
       v-for="(type, index) in projectTypes"
@@ -28,6 +28,8 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
+  <hr class="max-w-3xl mx-auto my-8" />
+  <h2 class="text-center text-lg md:text-xl my-6">ThankYou Message</h2>
 
  </template>
 
