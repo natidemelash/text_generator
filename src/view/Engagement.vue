@@ -28,8 +28,6 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-  <hr class="max-w-3xl mx-auto my-8" />
-  <h2 class="text-center text-lg md:text-xl my-6">ThankYou Message</h2>
 
  </template>
 
@@ -106,8 +104,6 @@ import SPA from '@/components/SPA.vue';
 
       generateMessage() {
         let message = '';
-        const playStoreLink = 'https://rb.gy/imua7s'
-        const appStoreLink = 'https://rb.gy/aq2i5u'
         
         //Validate phone number
         if (!this.phoneNumber) {
@@ -157,7 +153,7 @@ import SPA from '@/components/SPA.vue';
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
             break;
           case 'mact-02':
-            message = `ሰላም ${this.customerName}! በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን አገልግሎቱን እንዳልፈለጉ በመገንዘብ ካርዱን ዘግተነዋል። ለቀጣይ የባለሙያ ጥያቄ በ9675 አልያም በ${this.phoneNumber} ይደውሉልን።`;
+            message = `ሰላም ${this.customerName}! በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን።`;
             break;
           case 'mact-03':
             message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎ ለክትትል ስንደውል ማግኘት ስላልቻልን ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ያሳውቁን። መልካም ቀን!`
@@ -188,9 +184,6 @@ import SPA from '@/components/SPA.vue';
             break;
           case 'mpue-01':
             message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መልካም ቀን!`
-            break;
-          case 'success':
-            message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። መልካም ቀን!`;
             break;
           case 'spa-01':
             message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`

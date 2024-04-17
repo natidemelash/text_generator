@@ -179,7 +179,7 @@ export default {
                 }else if (this.messageFor === 'serviceProvider'){
                     this.message = `ከGoodayOn ቀጣሪ (${this.name}) - በ(${this.phone}) ስልክ ይደውሉ። መልካም ቀን!`;
                 }
-                this,this.selectedService = '';
+                this.selectedService = '';
                 this.serviceProviderName = '';
                 this.serviceProviderPhone = '';
                 this.customerName = '';

@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage" @engagement-message="updateEngagementMessage"/>
+    <router-view @message-generated="updateGeneratedMessage" @payment-generated="updatePaymentMessage" @engagement-message="updateEngagementMessage" />
     <div class="my-5">
       <MessageDisplay v-if="generatedMessage && !isPaymentRoute && !isEngagementRoute" :generatedMessage="generatedMessage" @close="clearGeneratedMessage" />
       <MessageDisplay v-if="isPaymentRoute && paymentMessage " :generatedMessage="paymentMessage" :isPaymentMessage="true" @close="clearPaymentMessage" />
@@ -25,7 +25,7 @@ import MessageDisplay from './components/MessageDisplay.vue';
         isPaymentRoute:false,
         isEngagementRoute:false,
         paymentMessage: '',
-        engagementMessage: ''
+        engagementMessage: '',
       };
   },
   methods: {
