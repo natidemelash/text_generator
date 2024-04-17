@@ -76,13 +76,13 @@
           message = `ሰላም ${this.employerName}! የባንክ መረጃ እንደደረስዎት ለማረጋገጥ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መልካም ቀን!`;
           break;
         case 'Well-received':
-          message = `ሰላም ${this.employerName}! ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የባለሙያ ስልክ ከ20 - 30 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
+          message = `ሰላም ${this.employerName}! ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የባለሙያ ስልክ ከ20 - 30 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
           break;
         case 'Reminder':
-          message = `ሰላም ${this.employerName}! ክፍያ ባለመፈጸምዎ የባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ።`;
+          message = `ሰላም ${this.employerName}! ክፍያ ባለመፈጸምዎ የባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
           break;
         case 'Closed Ticket':
-          message = `ሰላም ${this.employerName}! ለባለሙያ ጥያቄዎ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። አገልግሎታችንን ሲፈልጉ በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን።`;
+          message = `ሰላም ${this.employerName}! ለባለሙያ ጥያቄዎ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መልካም ቀን!`;
           break;
         default:
           break;
