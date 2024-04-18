@@ -47,7 +47,7 @@ export default {
                 this.customerNameError = 'Name can\'t be empty'
                 return;
             }
-            this.message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። ለወደፊት የባለሙያ ጥያቄዎ በ0949231010 ይደውሉ። መልካም ቀን!`;
+            this.message = `ሰላም ${this.customerName}! ደንበኛችን ስለሆኑና አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn አገልግሎት ለዘመድ ለወዳጅ ያጋሩ። ለወደፊት የባለሙያ ጥያቄዎ በ0949231010 ይደውሉ። መልካም ቀን! \nመተግበሪያችንን ለማውረድ\n ከPlayStore: ${this.playStoreLink} \nከAppStore: ${this.appStoreLink}`;
 
 
             return this.message;

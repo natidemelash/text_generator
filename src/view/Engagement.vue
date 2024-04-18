@@ -149,6 +149,9 @@ import SPA from '@/components/SPA.vue';
           case 'closing-without-SP':
             message = `ሰላም ${this.customerName}! ባለሙያ ማግኘት ስላልተቻለ የከፈሉትን ክፍያ ለቀጣይ ጥያቄዎ መጠቀም የሚችሉ መሆኑን በትህትና እንገልጻለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`;
             break;
+          case 'sp-noanswer-jobStarted':
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ስለደረሱበት ሁኔታ ለመከታተል ደውለን ነበር። በ${this.phoneNumber} ደውለው የደረሱበትን እንዲያሳወቁን በትህትና እንጠይቃለን። መልካም ቀን!`
+            break;
           case 'job-transfered':
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
@@ -160,9 +163,6 @@ import SPA from '@/components/SPA.vue';
             break;
           case 'mact-03':
             message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎ ለክትትል ስንደውል ማግኘት ስላልቻልን ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ያሳውቁን። መልካም ቀን!`
-            break;
-          case 'mact-04':
-            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ስለደረሱበት ሁኔታ ለመከታተል ደውለን ነበር። በ${this.phoneNumber} ደውለው የደረሱበትን እንዲያሳወቁን በትህትና እንጠይቃለን። መልካም ቀን!`
             break;
           case 'mact-05':
             message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎት ለክትትል ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
