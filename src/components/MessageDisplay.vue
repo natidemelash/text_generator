@@ -18,8 +18,11 @@ export default {
   },
   methods: {
     copyToClipboard() {
+      // Replace <br> tags with newline characters
+      const message = this.generatedMessage.replace(/<br\s*\/?>/g, "\n");
+      
       const el = document.createElement("textarea");
-      el.value = this.generatedMessage;
+      el.value = message;
       document.body.appendChild(el);
       el.select();
       document.execCommand("copy");
