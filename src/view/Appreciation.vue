@@ -3,6 +3,7 @@
         <h3 class="text-lg mb-4 text-[#fff]">Appreciation Messages</h3>
         <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('success')">Successful Hire</button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('tg-link')">Telegram Links</button>
         </div>
 
         <div v-if="showCustomerNameInput">
@@ -11,7 +12,7 @@
             <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
-        <button v-if="showCustomerNameInput" class="bg-[#e21e81] text-sm text-white px-4 py-2 my-6 rounded-full" @click="appreciationMessage">Generate Msg</button>
+        <button v-if="showCustomerNameInput" class="bg-[#e21e81] text-sm text-white px-4 py-2 my-6 rounded-full" @click="generateMessage">Generate Msg</button>
    </div>
 
     <div v-if="message" class="card mx-auto max-w-sm bg-[#4f4d4d] mt-8 shadow-md rounded-md p-6">
@@ -31,26 +32,47 @@ export default {
         return{
             showCustomerNameInput: false,
             message: '',
+            messageFor: '',
             customerName: '',
             customerNameError: '',
-            appLink: 'onelink.to/goodayonapp'
+            appLink: 'onelink.to/goodayonapp',
+            tgLink: ' https://t.me/goodayon '
         }
     },
 
     methods: {
-        handleButtonClick(){
+        handleButtonClick(action){
             this.showCustomerNameInput = !this.showCustomerNameInput
+            this.messageFor = action;
         },
-        appreciationMessage() {
+        generateMessage() {
             if(!this.customerName){
                 this.customerNameError = 'Name can\'t be empty'
                 return;
             }
-            this.message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn ለወዳጅ ዘመድ ያጋሩ። ለቀልጣፋ አገልግሎት በ0949231010 ይደውሉ። መልካም ቀን! \n\nApp Link፡ onelink.to/goodayonapp`;
-
+            if(this.messageFor === 'success'){
+                this.message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn ለወዳጅ ዘመድ ያጋሩ። ለቀልጣፋ አገልግሎት በ0949231010 ይደውሉ። መልካም ቀን! \n\Download፡ onelink.to/goodayonapp`;
+            }else if(this.messageFor === 'tg-link'){
+                this.message = `ሰላም ${this.customerName}! ብዛት ያላቸው የስራ ማስታወቂያዎችን ለማግኘት የቴሌግራም ቻናላችንን በመቀላቀል የጉዳይ ቤተሰብ ይሁን። <br><br>${this.tgLink} <br><br>ለቀልጣፋ አገልግሎት በ0970014434 ይደውሉ። መልካም ቀን!`
+            }
 
             return this.message;
-        }
+        },
+
+        copyToClipboard() {
+             // Replace <br> tags with newline characters
+            const message = this.message.replace(/<br\s*\/?>/g, "\n");
+            
+            const el = document.createElement("textarea");
+            el.value = message;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand("copy");
+            document.body.removeChild(el);
+            // Optionally, you can provide some feedback to the user
+            alert("Message copied to clipboard successfully!");
+            this.message = ""
+        },
     },
 }
 </script>

@@ -89,13 +89,14 @@ import SPA from '@/components/SPA.vue';
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
         this.phoneNumber = phoneNumber;
         this.selectedService = selectedService;
         this.customerName = customerName;
+        this.crmNumber = crmNumber;
 
         // Generate the message
         this.generateMessage();
@@ -123,37 +124,37 @@ import SPA from '@/components/SPA.vue';
 
         switch (this.selectedAction) {
           case 'emp-paid-noanswer':
-            message = `ሰላም ${this.customerName}! የባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መለያ-${this.crmNumber} መልካም ቀን!`;
             break;
           case 'still-searching':
-            message = `ሰላም ${this.customerName}! የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'sp-dispatched-noanswer':
-            message = `ሰላም ${this.customerName}! የባለሙያ ስልክ ልከን ለማረጋገጥ ነበር። በ24 ሰዓት ውስጥ የደረሱበትን በ${this.phoneNumber} ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል ለመግለጽ እንወዳለን። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የባለሙያ ስልክ ልከን ለማረጋገጥ ነበር። በ24 ሰዓት ውስጥ የደረሱበትን በ${this.phoneNumber} ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል ለመግለጽ እንወዳለን። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'feedback-from-employer':
-            message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መልካምቀን!`
+            message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መለያ-${this.crmNumber}። መልካምቀን!`
             break;
           case 'feedback-from-SP':
-            message = `ሰላም ${this.customerName}! በላክንዎት ስራ ላይ ያለዎትን አስተያየት ለመውሰድ ደውለን ነበር። በሌላ ጊዜ የስራ ጥሪዎች እንዲደርሱዎት ያለዎትን አስተያየት በ${this.phoneNumber} ስልክ ደውለው ያሳውቁን። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! በላክንዎት ስራ ላይ ያለዎትን አስተያየት ለመውሰድ ደውለን ነበር። በሌላ ጊዜ የስራ ጥሪዎች እንዲደርሱዎት ያለዎትን አስተያየት በ${this.phoneNumber} ስልክ ደውለው ያሳውቁን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'sp-noanswer':
-            message = `ሰላም ${this.customerName}! የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የቀጣሪ ስልክ ልከንልዎ ስልክዎን እያነሱልን አይደለም። በ3 ደቂቃ ውስጥ ካልደወሉልን ስራውን ለሌላ ባለሙያ ለማስተላለፍ እንገደዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'dispatched-sp-noanswer':
-            message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ስንደውል ልናገኝዎ አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከማስተላለፋችን በፊት በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ስንደውል ልናገኝዎ አልቻልንም። ስራውን ለሌሎች ባለሙያዎች ከማስተላለፋችን በፊት በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'emp-close':
-            message = `ሰላም ${this.customerName}! በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። ለባለሙያ ጥያቄዎ የተሰጠው የጊዜ ገደብ ስላለፈ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። አገልግሎታችንን ሲፈልጉ በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን።`;
+            message = `ሰላም ${this.customerName}! በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። ለባለሙያ ጥያቄዎ የተሰጠው የጊዜ ገደብ ስላለፈ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። አገልግሎታችንን ሲፈልጉ በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}`;
             break;
           case 'closing-without-SP':
-            message = `ሰላም ${this.customerName}! ባለሙያ ማግኘት ስላልተቻለ የከፈሉትን ክፍያ ለቀጣይ ጥያቄዎ መጠቀም የሚችሉ መሆኑን በትህትና እንገልጻለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉልን። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! ባለሙያ ማግኘት ስላልተቻለ የከፈሉትን ክፍያ ለቀጣይ ጥያቄዎ መጠቀም የሚችሉ መሆኑን በትህትና እንገልጻለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'sp-noanswer-jobStarted':
-            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ስለደረሱበት ሁኔታ ለመከታተል ደውለን ነበር። በ${this.phoneNumber} ደውለው የደረሱበትን እንዲያሳወቁን በትህትና እንጠይቃለን። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ስለደረሱበት ሁኔታ ለመከታተል ደውለን ነበር። በ${this.phoneNumber} ደውለው የደረሱበትን እንዲያሳወቁን በትህትና እንጠይቃለን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'job-transfered':
-            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን።`;
