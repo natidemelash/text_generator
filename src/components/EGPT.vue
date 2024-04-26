@@ -13,6 +13,13 @@
           <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
+            <!-- CRM Number -->
+        <div v-if="showCustomerNameInput">
+            <label class="crmNumber">CRM Number </label>
+            <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+            <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
+        </div>
+
            <!-- Input field for phone number -->
         <div v-if="showPhoneNumberInput" class="mt-4">
           <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
@@ -34,6 +41,8 @@ export default {
         return{
             customerName: '',
             customerNameError: '',  
+            crmNumber:'',
+            crmError: '',
             phoneNumber: '',
             phoneNumberError: '',
         }
@@ -49,14 +58,21 @@ export default {
                 this.customerNameError = 'Name can\'t be empty'
                 return;
             }
+
+            if(!this.crmNumber){
+                this.crmError = 'Please put CRM Number'
+                return;
+            }
             // Emit an event with the action and phone number to be handled by the parent component
             this.$emit('generate-message', {
                 action: this.selectedAction,
                 phoneNumber: this.phoneNumber,
-                customerName: this.customerName
+                customerName: this.customerName,
+                crmNumber: this.crmNumber
             });
-            this.custmoerName = ''
+            this.customerName = ''
             this.phoneNumber = ''
+            this.crmNumber = ''
         }
     }
 }

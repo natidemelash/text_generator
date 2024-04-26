@@ -24,6 +24,13 @@
           </select>
         </di>
 
+         <!-- CRM Number -->
+         <div v-if="showCustomerNameInput">
+            <label class="crmNumber">CRM Number </label>
+            <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+            <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
+        </div>
+
          <!-- Input field for phone number -->
         <div v-if="showPhoneNumberInput" class="mt-4">
           <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
@@ -64,7 +71,9 @@ export default{
       ],
       selectedService: null,
       customerName: '',
-      customerNameError: ''
+      customerNameError: '',
+      crmNumber:'',
+      crmError: '',
     }
   },
   methods:{
@@ -78,15 +87,23 @@ export default{
         this.customerNameError = 'Name can\'t be empty'
         return;
       }
+      
+      if(!this.crmNumber){
+        this.crmError = 'Please put CRM Number'
+        return;
+      }
+
       this.$emit('generate-message', {
         action: this.selectedAction,
         phoneNumber: this.phoneNumber,
         selectedService:this.selectedService,
-        customerName: this.customerName
+        customerName: this.customerName,
+        crmNumber: this.crmNumber
       });
 
       this.customerName = '';
-      this.serviceOfInterest = null
+      this.selectedService = this.serviceOfInterest
+      this.crmNumber= ''
     }
   }  
 }

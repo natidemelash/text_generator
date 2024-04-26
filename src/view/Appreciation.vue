@@ -51,7 +51,7 @@ export default {
                 return;
             }
             if(this.messageFor === 'success'){
-                this.message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn ለወዳጅ ዘመድ ያጋሩ። ለቀልጣፋ አገልግሎት በ0949231010 ይደውሉ። መልካም ቀን! \n\Download፡ onelink.to/goodayonapp`;
+                this.message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn ለወዳጅ ዘመድ ያጋሩ። ለቀልጣፋ አገልግሎት በ0949231010 ይደውሉ። መልካም ቀን! <br><br>Download፡ onelink.to/goodayonapp`;
             }else if(this.messageFor === 'tg-link'){
                 this.message = `ሰላም ${this.customerName}! ብዛት ያላቸው የስራ ማስታወቂያዎችን ለማግኘት የቴሌግራም ቻናላችንን በመቀላቀል የጉዳይ ቤተሰብ ይሁን። <br><br>${this.tgLink} <br><br>ለቀልጣፋ አገልግሎት በ0970014434 ይደውሉ። መልካም ቀን!`
             }

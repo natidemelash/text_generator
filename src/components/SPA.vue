@@ -12,6 +12,13 @@
        <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
        <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
      </div>
+     
+        <!-- CRM Number -->
+     <div v-if="showCustomerNameInput">
+        <label class="crmNumber">CRM Number </label>
+        <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+        <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
+     </div>
 
         <!-- Input field for phone number -->
      <div v-if="showPhoneNumberInput" class="mt-4">
@@ -34,6 +41,8 @@ export default {
      return{
          customerName: '',
          customerNameError: '',  
+         crmNumber:'',
+         crmError: '',
          phoneNumber: '',
          phoneNumberError: '',
      }
@@ -50,6 +59,11 @@ export default {
              return;
          }
 
+         if(!this.crmNumber){
+            this.crmError = 'Please put CRM Number'
+            return;
+         }
+
          if(this.phoneNumber.length < 10){
             this.phoneNumberError = 'Phone number is not correct';
             return;
@@ -59,10 +73,12 @@ export default {
              action: this.selectedAction,
              phoneNumber: this.phoneNumber,
              customerName: this.customerName,
-             phoneNumberError: this.phoneNumberError
+             phoneNumberError: this.phoneNumberError,
+             crmNumber: this.crmNumber
          });
          this.custmoerName = ''
          this.phoneNumber = ''
+         this.crmNumber = ''
      }
  }
 }

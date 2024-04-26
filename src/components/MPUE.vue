@@ -25,6 +25,8 @@ export default {
         return {
             customerName: '',
             customerNameError: '',  
+            crmNumber:'',
+            crmError: '',
             phoneNumber: '',
             phoneNumberError: '',
         };
@@ -36,12 +38,18 @@ export default {
         },
 
         emitMessageEvent() {
+            if(!this.crmNumber){
+                this.crmError = 'Please put CRM Number'
+                return;
+            }
             // Emit an event with the action and phone number to be handled by the parent component
             this.$emit('generate-message', {
                 action: this.selectedAction,
                 phoneNumber: this.phoneNumber,
+                crmNumber: this.crmNumber
             });
             this.phoneNumber = ''
+            this.crmNumber = ''
         }
     }
 }

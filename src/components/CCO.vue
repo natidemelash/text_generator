@@ -20,14 +20,14 @@
         <div v-if="showCustomerNameInput">
           <label class="customerName">Customer Name </label>
           <input v-model="customerName" type="text" placeholder="Customer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-          <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
+          <p v-if="customerNameError" class="text-[#F1948A] text-sm ">{{ customerNameError }}</p>
         </div>
 
         <!-- CRM Number -->
         <div v-if="showCustomerNameInput">
             <label class="crmNumber">CRM Number </label>
             <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-            <p v-if="crmError" class="text-amber-500 text-sm mt-1">{{ crmError }}</p>
+            <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
         </div>
 
         <!-- Input field for phone number -->
@@ -49,10 +49,10 @@ export default {
         return {
             customerName: '',
             customerNameError: '',  
+            crmNumber:'',
+            crmError: '',
             phoneNumber: '',
             phoneNumberError: '',
-            crmNumber:'',
-            crmError: ''
         };
   },
     methods: {
