@@ -154,7 +154,7 @@ import SPA from '@/components/SPA.vue';
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ስለደረሱበት ሁኔታ ለመከታተል ደውለን ነበር። በ${this.phoneNumber} ደውለው የደረሱበትን እንዲያሳወቁን በትህትና እንጠይቃለን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'job-transfered':
-            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
@@ -169,7 +169,7 @@ import SPA from '@/components/SPA.vue';
             message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎ ለክትትል ስንደውል ማግኘት ስላልቻልን ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ያሳውቁን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mact-05':
-            message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎት ለክትትል ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ ያስተላለፍነው መሆኑን ለማሳወቅ እንወዳለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ከመተግበሪያው ላይ የስራ ጥሪ ተደርጎልዎት ለክትትል ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'egpt-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችን ላይ ባለሙያ ለማግኘት ማስታወቂያ ለጥፈው ነበር። እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። በሌላ ጊዜ ቀልጣፋ አገልግሎት እንድንሰጥዎ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
