@@ -4,8 +4,23 @@
 
         <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mpue-01')">Registration Not Completed</button>
+          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mpue-02')">Further Information</button>
         </div>
-        
+
+        <!-- Customer Name -->
+        <div v-if="showCustomerNameInput">
+            <label class="customerName">Customer Name </label>
+            <input v-model="customerName" type="text" placeholder="Customer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+            <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
+        </div>
+          
+        <!-- CRM Number -->
+        <div v-if="showCustomerNameInput" >
+            <label class="crmNumber">CRM Number </label>
+            <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+            <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
+        </div>
+
         <!-- Input field for phone number -->
         <div v-if="showPhoneNumberInput" class="mt-4">
             <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
@@ -27,7 +42,7 @@ export default {
             customerNameError: '',  
             crmNumber:'',
             crmError: '',
-            phoneNumber: '',
+            phoneNumber: '0970014434',
             phoneNumberError: '',
         };
   },
@@ -42,15 +57,25 @@ export default {
                 this.crmError = 'Please put CRM Number'
                 return;
             }
+
+            if(this.selectedAction === 'mpue-02'){
+               if(!this.customerName){
+                    this.customerNameError = 'Name can\'t be empty'
+                    return;
+               }
+            }
+
             // Emit an event with the action and phone number to be handled by the parent component
             this.$emit('generate-message', {
                 action: this.selectedAction,
+                customerName: this.customerName,
                 phoneNumber: this.phoneNumber,
                 crmNumber: this.crmNumber
             });
-            this.phoneNumber = ''
+            // this.phoneNumber = ''
             this.crmNumber = ''
+            this.customerName =  ''
         }
-    }
+    },
 }
 </script>

@@ -195,6 +195,9 @@ import SPA from '@/components/SPA.vue';
           case 'mpue-01':
             message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
+          case 'mpue-02':
+            message = `ሰላም ${this.customerName}! ማንኛውንም ዓይነት መረጃ እና እርዳታ ሲፈልጉ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            break;
           case 'spa-01':
             message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
