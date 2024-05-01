@@ -28,6 +28,7 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
+  <ALSAM v-if="selectedProjectType === 'ALSAM'" />  
 
  </template>
 
@@ -39,6 +40,7 @@ import EGPT from '@/components/EGPT.vue'
 import ACE from '@/components/ACE.vue'
 import MPUE from '@/components/MPUE.vue'
 import SPA from '@/components/SPA.vue';
+import ALSAM from '@/components/ALSAM.vue'
 
   export default {
     components:{
@@ -49,6 +51,7 @@ import SPA from '@/components/SPA.vue';
       ACE,
       MPUE,
       SPA,
+      ALSAM
     },
     data(){
       return{
@@ -58,7 +61,7 @@ import SPA from '@/components/SPA.vue';
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
-        projectTypes: ['CCO', 'MACT', 'BLSR', 'EGPT', 'MPUE', 'ACE', 'SPA'],
+        projectTypes: ['CCO', 'MACT', 'BLSR', 'EGPT', 'MPUE', 'ACE', 'SPA', 'ALSAM'],
         selectedProjectType: null,
         selectedService:'',
         customerName: '', 
