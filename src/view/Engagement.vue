@@ -163,7 +163,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'mact-02':
-            message = `ሰላም ${this.customerName}! በተደጋጋሚ በደወልን ሰዓት ማግኘት ስላልቻልን በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}!  በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'mact-03':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ በአገልግሎታችን እና በባለሙያው ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን የአገልግሎት ጥራታችን ለማሻሻል ይረዳናል። መለያ-${this.crmNumber}። መልካም ቀን!`
