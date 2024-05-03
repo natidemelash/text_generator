@@ -15,7 +15,8 @@
             <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
-         <!-- Serivice field for  -->
+        <div class="flex items-center gap-4">
+           <!-- Serivice field for  -->
          <di v-if="showServiceOfInterestInput">
           <label>Service of Interest </label> 
           <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
@@ -23,6 +24,13 @@
           </select>
         </di>
 
+        <!-- Date and Time picker -->
+        <div  v-if="showDateTimeInput" class="space-x-2">
+          <label for="time">Select Time: </label>
+          <input v-model="selectedTime" type="time" id="time" class="px-4 py-2 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none">
+        </div>
+        </div>
+        
         <!-- CRM Number -->
         <div v-if="showCustomerNameInput" >
             <label class="crmNumber">CRM Number </label>
@@ -46,13 +54,60 @@
 
 <script>
 export default {
-    props: [],
+  props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showDateTimeInput'],
     data(){
         return{
             customerName: '',
             expatServices: ['Cooking', 'Cleaning', 'Cooking & Cleaning'],
-            selectedService: ''
+            selectedService: null,
+            phoneNumber: '0900320880',
+            selectedTime: null
         }
+    },
+    methods:{
+      handleButtonClick(action){
+         this.selectedAction = action;
+         this.$emit('button-click', action)
+      },
+
+      emitMessageEvent() {
+        if(!this.customerName){
+          this.customerNameError = 'Name can\'t be empty'
+          return;
+        }
+        
+        if(!this.crmNumber){
+          this.crmError = 'Please put CRM Number'
+          return;
+        }
+
+        if(!this.selectedTime){
+          this.selectedTimeError =  'Plase add the appointment time'
+          return;
+        }
+
+        this.$emit('generate-message', {
+          action: this.selectedAction,
+          phoneNumber: this.phoneNumber,
+          selectedService:this.selectedService,
+          customerName: this.customerName,
+          crmNumber: this.crmNumber,
+          selectedTime: this.formattedTime
+        });
+
+        this.customerName = '';
+        this.selectedService = this.expatServices
+        this.crmNumber= ''
+        this.selectedTime =  new Date();
+      }
+    },
+
+    computed:{
+      formattedTime() {
+      if (!this.selectedTime) return '';
+        const time = new Date(`2000-01-01T${this.selectedTime}`);
+       return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true });
+      }
     }
 }
 </script>

@@ -28,8 +28,8 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-  <ALSAM v-if="selectedProjectType === 'ALSAM'" />  
-
+  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-date-time-input="showDateTimeInput"  @generate-message="handleGenerateMessage" />  
+ 
  </template>
 
 <script>
@@ -58,6 +58,7 @@ import ALSAM from '@/components/ALSAM.vue'
         showPhoneNumberInput: false,
         showServiceOfInterestInput: false,
         showCustomerNameInput: false,
+        showDateTimeInput: false,
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
@@ -78,8 +79,14 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showPhoneNumberInput = true
         this.showCustomerNameInput = true;
 
-        if(action === 'ace-01' || action === 'ace-02' ){
+        if(action === 'pa-02'){
+          this.showDateTimeInput = true;
           this.showServiceOfInterestInput = true;
+        }
+
+        if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01'){
+          this.showServiceOfInterestInput = true;
+          this.showDateTimeInput = false;
         }     
         else{
           this.generateMessage();
@@ -92,7 +99,7 @@ import ALSAM from '@/components/ALSAM.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, selectedTime } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
@@ -100,6 +107,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.selectedService = selectedService;
         this.customerName = customerName;
         this.crmNumber = crmNumber;
+        this.selectedTime = selectedTime;
 
         // Generate the message
         this.generateMessage();
@@ -124,6 +132,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showPhoneNumberInput = false;
         this.showCustomerNameInput = false;
         this.showServiceOfInterestInput =false;
+        this.showDateTimeInput = false;
 
         switch (this.selectedAction) {
           case 'emp-paid-noanswer':
@@ -203,6 +212,12 @@ import ALSAM from '@/components/ALSAM.vue'
             break;
           case 'spa-01':
             message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            break;
+          case 'pa-01':
+            message = `Hello ${this.customerName}, checking in on your ${this.selectedService} service request. Unable to reach you for details. Please Call ${this.phoneNumber} for assistance`
+            break;
+          case 'pa-02':
+            message = `Hello ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any changes, please call ${this.phoneNumber}`
             break;
           default:
             break;

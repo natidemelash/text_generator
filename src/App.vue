@@ -62,4 +62,11 @@ import MessageDisplay from './components/MessageDisplay.vue';
     outline: none;
     border: 3px solid #111;
   }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
+
+  input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+  }
 </style>
