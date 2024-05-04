@@ -13,7 +13,7 @@
   </div>
 
   <!-- CCO Messages -->
-  <CCO v-if="selectedProjectType ==='CCO'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
+  <CCO v-if="selectedProjectType ==='CCO'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
   <!-- MACT Messages -->
   <MACT v-if="selectedProjectType === 'MACT'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
@@ -84,7 +84,7 @@ import ALSAM from '@/components/ALSAM.vue'
           this.showServiceOfInterestInput = true;
         }
 
-        if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01'){
+        if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'emp-paid-noanswer'){
           this.showServiceOfInterestInput = true;
           this.showDateTimeInput = false;
         }     
@@ -136,7 +136,7 @@ import ALSAM from '@/components/ALSAM.vue'
 
         switch (this.selectedAction) {
           case 'emp-paid-noanswer':
-            message = `ሰላም ${this.customerName}! የባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መለያ-${this.crmNumber} መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መለያ-${this.crmNumber} መልካም ቀን!`;
             break;
           case 'still-searching':
             message = `ሰላም ${this.customerName}! የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`;

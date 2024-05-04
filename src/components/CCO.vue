@@ -23,6 +23,14 @@
           <p v-if="customerNameError" class="text-[#F1948A] text-sm ">{{ customerNameError }}</p>
         </div>
 
+           <!-- Serivice field for  -->
+        <di v-if="showServiceOfInterestInput">
+          <label>Service of Interest </label> 
+          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+            <option v-for="(service, index) in requestedService" :key="index">{{ service }}</option>
+          </select>
+        </di>
+
         <!-- CRM Number -->
         <div v-if="showCustomerNameInput">
             <label class="crmNumber">CRM Number </label>
@@ -44,44 +52,66 @@
 
 <script>
 export default {
-    props:['showPhoneNumberInput', 'showCustomerNameInput'],
-    data() {
-        return {
-            customerName: '',
-            customerNameError: '',  
-            crmNumber:'',
-            crmError: '',
-            phoneNumber: '',
-            phoneNumberError: '',
-        };
+  props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput'],
+  data() {
+    return {
+        customerName: '',
+        customerNameError: '',  
+        selectedService: null,
+        requestedService: [
+            'ምግብ አብሳይ',
+            'የጽዳት',
+            'ምግብ ዝግጅት',
+            'ሞግዚት',
+            'አስጠኚ',
+            'ዲሽ',
+            'ኤሌክትሪክ ስራ',
+            'ቧንቧ',
+            'ጥገና',
+            'ቀለም ቅብ',
+            'ግንባታ ስራ',
+            'ጂፕሰም ስራ',
+            'አልሙኒየም ስራ',
+            'አናጺ',
+            'ወለል ንጣፍ',
+            'ሂሳብ ስራ',
+            'ሽያጭ'     
+        ],
+        crmNumber:'',
+        crmError: '',
+        phoneNumber: '',
+        phoneNumberError: '',
+    };
   },
-    methods: {
-        handleButtonClick(action){
-            this.selectedAction = action;
-            this.$emit('button-click', action)
-        },
+  methods: {
+    handleButtonClick(action){
+        this.selectedAction = action;
+        this.$emit('button-click', action)
+    },
 
-        emitMessageEvent() {
-            if(!this.customerName){
-                this.customerNameError = 'Name can\'t be empty'
-                return;
-            }
+    emitMessageEvent() {
+      if(!this.customerName){
+          this.customerNameError = 'Name can\'t be empty'
+          return;
+      }
 
-            if(!this.crmNumber){
-                this.crmError = 'Please put CRM Number'
-                return;
-            }
-            // Emit an event with the action and phone number to be handled by the parent component
-            this.$emit('generate-message', {
-                action: this.selectedAction,
-                phoneNumber: this.phoneNumber,
-                customerName: this.customerName,
-                crmNumber: this.crmNumber
-            });
-            this.customerName = ''
-            this.phoneNumber = ''
-            this.crmNumber = ''
-        }
+      if(!this.crmNumber){
+          this.crmError = 'Please put CRM Number'
+          return;
+      }
+      // Emit an event with the action and phone number to be handled by the parent component
+      this.$emit('generate-message', {
+          action: this.selectedAction,
+          phoneNumber: this.phoneNumber,
+          customerName: this.customerName,
+          selectedService: this.selectedService,
+          crmNumber: this.crmNumber
+      });
+      this.customerName = ''
+      this.phoneNumber = ''
+      this.crmNumber = ''
+      this.selectedService = this.requestedService
     }
+  }
 }
 </script>
