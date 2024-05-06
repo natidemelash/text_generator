@@ -28,7 +28,7 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-date-time-input="showDateTimeInput"  @generate-message="handleGenerateMessage" />  
+  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-date-time-input="showDateTimeInput" :show-payment-amount-input="showPaymentAmountInput"  @generate-message="handleGenerateMessage" />  
  
  </template>
 
@@ -58,6 +58,7 @@ import ALSAM from '@/components/ALSAM.vue'
         showPhoneNumberInput: false,
         showServiceOfInterestInput: false,
         showCustomerNameInput: false,
+        showPaymentAmountInput: false,
         showDateTimeInput: false,
         selectedAction: null,
         phoneNumber: '',
@@ -79,6 +80,11 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showPhoneNumberInput = true
         this.showCustomerNameInput = true;
 
+        if(action === 'pa-03'){
+          this.showPaymentAmountInput = true
+          this.showServiceOfInterestInput = true
+        }
+
         if(action === 'pa-02'){
           this.showDateTimeInput = true;
           this.showServiceOfInterestInput = true;
@@ -87,7 +93,9 @@ import ALSAM from '@/components/ALSAM.vue'
         if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'emp-paid-noanswer'){
           this.showServiceOfInterestInput = true;
           this.showDateTimeInput = false;
+          this.showPaymentAmountInput = false;
         }     
+
         else{
           this.generateMessage();
         }     
@@ -99,13 +107,14 @@ import ALSAM from '@/components/ALSAM.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber, selectedTime } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
         this.phoneNumber = phoneNumber;
         this.selectedService = selectedService;
         this.customerName = customerName;
+        this.paymentAmount = paymentAmount;
         this.crmNumber = crmNumber;
         this.selectedTime = selectedTime;
 
@@ -133,16 +142,17 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showCustomerNameInput = false;
         this.showServiceOfInterestInput =false;
         this.showDateTimeInput = false;
+        this.showPaymentAmountInput = false
 
         switch (this.selectedAction) {
           case 'emp-paid-noanswer':
-            message = `ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መለያ-${this.crmNumber} መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ጥያቄዎን በተመለከተ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'still-searching':
             message = `ሰላም ${this.customerName}! የእርስዎን መስፈርት በሚገባ የሚያሟላ ባለሙያ ፍለጋ ላይ ነን። እባክዎን በትዕግስት ይጠብቁ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'sp-dispatched-noanswer':
-            message = `ሰላም ${this.customerName}! የባለሙያ ስልክ ልከን ለማረጋገጥ ነበር። በ24 ሰዓት ውስጥ የደረሱበትን በ${this.phoneNumber} ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል ለመግለጽ እንወዳለን። መለያ-${this.crmNumber}። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! የባለሙያ ስልክ እንደደረስዎ ለማረጋገጥ ነበር። በ24 ሰዓት ውስጥ የደረሱበትን በ${this.phoneNumber} ካላሳወቁን ሌላ ባለሙያ መላክ እንደማንችል ለመግለጽ እንወዳለን። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'feedback-from-employer':
             message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መለያ-${this.crmNumber}። መልካምቀን!`
@@ -199,7 +209,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}። መልካም ቀን!` 
             break;
           case 'ace-03':
-            message = `ሰላም ${this.customerName}! የGoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'ace-04':
             message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
@@ -218,6 +228,9 @@ import ALSAM from '@/components/ALSAM.vue'
             break;
           case 'pa-02':
             message = `Hello ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any changes, please call ${this.phoneNumber}`
+            break;
+          case 'pa-03':
+            message = `Hello ${this.customerName}, Please pay ETB ${this.paymentAmount} for your ${this.selectedService} Service via Telebirr: +251949231010 Tigist Afework. Thank you for trusting us!`
             break;
           default:
             break;
