@@ -83,6 +83,7 @@ import ALSAM from '@/components/ALSAM.vue'
         if(action === 'pa-03'){
           this.showPaymentAmountInput = true
           this.showServiceOfInterestInput = true
+          this.showDateTimeInput = false
         }
 
         if(action === 'pa-02'){
@@ -227,7 +228,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hello ${this.customerName}, checking in on your ${this.selectedService} service request. Unable to reach you for details. Please Call ${this.phoneNumber} for assistance`
             break;
           case 'pa-02':
-            message = `Hello ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any changes, please call ${this.phoneNumber}`
+            message = `Hello ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at Today ${this.selectedTime}. For any changes, please call ${this.phoneNumber}`
             break;
           case 'pa-03':
             message = `Hello ${this.customerName}, Please pay ETB ${this.paymentAmount} for your ${this.selectedService} Service via Telebirr: +251949231010 Tigist Afework. Thank you for trusting us!`

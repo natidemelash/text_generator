@@ -91,14 +91,16 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
        return;
      }
 
-     if(!this.paymentAmount || this.paymentAmount <= 0){
-       this.paymentAmount = 'Please provide the correct payment amount value'
-       return;
-     }
-
+    if(this.selectedAction == 'pa-03'){
+      if(!this.paymentAmount || this.paymentAmount <= 0){
+        this.paymentAmountError = 'Please provide the correct payment amount value'
+        return;
+      }
+    }
+    
      if(this.selectedAction == 'pa-02'){
        if(!this.selectedTime){
-       this.selectedTimeError =  'Plase add the appointment time'
+       this.selectedTimeError =  'Please add the appointment time'
        return;
        }
      }
