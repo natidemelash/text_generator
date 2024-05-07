@@ -3,17 +3,17 @@
         <h3 class="text-lg mb-4 text-[#fff]">CCO Engagement Messages</h3>
 
         <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('emp-paid-noanswer')">Paid Conn.-Unresponsive/ቀጣሪ ከፍሎ ስልክ ካላነሳ</button>
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('still-searching')">Still Searching / በ30 ደቂቃ ባለሙያ ማግኘት ካልተቻለ </button>
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('sp-dispatched-noanswer')">Dispatched - Unresponsive / ባለሙያ ተልኮ ቀጣሪ ስልክ ካላነሳ</button>
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('emp-close')"> Time Limit Exceeded - የ24 ሰዓት የጊዜ ገደብ ካለፈ </button>
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('closing-without-SP')">No SP available / ባለሙያ ማግኘት ካልተቻለ</button>
-            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('feedback-from-employer')">Requesting Feedback/ ከቀጣሪ አስተያየት ለመጠየቅ</button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('feedback-from-SP')">Requesting Feedback/ ከባለሙያ አስተያየት ለመጠየቅ</button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('sp-noanswer')">SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ </button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('sp-noanswer-jobStarted')">SP Not Answering - Job Started </button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('dispatched-sp-noanswer')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('job-transfered')">SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል </button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-01')">Paid Conn.-Unresponsive/ቀጣሪ ከፍሎ ስልክ ካላነሳ</button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-02')">Still Searching / በ30 ደቂቃ ባለሙያ ማግኘት ካልተቻለ </button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-03')">Dispatched - Unresponsive / ባለሙያ ተልኮ ቀጣሪ ስልክ ካላነሳ</button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-04')"> Time Limit Exceeded - የ24 ሰዓት የጊዜ ገደብ ካለፈ </button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-05')">No SP available / ባለሙያ ማግኘት ካልተቻለ</button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-06')">Requesting Feedback/ ከቀጣሪ አስተያየት ለመጠየቅ</button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('cco-07')">Requesting Feedback/ ከባለሙያ አስተያየት ለመጠየቅ</button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-08')">SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ </button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-09')">SP Not Answering - Job Started </button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-10')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-11')">SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል </button>
         </div>
 
            <!-- Customer Name -->

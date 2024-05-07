@@ -3,9 +3,10 @@
      <h3 class="text-lg mb-4 text-[#fff]">Project ALSAM Engagement Messages</h3>
 
      <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-01')">Detail Confirmation</button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-02')">Appointment Confirmation</button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-03')">Payment Details</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-01')">Detail Confirmation(1st SMS)</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-02')">Detail Confirmation(2nd SMS)</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-03')">Appointment Confirmation</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-04')">Payment Details</button>
      </div>
 
 
@@ -91,14 +92,14 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
        return;
      }
 
-    if(this.selectedAction == 'pa-03'){
+    if(this.selectedAction == 'pa-04'){
       if(!this.paymentAmount || this.paymentAmount <= 0){
         this.paymentAmountError = 'Please provide the correct payment amount value'
         return;
       }
     }
-    
-     if(this.selectedAction == 'pa-02'){
+
+     if(this.selectedAction == 'pa-03'){
        if(!this.selectedTime){
        this.selectedTimeError =  'Please add the appointment time'
        return;
