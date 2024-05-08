@@ -85,27 +85,27 @@ export default {
   },
   methods: {
     handleButtonClick(action){
-        this.selectedAction = action;
-        this.$emit('button-click', action)
+      this.selectedAction = action;
+      this.$emit('button-click', action)
     },
 
     emitMessageEvent() {
       if(!this.customerName){
-          this.customerNameError = 'Name can\'t be empty'
-          return;
+        this.customerNameError = 'Name can\'t be empty'
+        return;
       }
 
       if(!this.crmNumber){
-          this.crmError = 'Please put CRM Number'
-          return;
+        this.crmError = 'Please put CRM Number'
+        return;
       }
       // Emit an event with the action and phone number to be handled by the parent component
       this.$emit('generate-message', {
-          action: this.selectedAction,
-          phoneNumber: this.phoneNumber,
-          customerName: this.customerName,
-          selectedService: this.selectedService,
-          crmNumber: this.crmNumber
+        action: this.selectedAction,
+        phoneNumber: this.phoneNumber,
+        customerName: this.customerName,
+        selectedService: this.selectedService,
+        crmNumber: this.crmNumber
       });
       this.customerName = ''
       this.phoneNumber = ''

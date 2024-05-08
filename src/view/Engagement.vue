@@ -28,7 +28,7 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-date-time-input="showDateTimeInput" :show-payment-amount-input="showPaymentAmountInput" @generate-message="handleGenerateMessage" />  
+  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-time-input="showTimeInput" :show-date-input="showDateInput" :show-payment-amount-input="showPaymentAmountInput" @generate-message="handleGenerateMessage" />  
  
  </template>
 
@@ -59,7 +59,8 @@ import ALSAM from '@/components/ALSAM.vue'
         showServiceOfInterestInput: false,
         showCustomerNameInput: false,
         showPaymentAmountInput: false,
-        showDateTimeInput: false,
+        showTimeInput: false,
+        showDateInput: false,
         selectedAction: null,
         phoneNumber: '',
         phoneNumberError: '',
@@ -68,6 +69,9 @@ import ALSAM from '@/components/ALSAM.vue'
         selectedService:'',
         customerName: '', 
         crmNumber: '',
+        paymentAmount: '',
+        selectedDate: '',
+        selectedTime: '',
       }
     },
 
@@ -83,22 +87,29 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showPhoneNumberInput = true
         this.showCustomerNameInput = true;
 
-        if(action === 'pa-04'){
+        if(action === 'pa-04' || action === 'pa-08'){
           this.showPaymentAmountInput = true
           this.showServiceOfInterestInput = true
-          this.showDateTimeInput = false
+          this.showTimeInput = false
+          return;
         }
 
         if(action === 'pa-03'){
-          this.showDateTimeInput = true;
+          this.showTimeInput = true;
           this.showServiceOfInterestInput = true;
           this.showPaymentAmountInput = false;
+          return;
+        }
+
+        if(action === 'pa-10'){
+          this.showDateInput = true;
         }
 
         if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
           this.showServiceOfInterestInput = true;
-          this.showDateTimeInput = false;
+          this.showTimeInput = false;
           this.showPaymentAmountInput = false;
+          return;
         }     
 
         else{
@@ -112,7 +123,7 @@ import ALSAM from '@/components/ALSAM.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
@@ -122,6 +133,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.paymentAmount = paymentAmount;
         this.crmNumber = crmNumber;
         this.selectedTime = selectedTime;
+        this.selectedDate = selectedDate;
 
         // Generate the message
         this.generateMessage();
@@ -146,7 +158,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showPhoneNumberInput = false;
         this.showCustomerNameInput = false;
         this.showServiceOfInterestInput =false;
-        this.showDateTimeInput = false;
+        this.showTimeInput = false;
         this.showPaymentAmountInput = false
 
         switch (this.selectedAction) {
@@ -187,7 +199,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'mact-02':
-            message = `ሰላም ${this.customerName}!  በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'mact-03':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ በአገልግሎታችን እና በባለሙያው ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን የአገልግሎት ጥራታችን ለማሻሻል ይረዳናል። መለያ-${this.crmNumber}። መልካም ቀን!`
@@ -232,13 +244,34 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}, following up on your recent request for ${this.selectedService} service. Can you please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-02':
-            message = `Hi ${this.customerName}, We were not able to contact you to discuss your ${this.selectedService} service request. To move forward, give us a call at 0900320880!. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request . Can you please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
-            message = `Hi ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any changes, please call ${this.phoneNumber}. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, This is to notify you that your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-04':
-            message = `Hi ${this.customerName}, Please pay ETB ${this.paymentAmount} for your ${this.selectedService} Service via Telebirr: +251949231010 Tigist Afework. PA-${this.crmNumber} <br>Thank you for trusting us!`
+            message = `Hi ${this.customerName}, below are the payment details for your ${this.selectedService} service. <br><br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
+            break;
+          case 'pa-05':
+            message = `Hi ${this.customerName}, We haven't been able to contact you about ${this.selectedService} service you requested. If you are still interested, please call at 0900320880.`
+            break;
+          case 'pa-06':
+            message = `Hi ${this.customerName}, A gentle reminder on the service payment for your ${this.selectedService} service request . Please call 0900320880 for any support. PA-${this.crmNumber}`
+            break;
+          case 'pa-07':
+            message = `Hi ${this.customerName}, We haven't been able to contact you about the payment for the requested ${this.selectedService} service. If you are still interested, please call at 0900320880. PA-${this.crmNumber}`
+            break;
+          case 'pa-08':
+            message = `Hi ${this.customerName}, ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
+            break;
+          case 'pa-09':
+            message = `Hi ${this.customerName}, ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
+            break;
+          case 'pa-09':
+            message = `Hi ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            break;
+          case 'pa-10':
+            message = `Hi ${this.customerName}, Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
           default:
             break;
