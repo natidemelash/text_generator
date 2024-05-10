@@ -63,7 +63,6 @@ export default {
         copyToClipboard() {
              // Replace <br> tags with newline characters
             const message = this.message.replace(/<br\s*\/?>/g, "\n");
-            
             const el = document.createElement("textarea");
             el.value = message;
             document.body.appendChild(el);

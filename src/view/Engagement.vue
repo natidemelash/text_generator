@@ -241,19 +241,19 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'pa-01':
-            message = `Hi ${this.customerName}, following up on your recent request for ${this.selectedService} service. Can you please call 0900320880 to discuss the details. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, following your recent request for ${this.selectedService} service. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-02':
-            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request . Can you please call 0900320880 to discuss the details. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request . Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
             message = `Hi ${this.customerName}, Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-04':
-            message = `Hi ${this.customerName}, below are the payment details for your ${this.selectedService} service. <br><br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
+            message = `Hi ${this.customerName}, below are the payment details for your ${this.selectedService} service.<br><br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
             break;
           case 'pa-05':
-            message = `Hi ${this.customerName}, We haven't been able to contact you about ${this.selectedService} service you requested. If you are still interested, please call at 0900320880.`
+            message = `Hi ${this.customerName}, We're unable to contact you about ${this.selectedService} service you requested. If you are still interested, please call at 0900320880.`
             break;
           case 'pa-06':
             message = `Hi ${this.customerName}, A gentle reminder on the service payment for your ${this.selectedService} service request . Please call 0900320880 for any support. PA-${this.crmNumber}`
