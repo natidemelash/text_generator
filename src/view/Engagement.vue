@@ -94,7 +94,7 @@ import ALSAM from '@/components/ALSAM.vue'
           return;
         }
 
-        if(action === 'pa-03'){
+        if(action === 'pa-03' || action === 'pa-09'){
           this.showTimeInput = true;
           this.showServiceOfInterestInput = true;
           this.showPaymentAmountInput = false;
@@ -247,7 +247,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request . Can you please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
-            message = `Hi ${this.customerName}, This is to notify you that your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-04':
             message = `Hi ${this.customerName}, below are the payment details for your ${this.selectedService} service. <br><br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
@@ -265,10 +265,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}, ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
             break;
           case 'pa-09':
-            message = `Hi ${this.customerName}, ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
-            break;
-          case 'pa-09':
-            message = `Hi ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled Today at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-10':
             message = `Hi ${this.customerName}, Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
