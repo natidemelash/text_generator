@@ -17,6 +17,14 @@
           <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
+         <!-- Serivice field for  -->
+         <di v-if="showServiceOfInterestInput">
+          <label>Service of Interest </label> 
+          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+            <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
+          </select>
+        </di>
+
         <!-- CRM Number -->
         <div v-if="showCustomerNameInput">
             <label class="crmNumber">CRM Number </label>
@@ -38,14 +46,34 @@
 
 <script>
 export default {
-    props: ['showPhoneNumberInput', 'showCustomerNameInput'],
+    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput'],
     data(){
         return{
+            serviceOfInterest: [
+                'ምግብ አብሳይ',
+                'የጽዳት',
+                'ምግብ ዝግጅት',
+                'ሞግዚት',
+                'አስጠኚ',
+                'ዲሽ',
+                'ኤሌክትሪክ ስራ',
+                'ቧንቧ',
+                'ጥገና',
+                'ቀለም ቅብ',
+                'ግንባታ ስራ',
+                'ጂፕሰም ስራ',
+                'አልሙኒየም ስራ',
+                'አናጺ',
+                'ወለል ንጣፍ',
+                'ሂሳብ ስራ',
+                'ሽያጭ'     
+            ],
             customerName: '',
             customerNameError: '',
             crmNumber: '',
             crmError: '',  
             phoneNumber: '',
+            selectedService: '',
             phoneNumberError: '',
         }
     },
@@ -70,11 +98,13 @@ export default {
                 action: this.selectedAction,
                 phoneNumber: this.phoneNumber,
                 customerName: this.customerName,
+                selectedService: this.selectedService,
                 crmNumber: this.crmNumber
             });
-            this.custmoerName = ''
+            this.customerName = ''
             this.phoneNumber = ''
             this.crmNumber = ''
+            this.selectedService = this.serviceOfInterest
         }
     }
 }

@@ -86,7 +86,7 @@
     <div class="mb-10">
       <label for="phone" class="block text-sm font-medium text-[#fff] mb-1">Enter Phone/የዲስፓቸር ሰልክ ቁጥር:</label>
       <input v-model="phone" @input="onPhoneInput" type="text" class="border-2 rounded-md bg-[#ECF0F1] focus:border p-2 text-black focus:outline-none" placeholder="Enter phone number" />
-      <div v-if="errors.phone" class="text-red-300 w-3/4">{{ errorMessage.workingHour }}</div>
+      <div v-if="errors.phone" class="text-red-300 w-3/4">{{ errorMessage.phone }}</div>
     </div>
     </div>
 

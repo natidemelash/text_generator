@@ -13,6 +13,7 @@
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-08')">Payment Received</button>
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-09')">Appointment (on the day) </button>
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-10')">Payment due on</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-11')">Feedback Request</button>
      </div>
 
      <!-- Customer Name -->
@@ -83,7 +84,8 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
         paymentAmount: '',
         paymentAmountError: '',
         selectedTime: null,
-        selectedDate: null
+        selectedDate: null,
+        feedbackFormLink: 'https://forms.gle/iWiTcwfK7RUvwcTU8'
      }
  },
  methods:{
@@ -132,7 +134,8 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
        crmNumber: this.crmNumber,
        paymentAmount: this.paymentAmount,
        selectedTime: this.formattedTime,
-       selectedDate: this.selectedDate 
+       selectedDate: this.selectedDate, 
+       feedbackFormLink: this.feedbackFormLink
      });
 
      this.customerName = '';

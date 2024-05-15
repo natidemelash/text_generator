@@ -16,7 +16,7 @@
   <CCO v-if="selectedProjectType ==='CCO'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
   <!-- MACT Messages -->
-  <MACT v-if="selectedProjectType === 'MACT'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
+  <MACT v-if="selectedProjectType === 'MACT'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
 
   <BLSR v-if="selectedProjectType === 'BLSR'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
@@ -72,6 +72,7 @@ import ALSAM from '@/components/ALSAM.vue'
         paymentAmount: '',
         selectedDate: '',
         selectedTime: '',
+        feedbackFormLink: null,
       }
     },
 
@@ -105,7 +106,7 @@ import ALSAM from '@/components/ALSAM.vue'
           this.showDateInput = true;
         }
 
-        if(action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
+        if(action === 'mact-01' || action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
           this.showServiceOfInterestInput = true;
           this.showTimeInput = false;
           this.showPaymentAmountInput = false;
@@ -123,7 +124,7 @@ import ALSAM from '@/components/ALSAM.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate, feedbackFormLink } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
@@ -134,6 +135,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.crmNumber = crmNumber;
         this.selectedTime = selectedTime;
         this.selectedDate = selectedDate;
+        this.feedbackFormLink = feedbackFormLink;
 
         // Generate the message
         this.generateMessage();
@@ -196,7 +198,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mact-01':
-            message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን፤ ስለደረሱበት ለመከታተል ብሎም እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። ለተሻለ አገልግሎት በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
+            message = `ሰላም ${this.customerName}! መተግበሪያችንን ተጠቅመው ባቀረቡት የ${this.selectedService} ባለሙያ ጥያቄ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} መልሰው ይደውሉልን። MACT-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'mact-02':
             message = `ሰላም ${this.customerName}! በተደጋጋሚ ደውለን ልናገኝዎ አልቻልንም። በአገልግሎቱ ላይ እገዛችንን እንዳልፈለጉ በመገንዘብ ክትትላችንን አቋርጠነዋል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ -${this.crmNumber}። መልካም ቀን!`;
@@ -244,7 +246,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}, following your recent request for ${this.selectedService} service. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-02':
-            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request . Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
             message = `Hi ${this.customerName}, Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
@@ -270,6 +272,8 @@ import ALSAM from '@/components/ALSAM.vue'
           case 'pa-10':
             message = `Hi ${this.customerName}, Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
+          case 'pa-11':
+            message = `Hi ${this.customerName}, Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
           default:
             break;
         }
