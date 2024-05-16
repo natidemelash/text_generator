@@ -85,7 +85,7 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
         paymentAmountError: '',
         selectedTime: null,
         selectedDate: null,
-        feedbackFormLink: 'https://forms.gle/iWiTcwfK7RUvwcTU8'
+        feedbackFormLink: 'rb.gy/6c02yl'
      }
  },
  methods:{

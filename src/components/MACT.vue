@@ -6,8 +6,10 @@
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-01')">First call to employer - No answer/ቀጣሪው ስልክ አያነሳም (1ኛ ሙከራ)</button>
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-02')">Repeated calls to employer - No answer/ቀጣሪው ስልክ አያነሳም (መዝጊያ)</button>
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-03')">Asking Employer Feedback</button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-04')">SP Not Answering - 1st Call</button>
-            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-05')">SP Not Answering - Job Transfered to other</button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-04')">SP Not Answering - 1st Call SMS</button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-05')">SP Not Answering - 2nd Call SMS </button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-06')">SP Not Answering - Job Transfered to other</button>
+            <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('mact-07')">Disable Ad</button>
         </div>
 
              <!-- Customer Name -->
@@ -18,12 +20,20 @@
         </div>
 
          <!-- Serivice field for  -->
-         <di v-if="showServiceOfInterestInput">
+         <div v-if="showServiceOfInterestInput">
           <label>Service of Interest </label> 
           <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
             <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
           </select>
-        </di>
+        </div>
+
+        <!-- Resasons for disabling -->
+        <div v-if="showReasonForDisable">
+           <label>Reason for Disable</label> 
+           <select v-model="disabledFor" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+            <option v-for="(reason, index) in reasonForDisable" :key="index">{{ reason }}</option>
+          </select>
+        </div>
 
         <!-- CRM Number -->
         <div v-if="showCustomerNameInput">
@@ -46,9 +56,15 @@
 
 <script>
 export default {
-    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput'],
+    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput', 'showReasonForDisable'],
     data(){
         return{
+            reasonForDisable:[
+                'ምላሽ ለመስጠት ፍቃደኛ ስላልሆኑ',
+                'ለስራ ተልከው ስለቀሩ',
+                'ያልተገባ ባህሪ በማሳየትዎ',
+                'ሌላ ባለሙያ በመላክዎ'    
+            ],
             serviceOfInterest: [
                 'ምግብ አብሳይ',
                 'የጽዳት',
@@ -74,6 +90,7 @@ export default {
             crmError: '',  
             phoneNumber: '',
             selectedService: '',
+            disabledFor:'',
             phoneNumberError: '',
         }
     },
@@ -83,6 +100,30 @@ export default {
             this.$emit('button-click', action)
         },
 
+        emitMessageEvent() {
+            if(!this.customerName){
+                this.customerNameError = 'Name can\'t be empty'
+                return;
+            }
+            if(!this.crmNumber){
+                this.crmError = 'Please put CRM Number'
+                return;
+            }
+            // Emit an event with the action and phone number to be handled by the parent component
+            this.$emit('generate-message', {
+                action: this.selectedAction,
+                phoneNumber: this.phoneNumber,
+                customerName: this.customerName,
+                selectedService: this.selectedService,
+                crmNumber: this.crmNumber,
+                disabledFor: this.disabledFor
+            });
+            this.customerName = ''
+            this.phoneNumber = ''
+            this.crmNumber = ''
+            this.selectedService = this.serviceOfInterest
+            this.disabledFor = this.reasonForDisable
+        }
     }
 }
 </script>
