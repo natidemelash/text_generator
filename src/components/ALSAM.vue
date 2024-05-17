@@ -14,6 +14,7 @@
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-09')">Appointment (on the day) </button>
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-10')">Payment due on</button>
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-11')">Feedback Request</button>
+       <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('pa-12')">Notification for SP (on the day)</button>
      </div>
 
      <!-- Customer Name -->
@@ -49,6 +50,12 @@
          <input v-model="selectedTime" type="time" id="time" class="px-4 py-2 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none">
        </div>
      </div>
+
+     <div v-if="showEmployerNameInput">
+      <label>Employer Name: </label>
+      <input v-model="employerName" type="text" placeholder="Customer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+      <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{  customerNameError }}</p>
+     </div>
      
      <!-- CRM Number -->
      <div v-if="showCustomerNameInput" >
@@ -72,7 +79,7 @@
 
 <script>
 export default {
-props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showPaymentAmountInput', 'showTimeInput', 'showDateInput'],
+props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showPaymentAmountInput', 'showTimeInput', 'showDateInput', 'showEmployerNameInput'],
  data(){
      return{
         customerName: '',
@@ -81,6 +88,7 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
         phoneNumber: '0900320880',
         crmNumber: '',
         crmError: '',
+        employerName: '',
         paymentAmount: '',
         paymentAmountError: '',
         selectedTime: null,
@@ -110,7 +118,9 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
         this.paymentAmountError = 'Please provide the correct payment amount value'
         return;
       }
-    }
+    } 
+
+    
 
      if(this.selectedAction === 'pa-03'){
        if(!this.selectedTime){
@@ -135,7 +145,8 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
        paymentAmount: this.paymentAmount,
        selectedTime: this.formattedTime,
        selectedDate: this.selectedDate, 
-       feedbackFormLink: this.feedbackFormLink
+       feedbackFormLink: this.feedbackFormLink,
+       employerName:this.employerName
      });
 
      this.customerName = '';
@@ -144,6 +155,7 @@ props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameI
      this.paymentAmount = ''
      this.selectedTime =  new Date()
      this.selectedDate = null
+     this.employerName = ''
    }
  },
 

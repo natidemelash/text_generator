@@ -28,7 +28,7 @@
 
   <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
   
-  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-time-input="showTimeInput" :show-date-input="showDateInput" :show-payment-amount-input="showPaymentAmountInput" @generate-message="handleGenerateMessage" />  
+  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-time-input="showTimeInput" :show-date-input="showDateInput" :show-payment-amount-input="showPaymentAmountInput" :show-employer-name-input="showEmployerNameInput" @generate-message="handleGenerateMessage" />  
  
  </template>
 
@@ -60,6 +60,7 @@ import ALSAM from '@/components/ALSAM.vue'
         showCustomerNameInput: false,
         showPaymentAmountInput: false,
         showReasonForDisable: false,
+        showEmployerNameInput: false,
         showTimeInput: false,
         showDateInput: false,
         selectedAction: null,
@@ -74,7 +75,8 @@ import ALSAM from '@/components/ALSAM.vue'
         selectedDate: '',
         selectedTime: '',
         feedbackFormLink: null,
-        disabledFor: ''
+        disabledFor: '',
+        employerName: ''
       }
     },
 
@@ -121,6 +123,12 @@ import ALSAM from '@/components/ALSAM.vue'
           return;
         }     
 
+        if(action === 'pa-12'){
+          this.showEmployerNameInput = true;
+          this.showTimeInput = true;
+          return;
+        }
+
         else{
           this.generateMessage();
         }     
@@ -132,7 +140,7 @@ import ALSAM from '@/components/ALSAM.vue'
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate, feedbackFormLink, disabledFor } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate, feedbackFormLink, disabledFor, employerName } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
@@ -145,6 +153,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.selectedDate = selectedDate;
         this.feedbackFormLink = feedbackFormLink;
         this.disabledFor = disabledFor
+        this.employerName = employerName
 
         // Generate the message
         this.generateMessage();
@@ -172,6 +181,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.showTimeInput = false;
         this.showPaymentAmountInput = false;
         this.showReasonForDisable = false;
+        this.showEmployerNameInput = false;
 
         switch (this.selectedAction) {
           case 'cco-01':
@@ -238,58 +248,62 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! በ24 ሰዓታት ውስጥ ባለሙያዎቹን ባለማናገርዎ  እና ስንደውል ስላላገኘንዎ አገልግሎቱን ማስቀጠል አልቻልንም። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;  
           case 'ace-01':
-            message=`ሰላም ${this.customerName}, የ${this.selectedService} ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message=`ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;   
           case 'ace-02':
-            message = `ሰላም ${this.customerName}, የ${this.selectedService} ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}። መልካም ቀን!` 
+            message = `ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}። መልካም ቀን!` 
             break;
           case 'ace-03':
-            message = `ሰላም ${this.customerName}, የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'ace-04':
-            message = `ሰላም ${this.customerName}, በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mpue-01':
             message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mpue-02':
-            message = `ሰላም ${this.customerName}, ማንኛውንም ዓይነት መረጃ እና እርዳታ ሲፈልጉ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ማንኛውንም ዓይነት መረጃ እና እርዳታ ሲፈልጉ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'spa-01':
-            message = `ሰላም ${this.customerName}, የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያ ላይ በባለሙያነት ስለተመዘገቡ እናመሰግናለን። ቀሪውን የምዝገባ ሂደት በመጨረስ የስራ ገበያውን ለመቀላቀል በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'pa-01':
-            message = `Hi ${this.customerName}, following your recent request for ${this.selectedService} service. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! following your recent request for ${this.selectedService} service. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-02':
-            message = `Hi ${this.customerName}, calling again to follow up on your ${this.selectedService} service request. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! calling again to follow up on your ${this.selectedService} service request. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
-            message = `Hi ${this.customerName}, Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-04':
-            message = `Hi ${this.customerName}, below are the payment details for your ${this.selectedService} service.<br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
+            message = `Hi ${this.customerName}! below are the payment details for your ${this.selectedService} service.<br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`
             break;
           case 'pa-05':
-            message = `Hi ${this.customerName}, We were unable to contact you for the ${this.selectedService} service requested. If still interested, please call 0900320880.`
+            message = `Hi ${this.customerName}! We were unable to contact you for the ${this.selectedService} service requested. If still interested, please call 0900320880.`
             break;
           case 'pa-06':
-            message = `Hi ${this.customerName}, A gentle reminder on the service payment for your ${this.selectedService} service request . Please call 0900320880 for any support. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! A gentle reminder on the service payment for your ${this.selectedService} service request . Please call 0900320880 for any support. PA-${this.crmNumber}`
             break;
           case 'pa-07':
-            message = `Hi ${this.customerName}, We haven't been able to contact you about the payment for the requested ${this.selectedService} service. If you are still interested, please call at 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! We haven't been able to contact you about the payment for the requested ${this.selectedService} service. If you are still interested, please call at 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-08':
-            message = `Hi ${this.customerName}, ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
+            message = `Hi ${this.customerName}! ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
             break;
           case 'pa-09':
-            message = `Hi ${this.customerName}, Your requested ${this.selectedService} maid will arrive as scheduled Today at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Your requested ${this.selectedService} maid will arrive as scheduled Today at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-10':
-            message = `Hi ${this.customerName}, Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
           case 'pa-11':
-            message = `Hi ${this.customerName}, Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
+            message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
+            break;
+          case 'pa-12':
+            message = `ሰላም ${this.customerName}! ዛሬ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ ስላለዎ ሰዓትዎን አክብረው ይገኙ። ለበለጠ መረጃ በ0900320880 ይደውሉልን PA-${this.crmNumber}። መልካም ቀን!`
+            break;
           default:
             break;
         }
