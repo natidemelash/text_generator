@@ -113,9 +113,9 @@ const validationMixin = {
     validateSelectedDate() {
       this.selectedDateError = this.selectedDate ? '' : 'Please add the payment due on date';
     },
-    validateSelectedService() {
-      this.selectedServiceError = this.selectedService ? '' : 'Please select the service'
-    },
+    // validateSelectedService() {
+    //   this.selectedServiceError = this.selectedService ? '' : 'Please select the service'
+    // },
     validateServiceAndEmployerName() {
       this.selectedServiceError = this.selectedService ? '' : 'Please select the service';
       this.employerNameError = this.employerName ? '' : 'Please add the employer name';
@@ -123,7 +123,7 @@ const validationMixin = {
     validateForm() {
       this.validateCustomerName();
       this.validateCRMNumber();
-      this.validateSelectedService();
+      // this.validateSelectedService();
       if (this.selectedAction === 'pa-04') this.validatePaymentAmount();
       if (this.selectedAction === 'pa-03' || this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') this.validateSelectedTime();
       if (this.selectedAction === 'pa-10') this.validateSelectedDate();

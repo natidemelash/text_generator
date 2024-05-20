@@ -108,6 +108,8 @@ import ALSAM from '@/components/ALSAM.vue'
 
         if(action === 'pa-10'){
           this.showDateInput = true;
+          this.showPaymentAmountInput = true;
+          this.showServiceOfInterestInput = true
           return;
         }
 
@@ -297,7 +299,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive as scheduled Today at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-10':
-            message = `Hi ${this.customerName}! Payment for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Payment of ETB ${this.paymentAmount} for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
           case 'pa-11':
             message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
