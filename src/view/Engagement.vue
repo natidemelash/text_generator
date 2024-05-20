@@ -116,18 +116,19 @@ import ALSAM from '@/components/ALSAM.vue'
           return
         }
 
+        if(action === 'pa-12' || action === 'pa-13'){
+          this.showEmployerNameInput = true;
+          this.showTimeInput = true;
+          this.showServiceOfInterestInput= true;
+          return;
+        }
+
         if(action === 'mact-01' || action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
           this.showServiceOfInterestInput = true;
           this.showTimeInput = false;
           this.showPaymentAmountInput = false;
           return;
         }     
-
-        if(action === 'pa-12'){
-          this.showEmployerNameInput = true;
-          this.showTimeInput = true;
-          return;
-        }
 
         else{
           this.generateMessage();
@@ -302,8 +303,10 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
             break;
           case 'pa-12':
-            message = `ሰላም ${this.customerName}! ዛሬ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ ስላለዎ ሰዓትዎን አክብረው ይገኙ። ለበለጠ መረጃ በ0900320880 ይደውሉልን PA-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ዛሬ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ ስላለዎ ሰዓትዎን አክብረው ይገኙ። ለበለጠ መረጃ በ0900320880 ይደውሉልን። PA-${this.crmNumber}። መልካም ቀን!`
             break;
+          case 'pa-13':
+            message = `ሰላም ${this.customerName}! ነገ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ እንዳለዎ ለማስታወስ እንወዳለን። ለበለጠ መረጃ በ0900320880 ይደውሉልን። PA-${this.crmNumber}። መልካም ቀን!`
           default:
             break;
         }
