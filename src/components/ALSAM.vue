@@ -151,7 +151,7 @@ export default {
       paymentAmount: '',
       selectedTime: null,
       selectedDate: null,
-      feedbackFormLink: 'rb.gy/6c02yl',
+      feedbackFormLink: 'bit.ly/3wJVGON',
       customerNameError: '',
       paymentAmountError: '',
       crmError: '',
