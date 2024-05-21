@@ -3,8 +3,8 @@
      <h2 class="text-xl font-semibold mb-4 text-[#fff]">Payment related messages</h2>
      <div class="grid grid-cols-1 md:grid-cols-3 text-black gap-8">
       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('bank-confirmation')">Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ </button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('Well-received')">Received Payment / ክፍያ ደርሶናል</button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('payment-received')">Received Payment / ክፍያ ደርሶናል</button>
+       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
        <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Closed Ticket')">Closing ticket / የመዝጊያ መልዕክት </button>
      </div>
 
@@ -15,6 +15,14 @@
           " >
           <p v-if="employerNameError" class="text-amber-500 text-sm mt-1">{{ employerNameError }}</p>
         </div>
+        
+        <!-- Serivice field for  -->
+        <di v-if="showServiceOfInterestInput">
+          <label>Service of Interest </label> 
+          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+            <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
+          </select>
+        </di>
 
        <!-- Input field for phone number -->
       <div v-if="showPhoneNumberInput" class="mt-4">
@@ -34,9 +42,30 @@
     return{
       showPhoneNumberInput: false,
       showEmployerNameInput: false,
+      showServiceOfInterestInput: false,
+      serviceOfInterest: [
+          'ምግብ አብሳይ',
+          'የጽዳት',
+          'ምግብ ዝግጅት',
+          'ሞግዚት',
+          'አስጠኚ',
+          'ዲሽ',
+          'ኤሌክትሪክ',
+          'ቧንቧ',
+          'ጥገና',
+          'ቀለም ቅብ',
+          'ግንባታ ስራ',
+          'ጂፕሰም ስራ',
+          'አልሙኒየም ስራ',
+          'አናጺ',
+          'ወለል ንጣፍ',
+          'ሂሳብ ስራ',
+          'ሽያጭ'     
+      ],
       employerName: '',
       employerNameError: '',
       phoneNumber: '',
+      selectedService: '',
       phoneNumberError: ''
     }
   }, 
@@ -45,8 +74,14 @@
     handleButtonClick(action) {
       this.showPhoneNumberInput = true;
       this.showEmployerNameInput = true;
+      this.showServiceOfInterestInput = false;
       // Save the action to a data property to handle it later
       this.selectedAction = action;
+
+      if(this.selectedAction !== 'bank-confirmation'){
+        this.showServiceOfInterestInput = true;
+        return;
+      }
     },
 
     generateMessage() {
@@ -62,6 +97,7 @@
         return;
       }
 
+
       if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
         this.phoneNumberError = 'Invalid phone number format. It should start with 09 and should be 10 digits long.';
         return;
@@ -70,19 +106,20 @@
       this.employerNameError = '';
       this.showPhoneNumberInput = false;
       this.showEmployerNameInput = false;
+      this.showServiceOfInterestInput = false;
 
       switch (this.selectedAction) {
         case 'bank-confirmation':
           message = `ሰላም ${this.employerName}! የባንክ መረጃ እንደደረስዎት ለማረጋገጥ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መልካም ቀን!`;
           break;
-        case 'Well-received':
-          message = `ሰላም ${this.employerName}! ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የባለሙያ ስልክ ከ20 - 30 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+        case 'payment-received':
+          message = `ሰላም ${this.employerName}! ክፍያውን ስለፈጸሙ እናመሰግናለን። መስፈርትዎን የሚያሟላ የ${this.selectedService} ባለሙያ ስልክ ከ20 - 30 ደቂቃ ውስጥ ይደርሶታል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
           break;
-        case 'Reminder':
-          message = `ሰላም ${this.employerName}! ክፍያ ባለመፈጸምዎ የባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
+        case 'reminder':
+          message = `ሰላም ${this.employerName}! ክፍያ ባለመፈጸምዎ የ${this.selectedService} ባለሙያ ጥያቄዎን ለማስተናገድ አልቻልንም። በቀረው 12 ሰዓት ውስጥ ክፍያውን በመፈጸም ፈጣን አገልግሎት ያግኙ። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`;
           break;
         case 'Closed Ticket':
-          message = `ሰላም ${this.employerName}! ለባለሙያ ጥያቄዎ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መልካም ቀን!`;
+          message = `ሰላም ${this.employerName}! ለ${this.selectedService} ባለሙያ ጥያቄዎ የአገልግሎት ክፍያ ባለመፈጸምዎ ሃሳብዎን እንደቀየሩ ተቆጥሮ ትዕዛዝዎ ተዘግቷል። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መልካም ቀን!`;
           break;
         default:
           break;
@@ -90,6 +127,7 @@
       this.$emit('payment-generated', message);
       this.phoneNumber = '';
       this.employerName = '';
+      this.selectedService = this.serviceOfInterest
     },
   },
  };
