@@ -191,7 +191,7 @@ export default {
         customerName: this.customerName,
         crmNumber: this.crmNumber,
         paymentAmount: this.paymentAmount,
-        selectedTime: this.selectedTime,
+        selectedTime: this.formattedTime,
         selectedDate: this.selectedDate,
         feedbackFormLink: this.feedbackFormLink,
         employerName: this.employerName
@@ -208,7 +208,15 @@ export default {
       this.paymentAmount = '';
       this.selectedDate = null,
       this.selectedTime = null
-    }
+    },
+  },
+
+  computed: {
+    formattedTime() {
+      if (!this.selectedTime) return '';
+        const time = new Date(`2000-01-01T${this.selectedTime}`);
+       return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true });
+      }
   }
 } 
 

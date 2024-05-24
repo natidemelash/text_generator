@@ -1,3 +1,4 @@
+
 <template>
     <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
         <h3 class="text-lg mb-4 text-[#fff]">MACT Engagement Messages</h3>
@@ -56,7 +57,7 @@
 
 <script>
 export default {
-    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput', 'showReasonForDisable'],
+    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfI nterestInput', 'showReasonForDisable'],
     data(){
         return{
             reasonForDisable:[

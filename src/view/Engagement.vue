@@ -125,7 +125,7 @@ import ALSAM from '@/components/ALSAM.vue'
           return;
         }
 
-        if(action === 'mact-01' || action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
+        if(action === 'mact-01' || action=== 'mact-02' || action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
           this.showServiceOfInterestInput = true;
           this.showTimeInput = false;
           this.showPaymentAmountInput = false;
@@ -220,6 +220,9 @@ import ALSAM from '@/components/ALSAM.vue'
           case 'cco-11':
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
+          case 'cco-12':
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን በ${this.selectedService} ባለሙያ ጥያቄዎ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ልናገኝዎ አልቻልንም። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}`;
             break;
@@ -241,6 +244,9 @@ import ALSAM from '@/components/ALSAM.vue'
           case 'mact-07':
             message = `ሰላም ${this.customerName}! ${this.disabledFor} ከዚህ በኋላ በመተግበሪያችን የስራ ጥሪ እንደማይደርስዎ እንገልጻለን። ለበለጠ መረጃ 0979472677 ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break; 
+          case 'mact-08':
+            message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            break; 
           case 'egpt-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችን ላይ ባለሙያ ለማግኘት ማስታወቂያ ለጥፈው ነበር። እገዛ ለማድረግ ስንደውል ማግኘት አልቻልንም። በሌላ ጊዜ ቀልጣፋ አገልግሎት እንድንሰጥዎ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break; 
@@ -260,7 +266,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አጠቃቀሙ ላይ እገዛ ካስፈለግዎ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'ace-04':
-            message = `ሰላም ${this.customerName}! በባለሙያ ፍለጋ ሂደት ላይ እገዛ ሲፈልጉ በ${this.phoneNumber} በመደወል ፈጣን አገልግሎት ማግኘት ይችላሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! በተለያዩ የሙያ ዘርፎች ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mpue-01':
             message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`

@@ -6,7 +6,7 @@
         :value="modelValue"
         :placeholder="placeholder"
         @input="handleInput"
-        class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none"
+        class="py-2 px-3 ml-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none"
       />
       <p v-if="error" class="text-amber-500 text-sm mt-1">{{ error }}</p>
     </div>

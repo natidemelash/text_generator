@@ -6,7 +6,7 @@
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-01')">Customer from BlindSpot</button>
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-02')">Customer from Search</button>
           <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-03')">Newly Registered Customer</button>
-          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-04')">Closing Employer</button>
+          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-04')">Multiple Search</button>
         </div>
 
         <!-- Customer Name -->
