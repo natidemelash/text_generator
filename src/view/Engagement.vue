@@ -223,6 +223,9 @@ import ALSAM from '@/components/ALSAM.vue'
           case 'cco-12':
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
+          case 'cco-13':
+            message = `ሰላም ${this.customerName}! ስለተላኩበት የ${this.selectedService} ለክትትል ደውለን ነበር። በ${this.phoneNumber} ደውለው ፈጣን ምላሽ በመስጠት የስራ ገበያዎን ያስፉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን በ${this.selectedService} ባለሙያ ጥያቄዎ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ልናገኝዎ አልቻልንም። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}`;
             break;
@@ -268,7 +271,7 @@ import ALSAM from '@/components/ALSAM.vue'
           case 'ace-04':
             message = `ሰላም ${this.customerName}! በተለያዩ የሙያ ዘርፎች ባለሙያ እንደፈለጉ ስላየን እገዛ ለማድረግ ደውለን ልናገኝዎ አልቻልንም። በ${this.phoneNumber} ቢደውሉልን ልናገለግልዎ ዝግጁ ነን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
-          case 'mpue-01':
+          case 'mpue-01': 
             message = `ሰላም! የ GoodayOn መተግበሪያን በማውረድዎ እናመሰግናለን። አገልግሎታችንን ለማግኘት ምዝገባውን በአግባቡ ማጠናቀቅ ይኖርብዎታል። እገዛችንን ሲፈልጉ በ${this.phoneNumber} በስራ ሰዓት ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mpue-02':

@@ -15,6 +15,7 @@
           <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-10')">SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም </button>
           <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-11')">SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል </button>
           <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-12')">Warning for SPs/ ማስጠንቀቂያ </button>
+          <button class="bg-[#588fe8] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('cco-13')">SP Follow-Up </button>
       </div>
 
          <!-- Customer Name -->
