@@ -23,7 +23,7 @@
       />
   
       <div v-if="showServiceOfInterestInput">
-        <label>Service of Interest</label>
+        <label class="mr-2">Service of Interest</label>
         <select
           v-model="selectedService"
           class="text-sm bg-[#333] py-1 px-4 rounded-md my-4"
@@ -37,7 +37,7 @@
       </div>
   
       <div v-if="showReasonForDisable">
-        <label>Reason for Disable</label>
+        <label class="mr-2">Reason for Disable</label>
         <select
           v-model="disabledFor"
           class="text-sm bg-[#333] py-1 px-4 rounded-md my-4"

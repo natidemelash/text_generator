@@ -18,7 +18,7 @@
   <!-- MACT Messages -->
   <MACT v-if="selectedProjectType === 'MACT'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-reason-for-disable="showReasonForDisable"  @generate-message="handleGenerateMessage"/>
 
-  <BLSR v-if="selectedProjectType === 'BLSR'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
+  <BLSR v-if="selectedProjectType === 'BLSR'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput"  :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
   <EGPT v-if="selectedProjectType === 'EGPT'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
 
@@ -42,7 +42,7 @@ import MPUE from '@/components/MPUE.vue'
 import SPA from '@/components/SPA.vue';
 import ALSAM from '@/components/ALSAM.vue'
 
-  export default {
+export default {
     components:{
       CCO,
       BLSR,
@@ -81,62 +81,48 @@ import ALSAM from '@/components/ALSAM.vue'
     },
 
     methods: {
-      handleButtonClick(action) {
-        // Reset phone number and error message
-        this.phoneNumber = '';
-        this.phoneNumberError = '';
-        this.customerName = '',
-        this.selectedService = ''
+       handleButtonClick(action) {
+          // Reset phone number and error message
+          this.phoneNumber = '';
+          this.phoneNumberError = '';
+          this.customerName = '';
+          this.selectedService = '';
 
-        this.selectedAction = action;
-        this.showPhoneNumberInput = true
-        this.showCustomerNameInput = true;
+          this.selectedAction = action;
+          this.showPhoneNumberInput = true;
+          this.showCustomerNameInput = true;
 
-        if(action === 'pa-04' || action === 'pa-08'){
-          this.showPaymentAmountInput = true
-          this.showServiceOfInterestInput = true
-          this.showTimeInput = false
-          return;
-        }
-
-        if(action === 'pa-03' || action === 'pa-09'){
-          this.showTimeInput = true;
-          this.showServiceOfInterestInput = true;
+          // Reset all input flags to false
           this.showPaymentAmountInput = false;
-          return;
-        }
-
-        if(action === 'pa-10'){
-          this.showDateInput = true;
-          this.showPaymentAmountInput = true;
-          this.showServiceOfInterestInput = true
-          return;
-        }
-
-        if(action === 'mact-07'){
-          this.showReasonForDisable = true;
-          return
-        }
-
-     
-        if(action === 'pa-12' || action === 'pa-13'){
-          this.showEmployerNameInput = true;
-          this.showTimeInput = true;
-          this.showServiceOfInterestInput= true;
-          return;
-        }
-
-        if(action === 'mact-01' || action=== 'mact-02' || action === 'ace-01' || action === 'ace-02' || action === 'pa-01' || action === 'pa-02' || action === 'cco-01' || 'cco-02'|| 'cco-05'){
-          this.showServiceOfInterestInput = true;
+          this.showServiceOfInterestInput = false;
           this.showTimeInput = false;
-          this.showPaymentAmountInput = false;
-          return;
-        }     
+          this.showDateInput = false;
+          this.showReasonForDisable = false;
+          this.showEmployerNameInput = false;
 
-        else{
-          this.generateMessage();
-        }     
-      },
+          // Set input flags based on the action
+          if (['pa-04', 'pa-08'].includes(action)) {
+              this.showPaymentAmountInput = true;
+              this.showServiceOfInterestInput = true;
+          } else if (['pa-03', 'pa-09'].includes(action)) {
+              this.showTimeInput = true;
+              this.showServiceOfInterestInput = true;
+          } else if (action === 'pa-10') {
+              this.showDateInput = true;
+              this.showPaymentAmountInput = true;
+              this.showServiceOfInterestInput = true;
+          } else if (action === 'mact-07') {
+              this.showReasonForDisable = true;
+          } else if (['pa-12', 'pa-13'].includes(action)) {
+              this.showEmployerNameInput = true;
+              this.showTimeInput = true;
+              this.showServiceOfInterestInput = true;
+          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05'].includes(action)) {
+              this.showServiceOfInterestInput = true;
+          } else {
+              this.generateMessage();
+          }
+        },
 
       handleProjectType(projectType){
         this.selectedProjectType = projectType;
@@ -258,7 +244,7 @@ import ALSAM from '@/components/ALSAM.vue'
             message = `ሰላም ${this.customerName}! የአገልግሎት ጥራታችንን ለማሻሻል ለክትትል በደወልን ሰዓት ልናገኝዎ አልቻልንም። ስለደረሱበት ሁኔታ በ${this.phoneNumber} ደውለው ቢያሳውቁን ፈጣን አገልግሎት እንድንሰጥዎ ይረዳናል። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'blsr-02':
-            message = `ሰላም ${this.customerName}! በ24 ሰዓታት ውስጥ ባለሙያዎቹን ባለማናገርዎ  እና ስንደውል ስላላገኘንዎ አገልግሎቱን ማስቀጠል አልቻልንም። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! በ24 ሰዓታት ውስጥ የ${this.selectedService} ባለሙያዎቹን ባለማናገርዎ  እና ስንደውል ስላላገኘንዎ አገልግሎቱን ማስቀጠል አልቻልንም። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;  
           case 'ace-01':
             message=`ሰላም ${this.customerName}! የ${this.selectedService} ባለሙያ ማግኘት እንዳልቻሉ ስላየን እገዛ ለማድረግ ደውለን ነበር። በፍለጋው እንድንረዳዎ እባክዎ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
