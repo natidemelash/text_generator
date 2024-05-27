@@ -214,9 +214,10 @@ export default {
   computed: {
     formattedTime() {
       if (!this.selectedTime) return '';
-        const time = new Date(`2000-01-01T${this.selectedTime}`);
-       return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true });
-      }
+      
+      const time = new Date(`2000-01-01T${this.selectedTime}`);
+      return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true });
+    }
   }
 } 
 
