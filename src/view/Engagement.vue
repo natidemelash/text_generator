@@ -118,6 +118,7 @@ import ALSAM from '@/components/ALSAM.vue'
           return
         }
 
+     
         if(action === 'pa-12' || action === 'pa-13'){
           this.showEmployerNameInput = true;
           this.showTimeInput = true;
@@ -180,7 +181,7 @@ import ALSAM from '@/components/ALSAM.vue'
         this.phoneNumberError = '';
         this.showPhoneNumberInput = false;
         this.showCustomerNameInput = false;
-        this.showServiceOfInterestInput =false;
+        this.showServiceOfInterestInput = false;
         this.showTimeInput = false;
         this.showPaymentAmountInput = false;
         this.showReasonForDisable = false;

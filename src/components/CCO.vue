@@ -62,7 +62,7 @@ data() {
       selectedService: null,
       requestedService: [
           'ምግብ አብሳይ',
-          'የጽዳት',
+          'ጽዳት',
           'ምግብ ዝግጅት',
           'ሞግዚት',
           'አስጠኚ',

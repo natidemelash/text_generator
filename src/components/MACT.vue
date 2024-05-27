@@ -21,7 +21,7 @@
         </div>
 
          <!-- Serivice field for  -->
-         <div v-if="showServiceOfInterestInput">
+        <div v-if="showServiceOfInterestInput">
           <label>Service of Interest </label> 
           <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
             <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
@@ -57,7 +57,7 @@
 
 <script>
 export default {
-    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfI nterestInput', 'showReasonForDisable'],
+    props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput', 'showReasonForDisable'],
     data(){
         return{
             reasonForDisable:[
