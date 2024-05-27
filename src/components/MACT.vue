@@ -16,16 +16,17 @@
              <!-- Customer Name -->
         <div v-if="showCustomerNameInput">
           <label class="customerName">Customer Name </label>
-          <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
+          <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" @input="validateCustomerName" >
           <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
         </div>
 
          <!-- Serivice field for  -->
         <div v-if="showServiceOfInterestInput">
           <label>Service of Interest </label> 
-          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4" @change="validateService">
             <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
           </select>
+          <p v-if="selectedServiceError" class="text-amber-500 text-sm mt-1">{{ selectedServiceError }}</p>
         </div>
 
         <!-- Resasons for disabling -->
@@ -56,8 +57,31 @@
 </template>
 
 <script>
+
+const validationMixin = {
+    methods: {
+        validateCustomerName() {
+            this.customerNameError = this.customerName ? '' : "Name can't be empty";
+        },
+        validateCRMNumber() {
+            this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
+        },
+        validateService() {
+            this.selectedServiceError = this.selectedService ? '' : 'Please Selecet Service'
+        },
+        validateForm() {
+            this.validateCustomerName();
+            this.validateCRMNumber();
+            if(this.selectedAction === 'mact-01' || this.selectedAction === 'mact-02') this.validateService();
+            
+            return !this.customerNameError && !this.crmError && !this.selectedServiceError;
+        }
+    }
+}
+
 export default {
     props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput', 'showReasonForDisable'],
+    mixins: [validationMixin],
     data(){
         return{
             reasonForDisable:[
@@ -93,6 +117,7 @@ export default {
             selectedService: '',
             disabledFor:'',
             phoneNumberError: '',
+            selectedServiceError: ''
         }
     },
     methods:{
@@ -102,14 +127,8 @@ export default {
         },
 
         emitMessageEvent() {
-            if(!this.customerName){
-                this.customerNameError = 'Name can\'t be empty'
-                return;
-            }
-            if(!this.crmNumber){
-                this.crmError = 'Please put CRM Number'
-                return;
-            }
+            if (!this.validateForm()) return;
+
             // Emit an event with the action and phone number to be handled by the parent component
             this.$emit('generate-message', {
                 action: this.selectedAction,
