@@ -45,7 +45,7 @@
       showServiceOfInterestInput: false,
       serviceOfInterest: [
           'ምግብ አብሳይ',
-          'የጽዳት',
+          'ጽዳት',
           'ምግብ ዝግጅት',
           'ሞግዚት',
           'አስጠኚ',
