@@ -117,7 +117,7 @@ export default {
               this.showEmployerNameInput = true;
               this.showTimeInput = true;
               this.showServiceOfInterestInput = true;
-          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05'].includes(action)) {
+          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13'].includes(action)) {
               this.showServiceOfInterestInput = true;
           } else {
               this.generateMessage();
