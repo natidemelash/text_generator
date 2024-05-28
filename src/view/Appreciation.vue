@@ -4,6 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('success')">Successful Hire</button>
             <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('tg-link')">Telegram Links</button>
+            <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('missed-call')">Missed-Call</button>
         </div>
 
         <div v-if="showCustomerNameInput">
@@ -46,14 +47,19 @@ export default {
             this.messageFor = action;
         },
         generateMessage() {
-            if(!this.customerName){
-                this.customerNameError = 'Name can\'t be empty'
-                return;
+            if(this.messageFor !== 'missed-call'){
+                if(!this.customerName){
+                    this.customerNameError = 'Name can\'t be empty'
+                    return;
+                }
             }
             if(this.messageFor === 'success'){
                 this.message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እናመሰግናለን። ስለ GoodayOn ለወዳጅ ዘመድ ያጋሩ። ለቀልጣፋ አገልግሎት በ0949231010 ይደውሉ። መልካም ቀን! <br><br>Download፡ onelink.to/goodayonapp`;
             }else if(this.messageFor === 'tg-link'){
                 this.message = `ሰላም ${this.customerName}! <br>የስራ ማስታወቂያዎች በብዛት እንዲደርስዎ የቴሌግራም ቻናላችን አባል ይሁኑ!<br>${this.tgLink}<br>ለቀልጣፋ አገልግሎት በ0970014434 ይደውሉ። መልካም ቀን!`
+            }else if(this.messageFor === 'missed-call'){
+                this.showCustomerNameInput = false;
+                this.message = `ጤና ይስጥልን! ወደ Gooday(ጉዳይ) ስለደወሉ እናመሰግናለን። ጥሪዎ ስላመለጠን መልሰን ብንደውልም አላገኘንዎትም። እባክዎን በ9675 አልያም በ0949231010 መልሰው ይደውሉልን። መልካም ቀን!`
             }
 
             return this.message;

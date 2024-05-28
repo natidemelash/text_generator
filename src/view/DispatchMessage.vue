@@ -196,7 +196,7 @@ export default {
             አውቶ_መካኒክ: `🚨አስቸኳይ🚨 <br><br>አውቶመካኒክ በሳምንት ${this.workingDays} ቀን ፣ ከ${this.workingHour} መስራት የሚችል ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
         };
 
-        return templates[this.selectedService] ||`🚨አስቸኳይ🚨 <br><br><br><br>የ${this.selectedService} ባለሙያ  በሳምንት ${this.workingDays} ቀን ፣ ከ${this.workingHour} መስራት የሚችል ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
+        return templates[this.selectedService] ||`🚨አስቸኳይ🚨 <br><br>የ${this.selectedService} ባለሙያ  በሳምንት ${this.workingDays} ቀን ፣ ከ${this.workingHour} መስራት የሚችል ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`;
       }else{
         const templates = {
           ማናጀር: `🚨አስቸኳይ🚨<br><br>ማናጀር ${this.location} አካባቢ ይፈለጋል-በ${this.phone} ይደውሉ መለያ-${this.crmTrackingNumber}`,
