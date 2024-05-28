@@ -211,7 +211,7 @@ export default {
             message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
           case 'cco-13':
-            message = `ሰላም ${this.customerName}! ስለተላኩበት የ${this.selectedService} ለክትትል ደውለን ነበር። በ${this.phoneNumber} ደውለው ፈጣን ምላሽ በመስጠት የስራ ገበያዎን ያስፉ። መለያ-${this.crmNumber}። መልካም ቀን!`
+            message = `ሰላም ${this.customerName}! ስለተላኩበት የ${this.selectedService} ስራ ለክትትል ደውለን ነበር። በ${this.phoneNumber} ደውለው ፈጣን ምላሽ በመስጠት የስራ ገበያዎን ያስፉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን በ${this.selectedService} ባለሙያ ጥያቄዎ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ልናገኝዎ አልቻልንም። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}`;

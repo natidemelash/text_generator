@@ -22,8 +22,6 @@
             <img src="../assets//copy.svg" alt="" width="20">
         </button>
     </div>
-
-
 </template>
 
 
