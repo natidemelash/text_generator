@@ -221,10 +221,25 @@ export default {
 
   computed: {
     formattedTime() {
-      if (!this.selectedTime) return '';
-      
-      const time = new Date(`2000-01-01T${this.selectedTime}`);
-      return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, '');
+        if (!this.selectedTime) return '';
+        
+        const time = new Date(`2000-01-01T${this.selectedTime}`);
+
+        // Check if the messageType is 'pa-02'
+        if (this.selectedAction === 'pa-13') {
+            const hours = time.getHours();
+            let prefix = '';
+            // Check if the time is between 1:00 and 6:00
+            if (hours >= 1 && hours < 6) {
+                prefix = 'ጠዋት';
+            } else {
+                prefix = 'ከቀኑ';
+            }
+            return `${prefix} ${this.selectedTime.toLocaleString('en-US', {hour12: true})}`;
+        } else {
+            // For other message types, simply format the time with AM/PM indicator
+            return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, '');
+        }
     },
     dueTime(){
       let newTime = this.addOneHour(this.selectedTime)
