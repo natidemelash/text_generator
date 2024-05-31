@@ -117,7 +117,7 @@ export default {
               this.showEmployerNameInput = true;
               this.showTimeInput = true;
               this.showServiceOfInterestInput = true;
-          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13'].includes(action)) {
+          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13', 'pa-11'].includes(action)) {
               this.showServiceOfInterestInput = true;
           } else {
               this.generateMessage();
@@ -298,7 +298,7 @@ export default {
             message = `Hi ${this.customerName}! Payment of ETB ${this.paymentAmount} for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
           case 'pa-11':
-            message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService}. For any enquiry please call 0900320880<br>${this.feedbackFormLink}`
+            message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService} service. <br><br>${this.feedbackFormLink}`
             break;
           case 'pa-12':
             message = `ሰላም ${this.customerName}! ዛሬ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ ስላለዎ ሰዓትዎን አክብረው ይገኙ። ለበለጠ መረጃ በ0900320880 ይደውሉልን። PA-${this.crmNumber}። መልካም ቀን!`
