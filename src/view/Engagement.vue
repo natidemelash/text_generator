@@ -81,6 +81,7 @@ export default {
     },
 
     methods: {
+
        handleButtonClick(action) {
           // Reset phone number and error message
           this.phoneNumber = '';
@@ -130,7 +131,7 @@ export default {
 
       handleGenerateMessage(messageData) {
         // Extract action and phone number from the emitted event data
-        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate, feedbackFormLink, disabledFor, employerName } = messageData;
+        const { action, phoneNumber, selectedService, customerName, crmNumber, paymentAmount, selectedTime, selectedDate, feedbackFormLink, disabledFor, employerName, newTime } = messageData;
         
         // Set the selected action and phone number
         this.selectedAction = action;
@@ -140,6 +141,7 @@ export default {
         this.paymentAmount = paymentAmount;
         this.crmNumber = crmNumber;
         this.selectedTime = selectedTime;
+        this.newTime = newTime;
         this.selectedDate = selectedDate;
         this.feedbackFormLink = feedbackFormLink;
         this.disabledFor = disabledFor
@@ -274,7 +276,7 @@ export default {
             message = `Hi ${this.customerName}! calling again to follow up on your ${this.selectedService} service request. Please call 0900320880 to discuss the details. PA-${this.crmNumber}`
             break;
           case 'pa-03':
-            message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive tomorrow at ${this.selectedTime} as planned. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive tomorrow between ${this.selectedTime} - ${this.newTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-04':
             message = `Hi ${this.customerName}! below are the payment details for your ${this.selectedService} service.<br>Telebirr: +251949231010 Tigist Afework<br>Amount: ETB ${this.paymentAmount}`

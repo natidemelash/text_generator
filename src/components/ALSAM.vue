@@ -159,6 +159,7 @@ export default {
       selectedTimeError: '',
       selectedDateError: '',
       selectedServiceError: '',
+      newTime:null,
       buttons: [
         { label: 'Detail Confirmation(1st SMS)', action: 'pa-01', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { label: 'Detail Confirmation(2nd SMS)', action: 'pa-02', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
@@ -177,6 +178,12 @@ export default {
     };
   },
   methods: {
+    addOneHour(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        const date = new Date();
+        date.setHours(hours + 1, minutes);
+        return date.toLocaleString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, '');
+    },
     handleButtonClick(action) {
       this.selectedAction = action;
       this.$emit('button-click', action);
@@ -192,6 +199,7 @@ export default {
         crmNumber: this.crmNumber,
         paymentAmount: this.paymentAmount,
         selectedTime: this.formattedTime,
+        newTime: this.dueTime,
         selectedDate: this.selectedDate,
         feedbackFormLink: this.feedbackFormLink,
         employerName: this.employerName
@@ -216,7 +224,11 @@ export default {
       if (!this.selectedTime) return '';
       
       const time = new Date(`2000-01-01T${this.selectedTime}`);
-      return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true });
+      return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, '');
+    },
+    dueTime(){
+      let newTime = this.addOneHour(this.selectedTime)
+      return newTime; 
     }
   }
 } 
