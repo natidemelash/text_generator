@@ -90,11 +90,17 @@
       <img src="../assets/send.png" alt="" width="25">
     </button>
   </div>
+
+  <div>
+    <h2 class="text-center my-5 text-2xl">ALSAM PRICING</h2>
+    <PricingCalculator />
+  </div>
 </template>
 
 
 <script>
 import InputField from './InputField.vue';
+import PricingCalculator from './PricingCalculator.vue';
 
 const validationMixin = {
   methods: {
@@ -136,7 +142,8 @@ const validationMixin = {
 
 export default {
   components:{
-    InputField
+    InputField,
+    PricingCalculator
   },
   props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showPaymentAmountInput', 'showTimeInput', 'showDateInput', 'showEmployerNameInput'],
   mixins: [validationMixin],
