@@ -92,7 +92,7 @@
   </div>
 
   <div>
-    <h2 class="text-center my-5 text-2xl">ALSAM PRICING</h2>
+    <hr class="my-12 px-8 mx-20" />
     <PricingCalculator />
   </div>
 </template>
@@ -242,7 +242,7 @@ export default {
             } else {
                 prefix = 'ከቀኑ';
             }
-            return `${prefix} ${this.selectedTime.toLocaleString('en-US', {hour12: true})}`;
+            return `${prefix} ${this.selectedTime.toLocaleString({hour:'numeric', hour12: true})}`;
         } else {
             // For other message types, simply format the time with AM/PM indicator
             return time.toLocaleString('en-US',{ hour: 'numeric', minute: '2-digit', hour12: true }).replace(/\s/g, '');
