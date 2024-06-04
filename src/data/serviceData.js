@@ -67,7 +67,7 @@ export const servicesData = {
         "3 bed room/4 - 7 people": { "total": 5000, "gooday": 1000, "sp": 4000 }
       }
     },
-    "Cleaning and Cooking": {
+    "Cooking & Cleaning": {
       "One time": {
         "1 bed room/3 or less people": { "total": 1000, "gooday": 200, "sp": 800 },
         "2 bed room/3 or less people": { "total": 1100, "gooday": 220, "sp": 880 },
