@@ -1,113 +1,135 @@
 <template>
   <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-     <h2 class="text-xl font-semibold mb-4 text-[#fff]">Payment related messages</h2>
-     <div class="grid grid-cols-1 md:grid-cols-3 text-black gap-8">
-      <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('bank-confirmation')">Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ </button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('payment-received')">Received Payment / ክፍያ ደርሶናል</button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('reminder')">Payment Reminder / የክፍያ ማስታወሻ</button>
-       <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('Closed Ticket')">Closing ticket / የመዝጊያ መልዕክት </button>
-     </div>
-
-        <!-- Employer Name -->
-        <div v-if="showEmployerNameInput">
-          <label for="employerName" class="text-sm">Customer Name </label>
-          <input v-model="employerName" id="employerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-sm mt-8 mb-2 focus:outline-none
-          " >
-          <p v-if="employerNameError" class="text-amber-500 text-sm mt-1">{{ employerNameError }}</p>
-        </div>
-        
-        <!-- Serivice field for  -->
-        <di v-if="showServiceOfInterestInput">
-          <label>Service of Interest </label> 
-          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
-            <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
-          </select>
-        </di>
-
-       <!-- Input field for phone number -->
-      <div v-if="showPhoneNumberInput" class="mt-4">
-        <label for="phoneNumber" class="text-sm  text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-        <input type="text" id="phoneNumber" v-model="phoneNumber" placeholder="Dispatcher phone" @input="validatePhoneNumber"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm rounded-md focus:outline-none">
-        <p v-if="phoneNumberError" class="text-amber-500 text-sm mt-2">{{ phoneNumberError }}</p>
-      </div>
-      <button @click="generateMessage" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
-        <img src="../assets//send.png" alt="" width="25">
+    <h2 class="text-xl font-semibold mb-4 text-[#fff]">Payment related messages</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 text-black gap-8">
+      <button
+        v-for="(button, index) in buttons"
+        :key="index"
+        :class="button.class"
+        @click="handleButtonClick(button.action)"
+      >
+        {{ button.label }}
       </button>
-   </div>
- </template>
- 
- <script>
- export default {
-  data(){
-    return{
+    </div>
+
+    <InputField
+      v-if="showEmployerNameInput"
+      label="Employer Name"
+      v-model="employerName"
+      placeholder="Employer name"
+      :error="employerNameError"
+    />
+
+    <div v-if="showServiceOfInterestInput">
+      <label>Service of Interest</label>
+      <select
+        v-model="selectedService"
+        class="text-sm bg-[#333] py-1 px-4 rounded-md my-4"
+      >
+        <option v-for="(service, index) in serviceOfInterest" :key="index">
+          {{ service }}
+        </option>
+      </select>
+    </div>
+
+    <InputField
+      v-if="showPhoneNumberInput"
+      label="Phone Number/የዲስፓቸር ስልክ"
+      v-model="phoneNumber"
+      placeholder="Dispatcher phone"
+      :error="phoneNumberError"
+      @input="validatePhoneNumber"
+    />
+
+    <button
+      @click="generateMessage"
+      class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded"
+    >
+      <img src="../assets/send.png" alt="" width="25" />
+    </button>
+  </div>
+</template>
+
+<script>
+import InputField from '@/components/InputField.vue';
+
+const validationMixin = {
+  methods: {
+    validateCustomerName() {
+      this.employerNameError = this.employerName ? '' : "Name can't be empty";
+    },
+    validatePhoneNumber() {
+      const phoneNumberPattern = /^(09)\d{8}$/;
+      this.phoneNumberError = phoneNumberPattern.test(this.phoneNumber)
+        ? ''
+        : 'Invalid phone number format. It should start with 09 and should be 10 digits long.';
+    }
+  }
+}
+
+export default {
+  components: {
+    InputField
+  },
+  mixins: [validationMixin],
+  data() {
+    return {
       showPhoneNumberInput: false,
       showEmployerNameInput: false,
       showServiceOfInterestInput: false,
       serviceOfInterest: [
-          'ምግብ አብሳይ',
-          'ጽዳት',
-          'ምግብ ዝግጅት',
-          'ሞግዚት',
-          'አስጠኚ',
-          'ዲሽ',
-          'ኤሌክትሪክ',
-          'ቧንቧ',
-          'ጥገና',
-          'ቀለም ቅብ',
-          'ግንባታ ስራ',
-          'ጂፕሰም ስራ',
-          'አልሙኒየም ስራ',
-          'አናጺ',
-          'ወለል ንጣፍ',
-          'ሂሳብ ስራ',
-          'ሽያጭ'     
+        'ምግብ አብሳይ',
+        'ጽዳት',
+        'ምግብ ዝግጅት',
+        'ሞግዚት',
+        'አስጠኚ',
+        'ዲሽ',
+        'ኤሌክትሪክ',
+        'ቧንቧ',
+        'ጥገና',
+        'ቀለም ቅብ',
+        'ግንባታ ስራ',
+        'ጂፕሰም ስራ',
+        'አልሙኒየም ስራ',
+        'አናጺ',
+        'ወለል ንጣፍ',
+        'ሂሳብ ስራ',
+        'ሽያጭ'
       ],
       employerName: '',
       employerNameError: '',
       phoneNumber: '',
       selectedService: '',
-      phoneNumberError: ''
+      phoneNumberError: '',
+      selectedAction: '',
+      buttons: [
+        { action: 'bank-confirmation', label: 'Bank information Confirmation / የመክፈያ መረጃ (ባንክ አካውንት) መድረሱን ለማረጋገጥ', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'payment-received', label: 'Received Payment / ክፍያ ደርሶናል', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'reminder', label: 'Payment Reminder / የክፍያ ማስታወሻ', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'Closed Ticket', label: 'Closing ticket / የመዝጊያ መልዕክት', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' }
+      ]
     }
-  }, 
-
+  },
   methods: {
     handleButtonClick(action) {
       this.showPhoneNumberInput = true;
       this.showEmployerNameInput = true;
-      this.showServiceOfInterestInput = false;
-      // Save the action to a data property to handle it later
+      this.showServiceOfInterestInput = action !== 'bank-confirmation';
       this.selectedAction = action;
-
-      if(this.selectedAction !== 'bank-confirmation'){
-        this.showServiceOfInterestInput = true;
-        return;
-      }
     },
-
     generateMessage() {
-      let message = '';
-
       if (this.phoneNumber === '') {
         this.phoneNumberError = 'Phone number cannot be empty.';
         return;
       }
-
-      if(!this.employerName){
+      if (!this.employerName) {
         this.employerNameError = 'Employer name cannot be empty.';
         return;
       }
-
-
-      if (!/^(09)\d{8}$/.test(this.phoneNumber)) {
-        this.phoneNumberError = 'Invalid phone number format. It should start with 09 and should be 10 digits long.';
+      if (this.phoneNumberError) {
         return;
       }
-      this.phoneNumberError = '';
-      this.employerNameError = '';
-      this.showPhoneNumberInput = false;
-      this.showEmployerNameInput = false;
-      this.showServiceOfInterestInput = false;
-
+      let message = '';
       switch (this.selectedAction) {
         case 'bank-confirmation':
           message = `ሰላም ${this.employerName}! የባንክ መረጃ እንደደረስዎት ለማረጋገጥ ደውለን ነበር። እባክዎን በ${this.phoneNumber} መልሰው በመደወል የተሻለ አገልግሎት እንድንሰጥዎ ያግዙን። መልካም ቀን!`;
@@ -125,10 +147,18 @@
           break;
       }
       this.$emit('payment-generated', message);
+      this.resetForm();
+    },
+    resetForm() {
       this.phoneNumber = '';
       this.employerName = '';
-      this.selectedService = this.serviceOfInterest
-    },
-  },
- };
- </script> 
+      this.selectedService = '';
+      this.phoneNumberError = '';
+      this.employerNameError = '';
+      this.showPhoneNumberInput = false;
+      this.showEmployerNameInput = false;
+      this.showServiceOfInterestInput = false;
+    }
+  }
+};
+</script>
