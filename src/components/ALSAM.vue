@@ -41,8 +41,8 @@
     </div>
     <div class="flex items-center gap-4">
       <div v-if="showServiceOfInterestInput">
-        <label>Service of Interest</label>
-        <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
+        <label class="mr-3">Service of Interest</label>
+        <select v-model="selectedService" class="text-sm bg-[#333] py-2 px-4 rounded-md my-4 focus:outline-none">
           <option v-for="(service, index) in expatServices" :key="index">{{ service }}</option>
         </select>
         <p v-if="selectedServiceError"  class="text-amber-500 text-sm mt-1">{{ selectedServiceError }}</p>

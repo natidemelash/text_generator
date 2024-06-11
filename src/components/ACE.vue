@@ -1,110 +1,183 @@
 <template>
-    <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
-        <h3 class="text-lg mb-4 text-[#fff]">ACE Engagement Messages</h3>
+  <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
+    <h3 class="text-lg mb-4 text-[#fff]">ACE Engagement Messages</h3>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
-          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-01')">Customer from BlindSpot</button>
-          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-02')">Customer from Search</button>
-          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-03')">Newly Registered Customer</button>
-          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded" @click="handleButtonClick('ace-04')">Multiple Search</button>
-        </div>
-
-        <!-- Customer Name -->
-        <div v-if="showCustomerNameInput">
-          <label class="customerName">Customer Name </label>
-          <input v-model="customerName" type="text" placeholder="Employer name" class="py-1 px-3 bg-[#333] text-sm text-white rounded-md my-4" >
-          <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
-        </div>
-
-        <!-- Serivice field for  -->
-        <di v-if="showServiceOfInterestInput">
-          <label>Service of Interest </label> 
-          <select v-model="selectedService" class="text-sm bg-[#333] py-1 px-4 rounded-md my-4">
-            <option v-for="(service, index) in serviceOfInterest" :key="index">{{ service }}</option>
-          </select>
-        </di>
-
-         <!-- CRM Number -->
-         <div v-if="showCustomerNameInput">
-            <label class="crmNumber">CRM Number </label>
-            <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-            <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
-        </div>
-
-         <!-- Input field for phone number -->
-        <div v-if="showPhoneNumberInput" class="mt-4">
-          <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-          <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
-          <p v-if="phoneNumberError" class="text-red-500 text-sm mt-2">{{ phoneNumberError }}</p>
-          <button @click="emitMessageEvent" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
-            <img src="../assets//send.png" alt="" width="25">
-          </button>
-        </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
+      <button
+        v-for="(button, index) in buttons"
+        :key="index"
+        :class="button.class"
+        @click="handleButtonClick(button.action)"
+      >
+        {{ button.label }}
+      </button>
     </div>
+
+    <!-- Customer Name -->
+    <InputField
+      v-if="showCustomerNameInput"
+      label="Customer Name"
+      v-model="customerName"
+      placeholder="Employer name"
+      :error="customerNameError"
+      class="my-4"
+    />
+
+    <!-- Service of Interest -->
+    <div v-if="showServiceOfInterestInput">
+      <label class="mr-3">Service of Interest</label>
+      <select
+        v-model="selectedService"
+        class="text-sm bg-[#333] py-2 px-4 rounded-md my-4 focus:outline-none"
+        @change="validateService"
+      >
+        <option  v-for="(service, index) in serviceOfInterest" :key="index">
+          {{ service }}
+        </option>
+      </select>
+      <p v-if="selectedServiceError" class="text-amber-500 text-sm mt-1">{{ selectedServiceError }}</p>
+    </div>
+
+    <!-- CRM Number -->
+    <InputField
+      v-if="showCustomerNameInput"
+      label="CRM Number"
+      v-model="crmNumber"
+      type="number"
+      placeholder="CRM Number"
+      :error="crmError"
+      class="mt-4"
+    />
+
+    <!-- Input field for phone number -->
+    <div v-if="showPhoneNumberInput" class="mt-4">
+      <InputField
+        label="Phone Number/የዲስፓቸር ስልክ"
+        v-model="phoneNumber"
+        placeholder="Dispatcher phone"
+        :error="phoneNumberError"
+        @input="validatePhoneNumber"
+      />
+      <button
+        @click="emitMessageEvent"
+        class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded"
+      >
+        <img src="../assets/send.png" alt="" width="25" />
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
-export default{
+import InputField from './InputField.vue';
+
+
+const validationMixin = {
+  methods: {
+    validateCustomerName() {
+      this.customerNameError = this.customerName ? '' : "Name can't be empty";
+    },
+    validateCRMNumber() {
+      this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
+    },
+    validateService() {
+      this.selectedServiceError = this.selectedService ? '' : 'Please select a service';
+    },
+    // validateSelectedService() {
+    //   this.selectedServiceError = this.selectedService ? '' : 'Please select the service'
+    // },
+  
+    // validateForm() {
+    //   this.validateCustomerName();
+    //   this.validateCRMNumber();
+    //   // this.validateSelectedService();
+    //   if (this.selectedAction === 'pa-04') this.validatePaymentAmount();
+    //   if (this.selectedAction === 'pa-03' || this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') this.validateSelectedTime();
+    //   if (this.selectedAction === 'pa-10') this.validateSelectedDate();
+    //   if (this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') this.validateServiceAndEmployerName();
+      
+    //   return !this.customerNameError && !this.crmError && !this.paymentAmountError && !this.selectedTimeError && !this.selectedDateError && !this.selectedServiceError && !this.employerNameError;
+    // }
+  }
+};
+
+export default {
+  components: {
+    InputField,
+  },
   props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput'],
-  data(){
-    return{
+  mixins: [validationMixin],
+  data() {
+    return {
+      buttons: [
+        { action: 'ace-01', label: 'Customer from BlindSpot', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'ace-02', label: 'Customer from Search', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'ace-03', label: 'Newly Registered Customer', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'ace-04', label: 'Multiple Search', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+      ],
       phoneNumber: '',
       phoneNumberError: '',
       serviceOfInterest: [
-          'ምግብ አብሳይ',
-          'ጽዳት',
-          'ምግብ ዝግጅት',
-          'ሞግዚት',
-          'አስጠኚ',
-          'ዲሽ',
-          'ኤሌክትሪክ',
-          'ቧንቧ',
-          'ጥገና',
-          'ቀለም ቅብ',
-          'ግንባታ ስራ',
-          'ጂፕሰም ስራ',
-          'አልሙኒየም ስራ',
-          'አናጺ',
-          'ወለል ንጣፍ',
-          'ሂሳብ ስራ',
-          'ሽያጭ'     
+        'ምግብ አብሳይ',
+        'ጽዳት',
+        'ምግብ ዝግጅት',
+        'ሞግዚት',
+        'አስጠኚ',
+        'ዲሽ',
+        'ኤሌክትሪክ',
+        'ቧንቧ',
+        'ጥገና',
+        'ቀለም ቅብ',
+        'ግንባታ ስራ',
+        'ጂፕሰም ስራ',
+        'አልሙኒየም ስራ',
+        'አናጺ',
+        'ወለል ንጣፍ',
+        'ሂሳብ ስራ',
+        'ሽያጭ',
       ],
       selectedService: null,
+      selectedServiceError: '',
       customerName: '',
       customerNameError: '',
-      crmNumber:'',
+      crmNumber: '',
       crmError: '',
-    }
+    };
   },
-  methods:{
-    handleButtonClick(action){
+  methods: {
+    handleButtonClick(action) {
       this.selectedAction = action;
-      this.$emit('button-click', action)
+      this.$emit('button-click', action);
     },
 
     emitMessageEvent() {
-      if(!this.customerName){
-        this.customerNameError = 'Name can\'t be empty'
-        return;
-      }
-      
-      if(!this.crmNumber){
-        this.crmError = 'Please put CRM Number'
+      // Implement your validation logic here before emitting the event
+      if (!this.customerName) {
+        this.customerNameError = "Name can't be empty";
         return;
       }
 
+      if (!this.crmNumber) {
+        this.crmError = 'Please put CRM Number';
+        return;
+      }
+
+      // Emit the event if validation passes
       this.$emit('generate-message', {
         action: this.selectedAction,
         phoneNumber: this.phoneNumber,
-        selectedService:this.selectedService,
+        selectedService: this.selectedService,
         customerName: this.customerName,
-        crmNumber: this.crmNumber
+        crmNumber: this.crmNumber,
       });
 
+      // Reset form fields after emitting the event
+      this.phoneNumber = ''
       this.customerName = '';
-      this.selectedService = this.serviceOfInterest
-      this.crmNumber= ''
-    }
-  }  
-}
+      this.selectedService = null;
+      this.crmNumber = '';
+      this.selectedServiceError = '';
+    },
+  },
+};
 </script>

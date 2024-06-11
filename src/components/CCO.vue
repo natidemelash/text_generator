@@ -26,7 +26,7 @@
       <label class="mr-3">Service of Interest</label>
       <select
         v-model="selectedService"
-        class="text-sm bg-[#333] py-1 px-4 rounded-md my-4"
+        class="text-sm bg-[#333] py-2 px-4 rounded-md my-4 focus:outline-none"
         @change="validateService"
       >
         <option v-for="(service, index) in requestedService" :key="index">
