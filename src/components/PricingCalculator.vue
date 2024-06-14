@@ -27,7 +27,6 @@
       <div v-if="pricing" class="mt-4 p-6 bg-[#FDEBD0] text-black rounded">
         <h2 class="text-[1.3rem] font-semibold mb-2">Pricing Details(ETB)</h2>
         <p class="font-medium my-2 border-b border-gray-400">Total Price{{ discountLabel }}: {{ discountedPricing.total }}</p>
-       
       </div>
     </div>
   </template>

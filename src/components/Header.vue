@@ -1,6 +1,6 @@
 <template>
-  <header class="bg-[#C21F80] px-8 py-4 ">
-    <nav class="flex items-center justify-between flex-col lg:flex-row ">
+  <header class="bg-[#C21F80] px-8 py-4">
+    <nav class="flex items-center justify-between flex-col lg:flex-row">
       <div class="flex items-center justify-between w-full lg:w-auto">
         <h1>
           <router-link to="/">
@@ -16,21 +16,13 @@
       </div>
 
       <!-- Navigation links -->
-      <div :class="{'hidden': !mobileMenuOpen, 'md:flex gap-3': !mobileMenuOpen, 'flex flex-col': mobileMenuOpen}" class="md:flex-row md:gap-4 flex-col items-center gap-4">
-        <router-link to="/dispatch" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Dispatch</button>
-        </router-link>
-        <router-link to="/payments" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Payments</button>
-        </router-link>
-        <router-link to="/engagements" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Engagements</button>
-        </router-link>
-        <router-link to="/custom" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Custom</button>
-        </router-link>
-        <router-link to="/appreciation" class="text-[#ffffffc4] text-sm hover:text-white  hover:scale-110 transition duration-500">
-          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">Appreciation / Social Links</button>
+      <div :class="{'hidden': !mobileMenuOpen, 'flex flex-col': mobileMenuOpen, 'lg:flex lg:flex-row lg:gap-4': true}" class="items-center">
+        <router-link 
+          v-for="link in links" 
+          :key="link.path" 
+          :to="link.path" 
+          class="text-[#ffffffc4] text-sm hover:text-white hover:scale-110 transition duration-500">
+          <button class="bg-[#640D4D] text-white px-4 py-1 rounded">{{ link.label }}</button>
         </router-link>
       </div>
     </nav>
@@ -41,7 +33,14 @@
 export default {
   data() {
     return {
-      mobileMenuOpen: false
+      mobileMenuOpen: false,
+      links: [
+        { path: '/dispatch', label: 'Dispatch' },
+        { path: '/payments', label: 'Payments' },
+        { path: '/engagements', label: 'Engagements' },
+        { path: '/custom', label: 'Custom' },
+        { path: '/appreciation', label: 'Appreciation / Social Links' }
+      ]
     };
   },
   methods: {
