@@ -118,7 +118,7 @@ export default {
               this.showEmployerNameInput = true;
               this.showTimeInput = true;
               this.showServiceOfInterestInput = true;
-          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13', 'pa-11'].includes(action)) {
+          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13', 'cco-14', 'pa-11'].includes(action)) {
               this.showServiceOfInterestInput = true;
           } else {
               this.generateMessage();
@@ -192,7 +192,7 @@ export default {
             message = `ሰላም ${this.customerName}! በአካባቢዎ የ${this.selectedService} ባለሙያ ማግኘት ስላልተቻለ የከፈሉትን ክፍያ ለቀጣይ ጥያቄዎ መጠቀም የሚችሉ መሆኑን በትህትና እንገልጻለን። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`;
             break;
           case 'cco-06':
-            message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መለያ-${this.crmNumber}። መልካምቀን!`
+            message = `ሰላም ${this.customerName}! አገልግሎታችንን ስለተጠቀሙ እያመሰገንን በላክንልዎ ባለሙያ ላይ ያልዎትን አስተያየት ለመውሰድ ደውለን ነበር። በ${this.phoneNumber} ቢደውሉልን ለአገልግሎት ጥራታችን ይረዳናል። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'cco-07':
             message = `ሰላም ${this.customerName}! በላክንዎት ስራ ላይ ያለዎትን አስተያየት ለመውሰድ ደውለን ነበር። በሌላ ጊዜ የስራ ጥሪዎች እንዲደርሱዎት ያለዎትን አስተያየት በ${this.phoneNumber} ስልክ ደውለው ያሳውቁን። መለያ-${this.crmNumber}። መልካም ቀን!`
@@ -218,6 +218,9 @@ export default {
             }else{
               message = `ሰላም ${this.customerName}! ስለተላኩበት የ${this.selectedService} ስራ ለክትትል ደውለን ነበር። በ${this.phoneNumber} ደውለው ፈጣን ምላሽ በመስጠት የስራ ገበያዎን ያስፉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             }
+            break;
+          case 'cco-14':
+            message = `ሰላም ${this.customerName}! ከላክንልዎ የ${this.selectedService} ባለሙያ ጋር ተስማምተው ስራው ሳይጀመር ከ1 ሳምንት በላይ ከቆየ የተቀያሪ ባለሙያ ጥያቄ የማናስተናግድ መሆኑን እናሳውቃለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
           case 'mact-01':
             message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን በ${this.selectedService} ባለሙያ ጥያቄዎ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ልናገኝዎ አልቻልንም። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}`;

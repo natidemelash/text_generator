@@ -102,13 +102,14 @@ data() {
         { action: 'cco-04', label: 'Time Limit Exceeded - የ24 ሰዓት የጊዜ ገደብ ካለፈ', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-05', label: 'No SP available / ባለሙያ ማግኘት ካልተቻለ', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-06', label: 'Requesting Feedback/ ከቀጣሪ አስተያየት ለመጠየቅ', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
+        { action: 'cco-14', label: 'SP Call to action notice', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-07', label: 'Requesting Feedback/ ከባለሙያ አስተያየት ለመጠየቅ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-08', label: 'SP did not answer /ለባለሙያው የቀጣሪ ስልክ መድረሱን ለማረጋጥ ካልተቻለ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-09', label: 'SP Not Answering - Job Started', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-10', label: 'SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-11', label: 'SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-12', label: 'Warning for SPs/ ማስጠንቀቂያ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
-        { action: 'cco-13', label: 'SP Follow-Up', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' }
+        { action: 'cco-13', label: 'SP Follow-Up', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
       ],
       customerName: '',
       customerNameError: '',  
@@ -136,7 +137,8 @@ data() {
       crmError: '',
       phoneNumber: '',
       phoneNumberError: '',
-      selectedAction: ''
+      selectedAction: '',
+      selectedServiceError: null
   };
 },
 methods: {

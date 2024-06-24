@@ -150,7 +150,6 @@ export default {
         }else{
           alert("Generated message exceeds the character limit. Please adjust your inputs.");
         }
-
       }
     },
     validateForm() {

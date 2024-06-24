@@ -233,7 +233,7 @@ export default {
         const time = new Date(`2000-01-01T${this.selectedTime}`);
 
         // Check if the messageType is 'pa-02'
-        if (this.selectedAction === 'pa-13') {
+        if (this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') {
             const hours = time.getHours();
             let prefix = '';
             // Check if the time is between 1:00 and 6:00

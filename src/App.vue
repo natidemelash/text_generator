@@ -8,6 +8,7 @@
         :generatedMessage="currentMessage" 
         :isPaymentMessage="isPaymentRoute" 
         :isEngagementRoute="isEngagementRoute" 
+        @close="clearMessage" 
       />
     </div>
   </div>
@@ -52,6 +53,15 @@ export default {
     updateEngagementMessage(message) {
       this.engagementMessage = message;
     },
+    clearMessage() {
+      if (this.isPaymentRoute) {
+        this.paymentMessage = null;
+      } else if (this.isEngagementRoute) {
+        this.engagementMessage = null;
+      } else {
+        this.generatedMessage = null;
+      }
+    }
   }
 };
 </script>
