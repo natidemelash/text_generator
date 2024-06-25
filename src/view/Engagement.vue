@@ -301,7 +301,7 @@ export default {
             message = `Hi ${this.customerName}! ETB ${this.paymentAmount} payment for ${this.selectedService} service is received. Thank you for trusting us. For any inquiries please call 0900320880`
             break;
           case 'pa-09':
-            message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive as scheduled Today at ${this.selectedTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
+            message = `Hi ${this.customerName}! Your ${this.selectedService} maid will arrive as scheduled Today between ${this.selectedTime} - ${this.newTime}. For any inquiries please call 0900320880. PA-${this.crmNumber}`
             break;
           case 'pa-10':
             message = `Hi ${this.customerName}! Payment of ETB ${this.paymentAmount} for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
