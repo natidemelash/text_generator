@@ -13,22 +13,20 @@
   </div>
 
   <!-- CCO Messages -->
-  <CCO v-if="selectedProjectType ==='CCO'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
-
-  <!-- MACT Messages -->
-  <MACT v-if="selectedProjectType === 'MACT'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-reason-for-disable="showReasonForDisable"  @generate-message="handleGenerateMessage"/>
-
-  <BLSR v-if="selectedProjectType === 'BLSR'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput"  :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
-
-  <EGPT v-if="selectedProjectType === 'EGPT'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
-
-  <MPUE v-if="selectedProjectType === 'MPUE'"  @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
-
-  <ACE v-if="selectedProjectType === 'ACE'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput"  @generate-message="handleGenerateMessage"/>
-
-  <SPA v-if="selectedProjectType === 'SPA'" @button-click="handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-customer-name-input="showCustomerNameInput" @generate-message="handleGenerateMessage"/>
-  
-  <ALSAM v-if="selectedProjectType === 'ALSAM'" @button-click = "handleButtonClick" :show-phone-number-input="showPhoneNumberInput" :show-service-of-interest-input="showServiceOfInterestInput" :show-customer-name-input="showCustomerNameInput" :show-time-input="showTimeInput" :show-date-input="showDateInput" :show-payment-amount-input="showPaymentAmountInput" :show-employer-name-input="showEmployerNameInput" @generate-message="handleGenerateMessage" />  
+  <component
+    :is="selectedProjectType"
+    v-if="selectedProjectType"
+    @button-click="handleButtonClick"
+    :show-phone-number-input="showPhoneNumberInput"
+    :show-service-of-interest-input="showServiceOfInterestInput"
+    :show-customer-name-input="showCustomerNameInput"
+    :show-payment-amount-input="showPaymentAmountInput"
+    :show-reason-for-disable="showReasonForDisable"
+    :show-employer-name-input="showEmployerNameInput"
+    :show-time-input="showTimeInput"
+    :show-date-input="showDateInput"
+    @generate-message="handleGenerateMessage"
+  />
  
  </template>
 
