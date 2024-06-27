@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { serviceOfInterest } from '@/data/serviceOfInterest';
 import InputField from './InputField.vue';
 
 
@@ -117,25 +118,7 @@ export default {
       ],
       phoneNumber: '',
       phoneNumberError: '',
-      serviceOfInterest: [
-        'ምግብ አብሳይ',
-        'ጽዳት',
-        'ምግብ ዝግጅት',
-        'ሞግዚት',
-        'አስጠኚ',
-        'ዲሽ',
-        'ኤሌክትሪክ',
-        'ቧንቧ',
-        'ጥገና',
-        'ቀለም ቅብ',
-        'ግንባታ ስራ',
-        'ጂፕሰም ስራ',
-        'አልሙኒየም ስራ',
-        'አናጺ',
-        'ወለል ንጣፍ',
-        'ሂሳብ ስራ',
-        'ሽያጭ',
-      ],
+      serviceOfInterest,
       selectedService: null,
       selectedServiceError: '',
       customerName: '',

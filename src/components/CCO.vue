@@ -30,7 +30,7 @@
         class="text-sm bg-[#333] py-2 px-4 rounded-md my-4 focus:outline-none"
         @change="validateService"
       >
-        <option v-for="(service, index) in requestedService" :key="index">
+        <option v-for="(service, index) in serviceOfInterest" :key="index">
           {{ service }}
         </option>
       </select>
@@ -63,6 +63,7 @@
 
 
 <script>
+import { serviceOfInterest } from '@/data/serviceOfInterest';
 import InputField from './InputField.vue';
 
 const validationMixin = {
@@ -114,25 +115,7 @@ data() {
       customerName: '',
       customerNameError: '',  
       selectedService: null,
-      requestedService: [
-          'ምግብ አብሳይ',
-          'ጽዳት',
-          'ምግብ ዝግጅት',
-          'ሞግዚት',
-          'አስጠኚ',
-          'ዲሽ',
-          'ኤሌክትሪክ ስራ',
-          'ቧንቧ',
-          'ጥገና',
-          'ቀለም ቅብ',
-          'ግንባታ ስራ',
-          'ጂፕሰም ስራ',
-          'አልሙኒየም ስራ',
-          'አናጺ',
-          'ወለል ንጣፍ',
-          'ሂሳብ ስራ',
-          'ሽያጭ'     
-      ],
+      serviceOfInterest,
       crmNumber:'',
       crmError: '',
       phoneNumber: '',

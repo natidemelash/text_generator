@@ -75,7 +75,8 @@
   </template>
   
   <script>
-  import InputField from './InputField.vue';
+  import { serviceOfInterest } from '@/data/serviceOfInterest';
+import InputField from './InputField.vue';
   
   const validationMixin = {
     methods: {
@@ -135,26 +136,8 @@
           'ያልተገባ ባህሪ በማሳየትዎ',
           'ሌላ ባለሙያ በመላክዎ'
         ],
-        serviceOfInterest: [
-          'ምግብ አብሳይ',
-          'ጽዳት',
-          'ምግብ ዝግጅት',
-          'ሞግዚት',
-          'አስጠኚ',
-          'ዲሽ',
-          'ኤሌክትሪክ ስራ',
-          'ቧንቧ',
-          'ጥገና',
-          'ቀለም ቅብ',
-          'ግንባታ ስራ',
-          'ጂፕሰም ስራ',
-          'አልሙኒየም ስራ',
-          'አናጺ',
-          'ወለል ንጣፍ',
-          'ሂሳብ ስራ',
-          'ሽያጭ'
-        ],
-        selectedAction: ''
+        selectedAction: '',
+        serviceOfInterest
       }
     },
     methods: {

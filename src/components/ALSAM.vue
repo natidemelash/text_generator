@@ -181,6 +181,7 @@ export default {
         { label: 'Feedback Request', action: 'pa-11', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { label: 'Notification for SP (on the day)', action: 'pa-12', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { label: 'Notification for SP (one day before)', action: 'pa-13', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
+        { label: 'Outside of Addis Requests', action: 'pa-14', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded'}
       ]
     };
   },
