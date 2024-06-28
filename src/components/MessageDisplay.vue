@@ -13,6 +13,9 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification';
+const toast = useToast();
+
 export default {
   props: {
     generatedMessage: {
@@ -33,8 +36,11 @@ export default {
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
-      alert("Message copied to clipboard successfully!");
+      // alert("Message copied to clipboard successfully!");
       this.$emit('close');
+
+      toast.success('Message copied to clipboard successfully!')
+      
     }
   }
 };

@@ -26,6 +26,8 @@
 
 
 <script>
+import { useToast } from 'vue-toastification';
+const toast = useToast();
 export default {
     data(){
         return{
@@ -73,8 +75,8 @@ export default {
             el.select();
             document.execCommand("copy");
             document.body.removeChild(el);
-            // Optionally, you can provide some feedback to the user
-            alert("Message copied to clipboard successfully!");
+           
+            toast.success('Message copied to clipboard successfully!')
             this.message = ""
         },
     },
