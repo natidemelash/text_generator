@@ -93,7 +93,13 @@
 
   <div>
     <hr class="my-12 px-8 mx-20" />
-    <PricingCalculator />
+
+    <div class="flex justify-center gap-12 items-center">
+      <h2 class="text-center my-2 text-2xl md:text-4xl md:my-6">Pricing Calculator</h2>
+      <toggle-switch v-model="showPricingCalculator" />
+    </div>
+
+    <PricingCalculator v-if="showPricingCalculator" />
   </div>
 </template>
 
@@ -101,6 +107,7 @@
 <script>
 import InputField from './InputField.vue';
 import PricingCalculator from './PricingCalculator.vue';
+import ToggleSwitch from './ToggleSwitch.vue';
 
 const validationMixin = {
   methods: {
@@ -143,7 +150,8 @@ const validationMixin = {
 export default {
   components:{
     InputField,
-    PricingCalculator
+    PricingCalculator,
+    ToggleSwitch,
   },
   props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showPaymentAmountInput', 'showTimeInput', 'showDateInput', 'showEmployerNameInput'],
   mixins: [validationMixin],
@@ -167,6 +175,7 @@ export default {
       selectedDateError: '',
       selectedServiceError: '',
       newTime:null,
+      showPricingCalculator: false,
       buttons: [
         { label: 'Detail Confirmation(1st SMS)', action: 'pa-01', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { label: 'Detail Confirmation(2nd SMS)', action: 'pa-02', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },

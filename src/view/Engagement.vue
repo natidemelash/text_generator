@@ -117,7 +117,7 @@ export default {
               this.showEmployerNameInput = true;
               this.showTimeInput = true;
               this.showServiceOfInterestInput = true;
-          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13', 'cco-14', 'pa-11'].includes(action)) {
+          } else if (['blsr-02', 'mact-01', 'mact-02', 'ace-01', 'ace-02', 'pa-01', 'pa-02', 'cco-01', 'cco-02', 'cco-05', 'cco-13', 'cco-14', 'pa-11', 'pa-14'].includes(action)) {
               this.showServiceOfInterestInput = true;
           } else {
               this.generateMessage();
@@ -464,7 +464,7 @@ export default {
             this.message = `ሰላም ${this.customerName}! ነገ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ እንዳለዎ ለማስታወስ እንወዳለን። ለበለጠ መረጃ በ0900320880 ይደውሉልን። PA-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'pa-14':
-            this.message = `Hi ${this.customerName}, Thank you for your interest in our ${this.selectedService} service. Currently, we only operate within Addis Ababa & cannot accept requests from outside the city. ${this.crmNumber}.`
+            this.message = `Hi ${this.customerName}, Thanks for your interest in our ${this.selectedService} service. We currently operate only in Addis Ababa. For inquiries, call 0900320880. PA-${this.crmNumber}`
            break;
           default:
             break;
