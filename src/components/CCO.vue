@@ -37,6 +37,20 @@
       <p v-if="selectedServiceError" class="text-amber-500 text-sm mt-1">{{ selectedServiceError }}</p>
     </div>
 
+    <div v-if="showReasonForDisable">
+        <label class="mr-2">Reason for Disable</label>
+        <select
+          v-model="disabledFor"
+          class="text-sm bg-[#333] py-1 px-4 rounded-md my-4"
+          @change="validateReasonForDisable"
+        >
+          <option v-for="(reason, index) in reasonForDisable" :key="index">
+            {{ reason }}
+          </option>
+        </select>
+        <p v-if="reasonForDisableError" class="text-amber-500 text-sm mt-1">{{ reasonForDisableError }}</p>
+      </div>
+
     <InputField
       v-if="showCustomerNameInput"
       label="CRM Number"
@@ -93,7 +107,7 @@ components: {
   InputField
 },
 mixins: [validationMixin],
-props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput'],
+props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showReasonForDisable'],
 data() {
   return {
     buttons: [
@@ -109,8 +123,9 @@ data() {
         { action: 'cco-09', label: 'SP Not Answering - Job Started', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-10', label: 'SP dispatched /ባለሙያው ለስራ ከተላኩ በኋላ ስልክ አያነሳም', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-11', label: 'SP Replacement notification/ስራው ለሌላ ባለሙያ ተላልፏል', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
-        { action: 'cco-12', label: 'Warning for SPs/ ማስጠንቀቂያ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
+        { action: 'cco-12', label: '⚠️ Warning for SPs/ ማስጠንቀቂያ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-13', label: 'SP Follow-Up', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
+        { action: 'cco-15', label: '🚫 Disable SP ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
       ],
       customerName: '',
       customerNameError: '',  
@@ -121,7 +136,15 @@ data() {
       phoneNumber: '',
       phoneNumberError: '',
       selectedAction: '',
-      selectedServiceError: null
+      selectedServiceError: null,
+      reasonForDisable: [
+          'ምላሽ ለመስጠት ፍቃደኛ ስላልሆኑ',
+          'ለስራ ተልከው ስለቀሩ',
+          'ያልተገባ ባህሪ በማሳየትዎ',
+          'ለተላኩበት ስራ ሌላ ባለሙያ በመላክዎ'
+      ],
+      disabledFor: '',
+      reasonForDisableError: '',
   };
 },
 methods: {
@@ -138,11 +161,14 @@ methods: {
       phoneNumber: this.phoneNumber,
       customerName: this.customerName,
       selectedService: this.selectedService,
-      crmNumber: this.crmNumber
+      crmNumber: this.crmNumber,
+      disabledFor: this.disabledFor
+      
     });
     this.customerName = ''
     this.phoneNumber = ''
     this.crmNumber = ''
+    this.disabledFor = ''
     this.selectedService = this.requestedService
   }
  }

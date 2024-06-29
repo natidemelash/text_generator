@@ -119,7 +119,7 @@ import InputField from './InputField.vue';
           { action: 'mact-04', label: 'SP Not Answering - 1st Call SMS', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
           { action: 'mact-05', label: 'SP Not Answering - 2nd Call SMS', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
           { action: 'mact-06', label: 'SP Not Answering - Job Transfered to other', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
-          { action: 'mact-07', label: 'Disable Ad', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' }
+          { action: 'mact-07', label: '🚫 Disable Ad', class: 'bg-[#588fe8] text-sm text-white px-6 py-3 rounded' }
         ],
         customerName: '',
         customerNameError: '',

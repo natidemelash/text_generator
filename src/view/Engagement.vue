@@ -111,7 +111,7 @@ export default {
               this.showDateInput = true;
               this.showPaymentAmountInput = true;
               this.showServiceOfInterestInput = true;
-          } else if (action === 'mact-07') {
+          } else if (['mact-07', 'cco-15'].includes(action)) {
               this.showReasonForDisable = true;
           } else if (['pa-12', 'pa-13'].includes(action)) {
               this.showEmployerNameInput = true;
@@ -358,7 +358,7 @@ export default {
             this.message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break;
           case 'cco-12':
-            this.message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
+            this.message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ሊደረግበት ነው። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
           case 'cco-13':
             if(this.selectedService === 'ኤሌክትሪክ ስራ' || this.selectedService === 'አልሙኒየም ስራ' ||  this.selectedService === 'ጂፕሰም ስራ' ||  this.selectedService === 'ግንባታ ስራ' ||  this.selectedService === 'ሂሳብ ስራ'){
@@ -370,6 +370,9 @@ export default {
           case 'cco-14':
             this.message = `ሰላም ${this.customerName}! ከላክንልዎ የ${this.selectedService} ባለሙያ ጋር ተስማምተው ስራው ሳይጀመር ከ1 ሳምንት በላይ ከቆየ የተቀያሪ ባለሙያ ጥያቄ የማናስተናግድ መሆኑን እናሳውቃለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
             break;
+          case 'cco-15':
+            this.message = `ሰላም ${this.customerName}! ${this.disabledFor} ከዚህ በኋላ በመተግበሪያችን የስራ ጥሪ እንደማይደርስዎ እንገልጻለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
+            break; 
           case 'mact-01':
             this.message = `ሰላም ${this.customerName}! መተግበሪያችንን ስለተጠቀሙ እያመሰገንን በ${this.selectedService} ባለሙያ ጥያቄዎ ላይ ዝርዝር መረጃ ለመውሰድ ደውለን ልናገኝዎ አልቻልንም። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}`;
             break;
@@ -389,7 +392,7 @@ export default {
             this.message = `ሰላም ${this.customerName}! ለስራ ልከንዎ ለክትትል በተደጋጋሚ ስንደውል ማግኘት ስላልቻልን ስራውን ለሌላ ባለሙያ አስተላልፈናል። ለተጨማሪ መረጃ በ${this.phoneNumber} ይደውሉ። መለያ-${this.crmNumber}። መልካም ቀን!`
             break; 
           case 'mact-07':
-            this.message = `ሰላም ${this.customerName}! ${this.disabledFor} ከዚህ በኋላ በመተግበሪያችን የስራ ጥሪ እንደማይደርስዎ እንገልጻለን። ለበለጠ መረጃ 0979472677 ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
+            this.message = `ሰላም ${this.customerName}! ${this.disabledFor} ከዚህ በኋላ በመተግበሪያችን የስራ ጥሪ እንደማይደርስዎ እንገልጻለን። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉልን። መለያ-${this.crmNumber}። መልካም ቀን!`
             break; 
           case 'mact-08':
             this.message = `ሰላም ${this.customerName}! ለስራ ልከንዎት ባሳዩት ያልተገባ ሙያዊ ሥነ-ምግባር ማስታወቂያዎ ላይ እገዳ ተደርጓል። ለበለጠ መረጃ በ${this.phoneNumber} ይደውሉ። መልካም ቀን!`
@@ -455,7 +458,7 @@ export default {
             this.message = `Hi ${this.customerName}! Payment of ETB ${this.paymentAmount} for the ${this.selectedService} service is due on ${this.selectedDate}. Thank you for using our service. PA-${this.crmNumber}`
             break;
           case 'pa-11':
-            this.message = `Hi ${this.customerName}! Thank you for choosing GoodayOn, please use the link below to provide your feedback on the last ${this.selectedService} service. <br><br>${this.feedbackFormLink}`
+            this.message = `Hi ${this.customerName}! Thank you for choosing us. Please use the link below to give feedback on your last ${this.selectedService} service.<br><br>${this.feedbackFormLink}`
             break;
           case 'pa-12':
             this.message = `ሰላም ${this.customerName}! ዛሬ ቀጣሪ ${this.employerName} ጋር የ${this.selectedService} ስራ ${this.selectedTime} ሰዓት ላይ ስላለዎ ሰዓትዎን አክብረው ይገኙ። ለበለጠ መረጃ በ0900320880 ይደውሉልን። PA-${this.crmNumber}። መልካም ቀን!`
