@@ -18,9 +18,9 @@
       v-if="showCustomerNameInput"
       label="Customer Name"
       v-model="customerName"
-      placeholder="Employer name"
+      placeholder="Customer name"
       :error="customerNameError"
-      class="my-4"
+      @input="validateCustomerName"
     />
 
     <!-- Service of Interest -->
@@ -46,7 +46,7 @@
       type="number"
       placeholder="CRM Number"
       :error="crmError"
-      class="mt-4"
+      @input="validateCRMNumber"
     />
 
     <!-- Input field for phone number -->
@@ -69,45 +69,15 @@
 </template>
 
 <script>
-import { serviceOfInterest } from '@/data/serviceOfInterest';
 import InputField from './InputField.vue';
-
-
-const validationMixin = {
-  methods: {
-    validateCustomerName() {
-      this.customerNameError = this.customerName ? '' : "Name can't be empty";
-    },
-    validateCRMNumber() {
-      this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
-    },
-    validateService() {
-      this.selectedServiceError = this.selectedService ? '' : 'Please select a service';
-    },
-    // validateSelectedService() {
-    //   this.selectedServiceError = this.selectedService ? '' : 'Please select the service'
-    // },
-  
-    // validateForm() {
-    //   this.validateCustomerName();
-    //   this.validateCRMNumber();
-    //   // this.validateSelectedService();
-    //   if (this.selectedAction === 'pa-04') this.validatePaymentAmount();
-    //   if (this.selectedAction === 'pa-03' || this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') this.validateSelectedTime();
-    //   if (this.selectedAction === 'pa-10') this.validateSelectedDate();
-    //   if (this.selectedAction === 'pa-12' || this.selectedAction === 'pa-13') this.validateServiceAndEmployerName();
-      
-    //   return !this.customerNameError && !this.crmError && !this.paymentAmountError && !this.selectedTimeError && !this.selectedDateError && !this.selectedServiceError && !this.employerNameError;
-    // }
-  }
-};
+import formDataMixin from '@/mixins/formDataMixin';
 
 export default {
   components: {
     InputField,
   },
   props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput'],
-  mixins: [validationMixin],
+  mixins: [formDataMixin],
   data() {
     return {
       buttons: [
@@ -116,51 +86,8 @@ export default {
         { action: 'ace-03', label: 'Newly Registered Customer', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
         { action: 'ace-04', label: 'Multiple Search', class: 'bg-[#e21e81] text-xs text-white px-6 py-3 rounded' },
       ],
-      phoneNumber: '',
-      phoneNumberError: '',
-      serviceOfInterest,
-      selectedService: null,
-      selectedServiceError: '',
-      customerName: '',
-      customerNameError: '',
-      crmNumber: '',
-      crmError: '',
     };
   },
-  methods: {
-    handleButtonClick(action) {
-      this.selectedAction = action;
-      this.$emit('button-click', action);
-    },
 
-    emitMessageEvent() {
-      // Implement your validation logic here before emitting the event
-      if (!this.customerName) {
-        this.customerNameError = "Name can't be empty";
-        return;
-      }
-
-      if (!this.crmNumber) {
-        this.crmError = 'Please put CRM Number';
-        return;
-      }
-
-      // Emit the event if validation passes
-      this.$emit('generate-message', {
-        action: this.selectedAction,
-        phoneNumber: this.phoneNumber,
-        selectedService: this.selectedService,
-        customerName: this.customerName,
-        crmNumber: this.crmNumber,
-      });
-
-      // Reset form fields after emitting the event
-      this.phoneNumber = ''
-      this.customerName = '';
-      this.selectedService = null;
-      this.crmNumber = '';
-      this.selectedServiceError = '';
-    },
-  },
 };
 </script>

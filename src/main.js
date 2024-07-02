@@ -10,7 +10,6 @@ import "vue-toastification/dist/index.css";
 
 import App from './App.vue';
 import router from './router';
-import store from './store/index';
 import Toast  from 'vue-toastification';
 
 const app = createApp(App);
@@ -31,8 +30,6 @@ const app = createApp(App);
 // };
 
 app.use(router);
-app.use(store)
-
 app.use(Toast);
 
 

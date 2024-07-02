@@ -1,4 +1,3 @@
-
 <template>
   <div class="card p-6 mx-3 md:mx-auto max-w-4xl bg-[#4f4d4d] mt-8 shadow-md rounded-md">
     <h3 class="text-lg mb-4 text-[#fff]">CCO Engagement Messages</h3>
@@ -37,7 +36,7 @@
       <p v-if="selectedServiceError" class="text-amber-500 text-sm mt-1">{{ selectedServiceError }}</p>
     </div>
 
-    <div v-if="showReasonForDisable">
+     <div v-if="showReasonForDisable">
         <label class="mr-2">Reason for Disable</label>
         <select
           v-model="disabledFor"
@@ -58,6 +57,7 @@
       type="number"
       placeholder="CRM Number"
       :error="crmError"
+      @input="validateCRMNumber"
     />
 
     <div v-if="showPhoneNumberInput" class="mt-4">
@@ -75,38 +75,15 @@
   </div>
 </template>
 
-
 <script>
-import { serviceOfInterest } from '@/data/serviceOfInterest';
 import InputField from './InputField.vue';
-
-const validationMixin = {
-  methods: {
-    validateCustomerName() {
-      this.customerNameError = this.customerName ? '' : "Name can't be empty";
-    },
-    validateCRMNumber() {
-      this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
-    },
-    validateService() {
-      this.selectedServiceError = this.selectedService ? '' : 'Please select a service';
-    },
-    validateForm() {
-      this.validateCustomerName();
-      this.validateCRMNumber();
-
-      if (this.selectedAction === 'cco-01' || this.selectedAction === 'cco-02' || this.selectedAction === 'cco-05') this.validateService();
-
-      return !this.customerNameError && !this.crmError && !this.selectedServiceError;
-    }
-  }
-}
+import formDataMixin from '@/mixins/formDataMixin';
 
 export default {
 components: {
   InputField
 },
-mixins: [validationMixin],
+mixins: [formDataMixin],
 props: ['showPhoneNumberInput', 'showServiceOfInterestInput', 'showCustomerNameInput', 'showReasonForDisable'],
 data() {
   return {
@@ -126,51 +103,8 @@ data() {
         { action: 'cco-12', label: '⚠️ Warning for SPs/ ማስጠንቀቂያ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-13', label: 'SP Follow-Up', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
         { action: 'cco-15', label: '🚫 Disable SP ', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
-      ],
-      customerName: '',
-      customerNameError: '',  
-      selectedService: null,
-      serviceOfInterest,
-      crmNumber:'',
-      crmError: '',
-      phoneNumber: '',
-      phoneNumberError: '',
-      selectedAction: '',
-      selectedServiceError: null,
-      reasonForDisable: [
-          'ምላሽ ለመስጠት ፍቃደኛ ስላልሆኑ',
-          'ለስራ ተልከው ስለቀሩ',
-          'ያልተገባ ባህሪ በማሳየትዎ',
-          'ለተላኩበት ስራ ሌላ ባለሙያ በመላክዎ'
-      ],
-      disabledFor: '',
-      reasonForDisableError: '',
-  };
-},
-methods: {
-  handleButtonClick(action) {
-    this.selectedAction = action;
-    this.$emit('button-click', action);
-  },
-
-  emitMessageEvent() {
-    if (!this.validateForm()) return;
-    // Emit an event with the action and phone number to be handled by the parent component
-    this.$emit('generate-message', {
-      action: this.selectedAction,
-      phoneNumber: this.phoneNumber,
-      customerName: this.customerName,
-      selectedService: this.selectedService,
-      crmNumber: this.crmNumber,
-      disabledFor: this.disabledFor
-      
-    });
-    this.customerName = ''
-    this.phoneNumber = ''
-    this.crmNumber = ''
-    this.disabledFor = ''
-    this.selectedService = this.requestedService
-  }
- }
+    ],
+   };
+ },
 }
 </script>

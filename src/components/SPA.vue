@@ -5,81 +5,56 @@
      <div class="grid grid-cols-1 md:grid-cols-3 items-center text-black gap-8">
          <button class="bg-[#e21e81] text-xs text-white px-6 py-3 rounded"  @click="handleButtonClick('spa-01')">Service Provider not responsive</button>
      </div>
-
-     <!-- Customer Name -->
-     <div v-if="showCustomerNameInput">
-       <label class="customerName">Customer Name </label>
-       <input v-model="customerName" type="text" placeholder="Employer name" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-       <p v-if="customerNameError" class="text-amber-500 text-sm mt-1">{{ customerNameError }}</p>
-     </div>
-     
+        <!-- Customer Name -->
+        <InputField
+            v-if="showCustomerNameInput"
+            label="Customer Name"
+            v-model="customerName"
+            placeholder="Employer name"
+            :error="customerNameError"
+            class="my-4"
+            @input="validateCustomerName"
+        />
         <!-- CRM Number -->
-     <div v-if="showCustomerNameInput">
-        <label class="crmNumber">CRM Number </label>
-        <input v-model="crmNumber" type="number" placeholder="CRM Number" class="py-2 px-3 bg-[#333] text-sm text-white rounded-md mt-4 mb-2 focus:outline-none" >
-        <p v-if="crmError" class="text-[#F1948A] text-sm">{{ crmError }}</p>
-     </div>
-
-        <!-- Input field for phone number -->
-     <div v-if="showPhoneNumberInput" class="mt-4">
-       <label for="phoneNumber" class="text-sm font-semibold text-[#fff]">Phone Number/የዲስፓቸር ስልክ:</label>
-       <input type="text" id="phoneNumber" v-model="phoneNumber" @input="validatePhoneNumber" placeholder="Dispatcher phone"  class="mt-2 px-4 py-2 text-black block w-[70%] bg-[#ECF0F1] shadow-sm sm:text-sm border-2 rounded-md focus:outline-none">
-       <p v-if="phoneNumberError" class="text-amber-500 text-sm mt-2">{{ phoneNumberError }}</p>
-       <button @click="emitMessageEvent" class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded">
-         <img src="../assets//send.png" alt="" width="25">
-       </button>
-     </div>
+        <InputField
+            v-if="showCustomerNameInput"
+            label="CRM Number"
+            v-model="crmNumber"
+            type="number"
+            placeholder="CRM Number"
+            :error="crmError"
+            class="mt-4"
+            @input="validateCRMNumber"
+        />
+        <div v-if="showPhoneNumberInput" class="mt-4">
+            <InputField
+                label="Phone Number/የዲስፓቸር ስልክ"
+                v-model="phoneNumber"
+                placeholder="Dispatcher phone"
+                :error="phoneNumberError"
+                @input="validatePhoneNumber"
+            />
+            <button
+                @click="emitMessageEvent"
+                class="mt-2 bg-[#333] cursor-pointer text-xs text-white px-4 py-2 rounded"
+            >
+                <img src="../assets/send.png" alt="" width="25" />
+            </button>
+        </div>
 
  </div>
 </template>
 
 
 <script>
+import formDataMixin from '@/mixins/formDataMixin';
+import InputField from './InputField.vue'
 export default {
  props: ['showPhoneNumberInput', 'showCustomerNameInput'],
- data(){
-     return{
-         customerName: '',
-         customerNameError: '',  
-         crmNumber:'',
-         crmError: '',
-         phoneNumber: '',
-         phoneNumberError: '',
-     }
+ mixins:[formDataMixin],
+ components: {
+    InputField
  },
- methods:{
-     handleButtonClick(action) {
-         this.selectedAction = action
-         this.$emit('button-click', action)
-     },
 
-     emitMessageEvent() {
-         if(!this.customerName){
-             this.customerNameError = 'Name can\'t be empty'
-             return;
-         }
-
-         if(!this.crmNumber){
-            this.crmError = 'Please put CRM Number'
-            return;
-         }
-
-         if(this.phoneNumber.length < 10){
-            this.phoneNumberError = 'Phone number is not correct';
-            return;
-         }
-         // Emit an event with the action and phone number to be handled by the parent component
-         this.$emit('generate-message', {
-             action: this.selectedAction,
-             phoneNumber: this.phoneNumber,
-             customerName: this.customerName,
-             phoneNumberError: this.phoneNumberError,
-             crmNumber: this.crmNumber
-         });
-         this.custmoerName = ''
-         this.phoneNumber = ''
-         this.crmNumber = ''
-     }
- }
 }
 </script>

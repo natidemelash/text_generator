@@ -57,6 +57,7 @@
         type="number"
         placeholder="CRM Number"
         :error="crmError"
+        @input="validateCRMNumber"
       />
   
       <div v-if="showPhoneNumberInput" class="mt-4">
@@ -75,40 +76,42 @@
   </template>
   
   <script>
-  import { serviceOfInterest } from '@/data/serviceOfInterest';
+  // import { serviceOfInterest } from '@/data/serviceOfInterest';
+import formDataMixin from '@/mixins/formDataMixin';
 import InputField from './InputField.vue';
   
-  const validationMixin = {
-    methods: {
-      validateCustomerName() {
-        this.customerNameError = this.customerName ? '' : "Name can't be empty";
-      },
-      validateCRMNumber() {
-        this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
-      },
-      validateService() {
-        this.selectedServiceError = this.selectedService ? '' : 'Please select a service';
-      },
-      validateReasonForDisable() {
-        this.reasonForDisableError = this.disabledFor ? '' : 'Please choose the reason for disabling';
-      },
-      validateForm() {
-        this.validateCustomerName();
-        this.validateCRMNumber();
+  // const validationMixin = {
+  //   methods: {
+  //     validateCustomerName() {
+  //       this.customerNameError = this.customerName ? '' : "Name can't be empty";
+  //     },
+  //     validateCRMNumber() {
+  //       this.crmError = this.crmNumber ? '' : 'Please put CRM Number';
+  //     },
+  //     validateService() {
+  //       this.selectedServiceError = this.selectedService ? '' : 'Please select a service';
+  //     },
+  //     validateReasonForDisable() {
+  //       this.reasonForDisableError = this.disabledFor ? '' : 'Please choose the reason for disabling';
+  //     },
+  //     validateForm() {
+  //       this.validateCustomerName();
+  //       this.validateCRMNumber();
   
-        if (this.selectedAction === 'mact-01' || this.selectedAction === 'mact-02') this.validateService();
-        if (this.selectedAction === 'mact-07') this.validateReasonForDisable();
+  //       if (this.selectedAction === 'mact-01' || this.selectedAction === 'mact-02') this.validateService();
+  //       if (this.selectedAction === 'mact-07') this.validateReasonForDisable();
   
-        return !this.customerNameError && !this.crmError && !this.selectedServiceError;
-      }
-    }
-  }
+  //       return !this.customerNameError && !this.crmError && !this.selectedServiceError;
+  //     }
+  //   }
+  // }
   
   export default {
     components: {
       InputField
     },
-    mixins: [validationMixin],
+    mixins: [formDataMixin],
+    // mixins: [validationMixin],
     props: ['showPhoneNumberInput', 'showCustomerNameInput', 'showServiceOfInterestInput', 'showReasonForDisable'],
     data() {
       return {
@@ -121,49 +124,49 @@ import InputField from './InputField.vue';
           { action: 'mact-06', label: 'SP Not Answering - Job Transfered to other', class: 'bg-[#588fe8] text-xs text-white px-6 py-3 rounded' },
           { action: 'mact-07', label: '🚫 Disable Ad', class: 'bg-[#588fe8] text-sm text-white px-6 py-3 rounded' }
         ],
-        customerName: '',
-        customerNameError: '',
-        crmNumber: '',
-        crmError: '',
-        phoneNumber: '',
-        selectedService: '',
-        selectedServiceError: '',
-        disabledFor: '',
-        reasonForDisableError: '',
-        reasonForDisable: [
-          'ምላሽ ለመስጠት ፍቃደኛ ስላልሆኑ',
-          'ለስራ ተልከው ስለቀሩ',
-          'ያልተገባ ባህሪ በማሳየትዎ',
-          'ሌላ ባለሙያ በመላክዎ'
-        ],
-        selectedAction: '',
-        serviceOfInterest
+        // customerName: '',
+        // customerNameError: '',
+        // crmNumber: '',
+        // crmError: '',
+        // phoneNumber: '',
+        // selectedService: '',
+        // selectedServiceError: '',
+        // disabledFor: '',
+        // reasonForDisableError: '',
+        // reasonForDisable: [
+        //   'ምላሽ ለመስጠት ፍቃደኛ ስላልሆኑ',
+        //   'ለስራ ተልከው ስለቀሩ',
+        //   'ያልተገባ ባህሪ በማሳየትዎ',
+        //   'ሌላ ባለሙያ በመላክዎ'
+        // ],
+        // selectedAction: '',
+        // serviceOfInterest
       }
     },
     methods: {
-      handleButtonClick(action) {
-        this.selectedAction = action;
-        this.$emit('button-click', action);
-      },
-      emitMessageEvent() {
-        if (!this.validateForm()) return;
+      // handleButtonClick(action) {
+      //   this.selectedAction = action;
+      //   this.$emit('button-click', action);
+      // },
+      // emitMessageEvent() {
+      //   if (!this.validateForm()) return;
   
-        // Emit an event with the action and phone number to be handled by the parent component
-        this.$emit('generate-message', {
-          action: this.selectedAction,
-          phoneNumber: this.phoneNumber,
-          customerName: this.customerName,
-          selectedService: this.selectedService,
-          crmNumber: this.crmNumber,
-          disabledFor: this.disabledFor
-        });
+      //   // Emit an event with the action and phone number to be handled by the parent component
+      //   this.$emit('generate-message', {
+      //     action: this.selectedAction,
+      //     phoneNumber: this.phoneNumber,
+      //     customerName: this.customerName,
+      //     selectedService: this.selectedService,
+      //     crmNumber: this.crmNumber,
+      //     disabledFor: this.disabledFor
+      //   });
   
-        this.customerName = '';
-        this.phoneNumber = '';
-        this.crmNumber = '';
-        this.selectedService = '';
-        this.disabledFor = '';
-      }
+      //   this.customerName = '';
+      //   this.phoneNumber = '';
+      //   this.crmNumber = '';
+      //   this.selectedService = '';
+      //   this.disabledFor = '';
+      // }
     }
   }
 </script>
